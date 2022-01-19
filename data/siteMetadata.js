@@ -9,7 +9,7 @@ const siteMetadata = {
   siteRepo: 'https://github.com/woodi97/woodi97.github.io',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
-  // socialBanner: '/static/images/twitter-card.png',
+  socialBanner: '/static/images/logo.png',
   email: 'woodi.daily@gmail.com',
   github: 'https://github.com/woodi97',
   // twitter: 'https://twitter.com/Twitter',
@@ -21,7 +21,7 @@ const siteMetadata = {
     // supports plausible, simpleAnalytics or googleAnalytics
     plausibleDataDomain: 'https://woodi97.github.io/', // e.g. tailwind-nextjs-starter-blog.vercel.app
     simpleAnalytics: false, // true or false
-    googleAnalyticsId: '', // e.g. UA-000000-2 or G-XXXXXXX
+    googleAnalyticsId: 'G-0G7SNT9K17', // e.g. UA-000000-2 or G-XXXXXXX
   },
   newsletter: {
     // supports mailchimp, buttondown, convertkit, klaviyo
