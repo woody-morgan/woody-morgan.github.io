@@ -2,6 +2,7 @@
   "name": "tailwind-nextjs-starter-blog",
   "version": "1.4.2",
   "private": true,
+  "homepage": "https://woodi97.github.io",
   "scripts": {
     "start": "cross-env SOCKET=true node ./scripts/next-remote-watch.js ./data",
     "dev": "next dev",
@@ -10,7 +11,8 @@
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts",
     "prepare": "husky install",
-    "deploy": "next build && next export -o docs && git checkout -- docs/CNAME && git checkout -- docs/.nojekyll && git add docs && git commit -m \"deploy: regen site\" && git push origin deployment"
+    "deploy": "next build && next export -o docs && git checkout -- docs/CNAME && git checkout -- docs/.nojekyll && git add docs && git commit -m \"deploy: regen site\" && git push origin main",
+    "writeup": "node ./scripts/compose.js"
   },
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.58",
