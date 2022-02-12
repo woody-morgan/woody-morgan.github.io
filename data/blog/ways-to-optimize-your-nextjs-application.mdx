@@ -1,0 +1,205 @@
+---
+title: Ways to Optimize your React/Nextjs Application
+date: '2022-02-07'
+tags: ['react-js', 'next-js', 'optimization']
+draft: false
+summary: apply tree-shaking & constate on my app
+images: ['/static/images/blog/ways-to-optimize-your-nextjs-application/optimized.png']
+layout: PostLayout
+---
+
+<TOCInline toc={props.toc} exclude={'Intro'} asDisclosure />
+
+## Intro
+
+While making React/Nextjs [Boilerplate](https://nextjs-test-template.herokuapp.com/), I read some
+FE optimization technique(like React Context Optimizing, Tree Shaking).
+So I will introduce how to apply these thing in your app.
+
+## Tree-Shaking
+
+![React App Structure](https://d.pr/i/emhzOw.png)
+
+Tree-Shaking means remove unusable code in your project.
+This term quite directly represents the meaning of the word.
+Because when you make your own React/Nextjs App,
+that has tree like shape, but also downloaded packages too.
+
+```jsx:useWindowSize.ts
+import { useState, useEffect } from 'react'
+import { IWindowSize } from '@src/core/interface'
+import _ from 'lodash'
+
+const useWindowSize = (delay: number = 0): IWindowSize => {
+  const [windowSize, setWindowSize] = useState<IWindowSize>({
+    width: undefined,
+    height: undefined,
+  })
+
+  const handleResize = _.throttle(() => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    })
+  }, delay)
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    handleResize()
+    return () => window.removeEventListener('resize', handleResize)
+  }, [handleResize])
+
+  return windowSize
+}
+
+export default useWindowSize
+```
+
+![lodash-not-tree-shaked](https://d.pr/i/ku7g9X.png)
+
+When you write components using lodash modules.
+we usually write code like above. But using package like this
+is not good for you project. Import full package in your code
+increases the size of build.
+Actually, I just write `import _ from 'lodash'` to use throttle function
+the bundle size increases 531.35KB, just for one line of code.
+To avoid this, you should use it like below.
+
+```jsx:useWindowSize.ts
+{...}
+import throttle from 'lodash/throttle'
+{...}
+```
+
+\.import the package you want to use only
+
+```jsx:useWindowSize.ts
+{...}
+import { throttle } from 'lodash-es'
+{...}
+```
+
+or use lodash-es(lodah-es is written in ES Module way.
+So tree-shaking will be applied automatically by webpack)
+
+### Tree-Shaked Result
+
+![tree-shaked-lodash](https://d.pr/i/SQ1TAJ.png)
+
+you can see, there is no lodash.js cause it is too small.
+
+## Wrap Context using [Constate](https://ridicorp.com/story/how-to-use-redux-in-ridi/)
+
+I use React Context to implement auto-login, avoid prop-drilling, Etc..
+React Context is very powerful when you need global state.
+But it doesn't do performance optimization. Assume that a component
+uses specific context value & another context value updated,
+that component will be re-rendered. For this reason, you should
+use React Context carefully.
+
+According to this reason, when you use it,
+if it is not related to each other,
+you should do separation of interests.
+It means you should write context separately.
+
+Check Advent Calendar code
+
+```jsx:ModalStore.tsx
+export const useModal = (): IModalContext => useContext(ModalContext);
+
+export const ModalProvider: FC = ({ children }) => {
+	const [modal, setModal] = {...};
+	const closeModal = {...}
+	const openModal = {...}
+	const openLoginModal = {...}
+	const openCalendarInfoModal = {...}
+	const openCalendarCreateModal = {...}
+	return (
+		<ModalContext.Provider
+			value={{
+				...
+			}}
+		>
+			{children}
+		</ModalContext.Provider>
+	);
+};
+```
+
+This code is not optmized. When modal state is updated,
+every components & functions that reference modal, setModal
+will be re-rendered. To prevent this, we should separate like this.
+
+```jsx:ModalStore.tsx
+export const useModal = (): IModalContext => useContext(ModalContext);
+
+export const ModalProvider: FC = ({ children }) => {
+	const [modal, setModal] = {...};
+	const closeModal = {...}
+	const openModal = {...}
+	const openLoginModal = {...}
+	const openCalendarInfoModal = {...}
+	const openCalendarCreateModal = {...}
+	return (
+    <ModalContext.Provider value={modal}>
+        <ModalUpdateContext.Provider value={setModal}>
+		      {children}
+        </ModalUpdateContext.Provider>
+    </ModalContext.Provider>
+	);
+};
+```
+
+But this is too hassle to apply.
+At this time, Constate module is really shines to us.
+To do the same thing above, it could be implemented like below.
+
+```jsx:ModalContext.tsx
+const useModal = () => {
+  const [modal, setModal] = useState<ModalShape | null>(null)
+
+  const closeModal = {...}
+  const openModal = {...}
+  const openSignUpModal = {...}
+  const openSignInModal = = {...}
+
+  return { modal, openSignUpModal, openSignInModal, closeModal }
+}
+
+const [
+  ModalProvider,
+  useModalInfo,
+  useSignUpModal,
+  useSignInModal,
+  useCloseModal,
+] = constate(
+  useModal,
+  (value) => value.modal,
+  (value) => value.openSignUpModal,
+  (value) => value.openSignInModal,
+  (value) => value.closeModal
+)
+
+export {
+  ModalProvider,
+  useModalInfo,
+  useSignUpModal,
+  useSignInModal,
+  useCloseModal,
+}
+```
+
+```jsx:_app.tsx
+<Composer components={[UserAuthProvider, ModalProvider]}>
+  <Component {...pageProps} />
+  <ModalContainer />
+</Composer>
+```
+
+Constate make Context Hook automatically.
+It makes separation of interests easily.
+
+## Conclusion
+
+I hope you apply these thing depends on your project size.
+If it is small, it increases learning curve.

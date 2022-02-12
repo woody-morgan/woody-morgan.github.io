@@ -1,0 +1,70 @@
+---
+title: Algorithm - Bitmasking
+date: '2022-02-08'
+tags: ['algorithm', 'bitmasking']
+draft: true
+summary: C++ tips for bitmasking
+images: []
+layout: PostLayout
+---
+
+### What is Bitmasking
+
+### Example Problem
+
+```c++
+#include <algorithm>
+#include <iostream>
+#include <queue>
+#include <set>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int N;
+
+void init() {
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+}
+
+void get_bitmask(int n) {
+  // 특정 bit가 masking되어 있는지 알아내는 방법 a &= (1<<1)
+  for (int i = 29; i >= 0; i--) {
+    int result = n & (1 << i) ? 1 : 0;
+    cout << result;
+  }
+  cout << "\n";
+}
+
+void get_bitmask_2(int n) {
+  vector<int> res;
+  while (n != 0) {
+    res.push_back(n % 2);
+    n /= 2;
+  }
+  while (!res.empty()) {
+    int last = res.back();
+    res.pop_back();
+    cout << last;
+  }
+  cout << "\n";
+}
+
+int main(void) {
+  init();
+  clock_t start, end;
+  int n = 999999999;
+  start = clock();
+  get_bitmask(n);
+  end = clock();
+  printf("max_index: %0.8f sec\n", ((float)end - start) / CLOCKS_PER_SEC);
+  start = clock();
+  get_bitmask_2(n);
+  end = clock();
+  printf("max_index: %0.8f sec\n", ((float)end - start) / CLOCKS_PER_SEC);
+  return 0;
+}
+```
