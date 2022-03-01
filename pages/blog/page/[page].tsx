@@ -5,6 +5,7 @@ import ListLayout from '@/layouts/ListLayout'
 import { POSTS_PER_PAGE } from '../../blog'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { PostFrontMatter } from 'types/PostFrontMatter'
+import Transition from '@/components/Transition'
 
 export const getStaticPaths: GetStaticPaths<{ page: string }> = async () => {
   const totalPosts = await getAllFilesFrontMatter('blog')
@@ -53,7 +54,7 @@ export default function PostPage({
   pagination,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <>
+    <Transition>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
       <ListLayout
         posts={posts}
@@ -61,6 +62,6 @@ export default function PostPage({
         pagination={pagination}
         title="All Posts"
       />
-    </>
+    </Transition>
   )
 }

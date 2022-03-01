@@ -4,6 +4,7 @@ import ListLayout from '@/layouts/ListLayout'
 import { PageSEO } from '@/components/SEO'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { ComponentProps } from 'react'
+import Transition from '@/components/Transition'
 
 export const POSTS_PER_PAGE = 5
 
@@ -28,7 +29,7 @@ export default function Blog({
   pagination,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <>
+    <Transition>
       <PageSEO title={`Blog - ${siteMetadata.author}`} description={siteMetadata.description} />
       <ListLayout
         posts={posts}
@@ -36,6 +37,6 @@ export default function Blog({
         pagination={pagination}
         title="All Posts"
       />
-    </>
+    </Transition>
   )
 }

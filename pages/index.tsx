@@ -7,6 +7,7 @@ import formatDate from '@/lib/utils/formatDate'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { PostFrontMatter } from 'types/PostFrontMatter'
 import NewsletterForm from '@/components/NewsletterForm'
+import Transition from '@/components/Transition'
 
 const MAX_DISPLAY = 5
 
@@ -18,7 +19,7 @@ export const getStaticProps: GetStaticProps<{ posts: PostFrontMatter[] }> = asyn
 
 export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <>
+    <Transition>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
@@ -97,6 +98,6 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
           <NewsletterForm />
         </div>
       )}
-    </>
+    </Transition>
   )
 }
