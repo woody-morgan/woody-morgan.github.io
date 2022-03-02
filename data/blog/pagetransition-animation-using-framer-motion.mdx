@@ -1,0 +1,248 @@
+---
+title: PageTransition Animation using Framer Motion
+date: '2022-03-01'
+tags: ['react-js', 'next-js', 'animation']
+draft: false
+summary: Guide to apply pagetransition animation using framer-motion
+images: ['/static/images/blog/pagetransition-animation-using-framer-motion/hero-image.png']
+layout: PostLayout
+---
+
+<TOCInline toc={props.toc} exclude={'Intro'} asDisclosure />
+
+## Intro
+
+To deliver a smooth transition between pages, we need css animations.
+But by using [framer-motion](https://framer.com/motion/) library,
+we can easily create a custom animation.
+Today I will show you how to apply PageTransition animation using framer-motion.
+And plus, explain how to apply SVG Animation which is applied to dark mode switch on this site.
+
+## Framer-motion
+
+![framer-motion-02](https://d.pr/i/fL43wt.gif)
+
+framer-motion is a library that helps you to create custom animations.
+The way to use it is very simple(way better than declare css code on your own).
+It declares animation code based on a variable unit and then you can share the code with components.
+
+### How to use framer-motion
+
+```jsx:rectangle.tsx
+import React from 'react';
+import { motion } from 'framer-motion';
+...
+return (
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={{
+    opacity: 1,
+  }}
+/>
+);
+```
+
+when you want to use framer-motion, you need to import motion from 'framer-motion'.
+Then, attach `motion.` to html tags. (ex. `<motion.div />`)
+And then, you can use framer-motion's animation code.
+
+Every framer html tag has `initial` and `animate` properties.
+`initial` is the initial state of the animation. (ex. `initial={{ opacity: 0 }}`)
+`animate` is the animation code. (ex. `animate={{ opacity: 1 }}`)
+When the component is mounted on React Rendering Tree,
+it will start the animation from initial to animate.
+So above code will make the opacity of the component 0 to 1 smoothly.
+
+For more information, please visit [framer-youtube-course](https://www.youtube.com/watch?v=2V1WK-3HQNk&list=PL4cUxeGkcC9iHDnQfTHEVVceOEBsOf07i).
+
+## Apply Page Transition Globally
+
+So how we apply PageTransition animation globally?
+First we need to make a component that will be used as a wrapper for all pages.
+I define PageTransition Component as below.
+
+```jsx:page-transition.tsx
+import { motion } from 'framer-motion'
+import React, { FC } from 'react'
+
+const variants = {
+  hidden: { opacity: 0, x: -200, y: 0 },
+  enter: { opacity: 1, x: 0, y: 0 },
+  exit: { opacity: 0, x: 0, y: -200 },
+}
+
+const Transition: FC = ({ children }) => {
+  return (
+    <motion.div
+      variants={variants}
+      initial="hidden"
+      animate="enter"
+      exit="exit"
+      transition={{ type: 'linear' }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+export default Transition
+```
+
+framer-motion support animation code that is defined in a variable.
+I defined variants for Transition Animation, and then I use `variants` property to set the animation code.
+And also I use `initial` and `animate` property to set the initial and animate state of the animation.
+
+At this moment, you can't understand what `exit` property is.
+`exit` property is the animation code that will be applied when the component is removed from React Rendering Tree.
+But without `AnimatePresence` component, `exit` property is not available.
+Because React cannot know when the component is removed from React Rendering Tree.
+So Before use `exit` property, you need to wrap the component with `AnimatePresence`.
+
+In this case, I use `AnimatePresence` component at \_app.tsx
+which is the entry point of this site(using Next.js)
+By doing this, I can use `exit` property and React can detect when the component is removed from React Rendering Tree.
+
+> Warning : you should give key props to Component(If you are using React, `<Switch />`) that is wrapped with `AnimatePresence`.
+> Because without unique key props React cannot detect when the component is removed from React Rendering Tree.
+
+```jsx:_app.tsx
+export default function App({ Component, pageProps, router }: AppProps) {
+  return (
+    <ThemeProvider>
+      ...
+      <LayoutWrapper>
+        <AnimatePresence>
+          <Component {...pageProps} key={router.route}/>
+        </AnimatePresence>
+      </LayoutWrapper>
+    </ThemeProvider>
+  )
+}
+```
+
+And then, wrap PageTransition Component to all pages you created.
+like below.
+
+```jsx:index.tsx
+export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
+  return (
+    <Transition>
+      ...
+    </Transition>
+  )
+}
+```
+
+The reason why we don't wrap PageTransition Component on \_app.tsx is
+framer-motion draw animation when the component is mounted on React Rendering Tree.
+If we wrap PageTransition Component on \_app.tsx, PageTransition Component will be always mounted
+even if the page changed. So, we should not wrap PageTransition Component on \_app.tsx.
+
+### Result
+
+![page-transition](https://d.pr/i/7jvHlS.gif)
+
+## Apply SVG Animation
+
+![site-header](https://d.pr/i/9e47j0.gif)
+
+There is theme switcher on this website-header.
+When you enter this website, it transite -90deg to 0deg.
+When you click theme switcher, original image will be disappeared
+and new them switch image transite -90deg to 0deg.
+How we can make this animation? It is simple if you know how to use framer-motion.
+
+```jsx:ThemeSwitch.tsx
+const ThemeSwitch = () => {
+
+  ...
+
+  return (
+    <button onClick={...}>
+      {mounted && (theme === 'dark' || resolvedTheme === 'dark') ? (
+        <WeatherSVG>
+          <path {`sun-flower vector path`}/>
+        </WeatherSVG>
+      ) : (
+        <WeatherSVG>
+          <path {`moon vector path`} />
+        </WeatherSVG>
+      )}
+    </button>
+  )
+}
+
+export default ThemeSwitch
+```
+
+First, if the theme is dark, show sunflower vector image.
+If not, show moon vector image.
+
+Then, define WeatherSVG Component to show the vector image with animation.
+
+```jsx:ThemeSwitch.tsx
+import React from 'react'
+import { motion } from 'framer-motion'
+
+const svgVariants: Variants = {
+  hidden: { rotate: -90, opacity: 0 },
+  visible: {
+    rotate: 0,
+    opacity: 1,
+    transition: { duration: 1 },
+  },
+}
+
+const ThemeSwitch = () => {
+
+  const WeatherSVG = useCallback(
+    ({ children }) => {
+      return (
+        <motion.svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          className="text-gray-900 dark:text-gray-100"
+          variants={svgVariants}
+          initial="hidden"
+          animate="visible"
+          whileHover={{ scale: 1.1 }}
+        >
+          {children}
+        </motion.svg>
+      )
+    },
+    [theme]
+  )
+
+  return (
+    <button onClick={...}>
+      ...
+    </button>
+  )
+}
+
+export default ThemeSwitch
+```
+
+WeatherSVG Component should be defined under useCallback hook.
+Because our animation should be conducted when the component is mounted.
+And then, when user click theme switch button, the animation should be conducted too.
+
+After user enter our website, transition animation should be run once.
+Even user change the router to another page, transition animation should not be run.
+To resolve this, we use `useCallback` hook. `useCallback` hook caches the function.
+The function wrapped with useCallback hook re-make function when the deps of useCallback changed.
+By doing this, WeatherSVG component cached when user enter website and do not re-make WeatherSVG Component when user change router.
+Finally, we can make the transition animation run only when the component is mounted and user click theme switch button.
+
+### Result
+
+![theme-switch](https://d.pr/i/gWSrQ8.gif)
+
+## Concolusion
+
+[Toss](https://toss.im/) team is using framer-motion to make animation.
+The reason why toss application has smooth animation even if it is webview,
+they are using proper web animation library which is framer-motion.
+If you can use it well, not only make your web application smooth, it also increases user experience.
