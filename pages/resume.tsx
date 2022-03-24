@@ -7,7 +7,7 @@ import React from 'react'
 import { NotionRenderer } from 'react-notion-x'
 import { useTheme } from 'next-themes'
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const NOTION_PAGE_ID = '54a0235bfba744a28729dfb7e14ab4f2'
   const api = new NotionAPI()
   const recordMap = await api.getPage(NOTION_PAGE_ID)
