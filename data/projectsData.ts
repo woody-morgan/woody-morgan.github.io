@@ -9,7 +9,7 @@ const projectsData = [
     title: 'Zeropage Advent Calendar',
     description: '[Blocked]Calendar for Advent Calendar',
     imgSrc: 'static/images/proj/advent/advent.png',
-    href: 'https://woodi97.github.io',
+    href: 'https://woodi97.github.io/zp-advent-calendar/',
   },
   {
     title: 'Nextjs Boilerplate Project',
