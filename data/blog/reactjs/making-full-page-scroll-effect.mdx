@@ -2,9 +2,9 @@
 title: Making Full Page Scroll Effect
 date: '2022-07-30'
 tags: ['reactjs', 'nextjs', 'javascript']
-draft: true
+draft: false
 summary: Encountered Problem When Making Full Page Scroll Effect
-images: []
+images: ['/static/images/javascript.png']
 layout: PostLayout
 ---
 
@@ -21,4 +21,374 @@ For example [fullPage.js](https://alvarotrigo.com/fullPage/ko/) is a library tha
 ![FullPageEffect](https://d.pr/i/pmTEDD.gif)
 But for today, I will share the implementation of this effect. And also the problem that I encountered.
 
-##
+## Browser Events
+
+### Wheel Events
+
+When you scroll the page, the browser will trigger some events.
+The one is "wheel" event. This event is triggered when you scroll the page using mouse "wheel".
+
+So I make this event as a custom hook like below.
+
+```jsx:useWheel.tsx
+export default function useWheel({
+  cb,
+  passive = true,
+}: {
+  cb: (e: WheelEvent) => void;
+  passive?: boolean;
+}) {
+  useEffect(() => {
+    window.addEventListener('wheel', cb, { passive });
+    return () => {
+      window.removeEventListener('wheel', cb);
+    };
+  }, []);
+}
+```
+
+The point is that we need passive option when enroll 'wheel' event to the browser.
+Because the browser set this option as true by default(For performance reason).
+And if it is true, we can't prevent default scroll event.(like e.preventDefault() in React)
+So if you want to block scroll event, you need to set passive option to false when enroll event to the page.
+
+![PassiveTrue](https://d.pr/i/c5ITIE.gif)
+
+If we don't give that option, the browser will ignore e.preventDefault() code and run the default scroll event.
+
+### Touch Events
+
+But not like normal desktop env, mobile device doesn't have mouse wheel.
+The default action of mobile device is touch. This touch action does not provide deltaY property which notifies the scroll direction.
+So we need to use both "touchstart" and "touchmove", and calculate the deltaY by our own.
+
+For convenience, I made a custom hook like below.
+
+```jsx:useTouch.tsx
+import { useEffect, useRef } from 'react';
+
+export type TTouchPoint = {
+  x: number;
+  y: number;
+};
+
+export default function useTouch({
+  cb,
+  passive = true,
+}: {
+  cb: (e: TouchEvent, startPos: TTouchPoint, offset: TTouchPoint) => void;
+  passive?: boolean;
+}) {
+  const startPos = useRef<TTouchPoint>({ x: 0, y: 0 });
+  const offset = useRef<TTouchPoint>({ x: 0, y: 0 });
+
+  const onTouchStart = (e: TouchEvent) => {
+    startPos.current = {
+      x: e.touches[0].pageX,
+      y: e.touches[0].pageY,
+    };
+  };
+
+  const onTouchMove = (e: TouchEvent) => {
+    e.stopPropagation();
+    offset.current = {
+      x: startPos.current.x - e.touches[0].pageX,
+      y: startPos.current.y - e.touches[0].pageY,
+    };
+    cb(e, startPos.current, offset.current);
+  };
+
+  useEffect(() => {
+    window.addEventListener('touchstart', onTouchStart, false);
+    window.addEventListener('touchmove', onTouchMove, {
+      passive,
+      capture: false,
+    });
+    return () => {
+      window.removeEventListener('touchstart', onTouchStart, false);
+      window.removeEventListener('touchmove', onTouchMove, {
+        capture: false,
+      });
+    };
+  });
+}
+```
+
+When the touch start, record the touch point in useRef variable`(<-this is very important for React Rendering Process)`.
+When the user move the touch point, calculate the offset between the touch point and the start point.
+By this calculation, we can get the scroll direction.`Caution: we need to set TouchEvent.stopPropagation() because when we touch the mobile display, that event could be propagated to parent elements. This could bring us unexpected behavior`
+
+![useTouchResult](https://d.pr/i/JhR0DM.gif)
+
+We can check the code is running very well.
+
+So now we use this hooks and make the scroll effect.
+
+## FullPage Effect
+
+### FullPage Effect Progress
+
+The FullPage Logic is as follows.
+
+1. When the user touch or wheel on the page, prevent the default behavior.
+2. If the scroll event is on progress, ignore the event.
+3. If the scroll event is not on progress, start the Full Page logic(`set ticking variable true`)
+4. Get the deltaY value which is the scroll direction.
+5. If the deltaY is positive, scroll to the next section.
+6. If the deltaY is negative, scroll to the previous section.
+7. Set the ticking variable false.(`we will use debounce function for this one`)
+
+### FullPage Effect Code
+
+```jsx:useFullPage.tsx
+export default function useFullPage(){
+  useWheel({
+    passive: false,
+    cb: (e) => {
+      // prevent default scroll event
+      e.preventDefault();
+
+      const { deltaY } = e;
+      // run scroll logic
+      handleScroll(deltaY);
+    },
+  });
+
+  useTouch({
+    passive: false,
+    cb: (e, _, offset) => {
+      // prevent default scroll event
+      e.preventDefault();
+
+      const { y } = offset;
+      // run scroll logic
+      handleScroll(deltaY);
+    },
+  });
+}
+```
+
+First we enroll useWheel & useTouch event as passive option false.
+Now we can use e.preventDefault() to prevent default browser behavior.
+Then get the deltaY value from the event. And run the scroll logic.
+
+```jsx:useFullPage.tsx
+export default function useFullPageScroll({
+  ref,
+  numOfPages,
+  debounceTime = 1500,
+}: {
+  ref: MutableRefObject<HTMLDivElement>;
+  numOfPages: number;
+  debounceTime?: number;
+}) {
+  const [nxPage, setNxPage] = useState<number>(0);
+  const nextPage = useRef<number>(0);
+  const ticking = useRef<boolean>(false);
+
+  const handleScroll = (deltaY: number) => {
+    // prevent duplicated scroll event
+    if (ticking.current) return;
+    // set scroll event is on action
+    ticking.current = true;
+
+    ...scroll logic
+  };
+}
+```
+
+When handleScroll function is running, if the ticking is true (which means the scroll event is on action),
+we don't run the scroll logic. If the ticking is false, we mark the ticking as true which means scroll event is on action.
+
+```jsx:useFullPage.tsx
+export default function useFullPageScroll({
+  ref,
+  numOfPages,
+  debounceTime = 1500,
+}: {
+  ref: MutableRefObject<HTMLDivElement>;
+  numOfPages: number;
+  debounceTime?: number;
+}) {
+  const [nxPage, setNxPage] = useState<number>(0);
+  const nextPage = useRef<number>(0);
+  const ticking = useRef<boolean>(false);
+
+  const handleScroll = (deltaY: number) => {
+    ...prevent logic
+
+    const { scrollTop } = ref.current;
+    const pageHeight = window.innerHeight;
+    const currentPage = Math.floor(scrollTop / pageHeight);
+    if (deltaY > 0) {
+      nextPage.current = currentPage + 1 >= numOfPages ? currentPage : currentPage + 1;
+      setNxPage(nextPage.current);
+      ref.current.scrollTo({
+        top: nextPage.current * pageHeight,
+        left: 0,
+        behavior: 'smooth',
+      });
+    } else {
+      nextPage.current = currentPage - 1 < 0 ? 0 : currentPage - 1;
+      setNxPage(nextPage.current);
+      ref.current.scrollTo({
+        top: nextPage.current * pageHeight,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+    // To prevent ticking value is changed during scroll
+    debouncedTickingFalse();
+  };
+}
+```
+
+The scroll logic run like this.
+
+1. Get the ScrollTop position of Ref(In this case, the page).
+2. Get the page height(window.innerHeight)
+3. Get the current page number(Math.floor(scrollTop / pageHeight))
+4. Calculate the next page(it differs by deltaY)
+5. use ScrollTo api to scroll to the next page.
+6. run debouncedTickingFalse() function.
+
+```jsx:useFullPage.tsx
+export default function useFullPageScroll({
+  ref,
+  numOfPages,
+  debounceTime = 1500,
+}: {
+  ref: MutableRefObject<HTMLDivElement>;
+  numOfPages: number;
+  debounceTime?: number;
+}) {
+  const [nxPage, setNxPage] = useState<number>(0);
+  const nextPage = useRef<number>(0);
+  const ticking = useRef<boolean>(false);
+
+  const handleScroll = (deltaY: number) => {
+    ...haldneScroll logic
+  };
+
+  const debouncedTickingFalse = debounce(() => {
+    ticking.current = false;
+  }, debounceTime);
+}
+```
+
+After scroll logic finished, we run debouncedTickingFalse() function.
+
+The reason why we should debounce the `ticking = false` code is browser fires
+the scroll event when the user is scrolling. This event operated a lot of times like below.
+
+![scrollEventDuplicated](https://d.pr/i/5aPuSH.gif)
+
+So at the time we mark the `ticking = false`, the browser still fires the scroll event.
+By this, another scroll logic run for the same scroll event.
+This is why we should use debounce function to prevent the duplicated scroll event.(If you know
+the better way, please leave comment)
+
+![scrollEventDebounced](https://d.pr/i/5aPuSH.gif)
+
+Now, the duplicated event is debounced.
+
+### FullCode
+
+```jsx:useFullPage.tsx
+import { useTouch, useWheel } from '@src/hooks/index';
+import { debounce } from 'lodash-es';
+import { MutableRefObject, useRef, useState } from 'react';
+
+export default function useFullPageScroll({
+  ref,
+  numOfPages,
+  debounceTime = 1500,
+  disableInfiniteScroll = false,
+}: {
+  ref: MutableRefObject<HTMLDivElement>;
+  numOfPages: number;
+  debounceTime?: number;
+  disableInfiniteScroll?: boolean;
+}) {
+  const [nxPage, setNxPage] = useState<number>(0);
+  const nextPage = useRef<number>(0);
+  const ticking = useRef<boolean>(false);
+
+  const debouncedTickingFalse = debounce(() => {
+    ticking.current = false;
+  }, debounceTime);
+
+  const handleScroll = (deltaY: number) => {
+    // prevent duplicated scroll event
+    if (ticking.current) return;
+    // set scroll event is on action
+    ticking.current = true;
+    console.log('scroll event fire');
+
+    const { scrollTop } = ref.current;
+    const pageHeight = window.innerHeight;
+    const currentPage = Math.floor(scrollTop / pageHeight);
+    if (deltaY > 0) {
+      if (!disableInfiniteScroll) {
+        nextPage.current = (currentPage + 1) % numOfPages;
+        setNxPage(nextPage.current);
+      } else {
+        nextPage.current = currentPage + 1 >= numOfPages ? currentPage : currentPage + 1;
+        setNxPage(nextPage.current);
+      }
+      ref.current.scrollTo({
+        top: nextPage.current * pageHeight,
+        left: 0,
+        behavior: 'smooth',
+      });
+    } else {
+      if (!disableInfiniteScroll) {
+        nextPage.current = (currentPage - 1 + numOfPages) % numOfPages;
+        setNxPage(nextPage.current);
+      } else {
+        nextPage.current = currentPage - 1 < 0 ? 0 : currentPage - 1;
+        setNxPage(nextPage.current);
+      }
+      ref.current.scrollTo({
+        top: nextPage.current * pageHeight,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+    // To prevent ticking value is changed during scroll
+    debouncedTickingFalse();
+  };
+
+  useWheel({
+    passive: false,
+    cb: (e) => {
+      // prevent default scroll event
+      e.preventDefault();
+
+      const { deltaY } = e;
+      handleScroll(deltaY);
+    },
+  });
+
+  useTouch({
+    passive: false,
+    cb: (e, _, offset) => {
+      // prevent default scroll event
+      e.preventDefault();
+
+      const { y } = offset;
+      handleScroll(y);
+    },
+  });
+
+  return {
+    nextPage: nxPage,
+  };
+}
+
+```
+
+## Conclusion
+
+Learned passive option at addEventListener Method.
+And Debounce function could be used for various purpose.
