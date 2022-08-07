@@ -1,0 +1,166 @@
+---
+title: Deploy Nestjs Application on Heroku System
+date: '2022-08-07'
+tags: ['backend', 'nestjs']
+draft: false
+summary: Nestjs 어플리케이션을 배포하면서 생긴 문제점을 정리하였습니다
+images: ['/static/images/heroku-nestjs.webp']
+layout: PostLayout
+---
+
+<TOCInline toc={props.toc} exclude={'Intro'} asDisclosure />
+
+## Intro
+
+이번 글은 많은 분들이 해당 에러를 쉽게 해결할 수 있도록 한글로 작성하게 되었습니다.
+해당 글은 Nestjs 어플리케이션을 Heroku 플랫폼에 배포하면서 발생할 수 있는 문제점과
+해결책을 제시하고 있습니다. 하지만 본 필자는 Nestjs를 배워나가고 있는 입장이므로
+적절하지 않은 해결책을 제시하고 있을 수 있습니다. 만약 틀린 해결책이라면 댓글로 알려주시면 감사하겠습니다.
+
+제 어플리케이션에서 쓰고 있는 Backend 기술 스택은 다음과 같습니다
+
+- [Nestjs](https://nestjs.com/)
+- [TypeORM](https://typeorm.io/)
+- [Postgres](https://www.postgresql.org/)
+- [Postgis](https://postgis.net/)
+- [Heroku](https://www.heroku.com/)
+
+## 배포하면서 생긴 문제점
+
+### 1. 로컬 Nestjs 어플리케이션에서 Heroku에서 제공한 Postgres 서버에 접속할 수 없음
+
+로컬 Nestjs 어플리케이션에서 Heroku에서 제공한 Postgres 서버에 접근해야할 필요가 생겼습니다.
+DB가 처음 생성되면 Nestjs에서 사용할 DB 테이블을 생성할 필요가 있습니다.이를 Typeorm의 Synchronize 옵션을 사용하면 자동으로 생성해줍니다.
+따라서 처음에 DB를 initialize해주기 위해서 로컬 Nestjs 어플리케이션에서 Heroku Postgres 서버에 접속할 필요가 있었습니다.
+
+하지만 local에서 했던 것과 같이 Heroku Postgres 서버에 접속하면 아래와 같은 Credential에러가 발생합니다.
+![Credential Error](https://d.pr/i/lhZKv8.png)
+
+#### 1.1. 해결책
+
+이는 Heroku Postgres 서버에 사용하는 pg_hba.conf 설정 파일에서 whitelist를 이용해서 접근할 수 있는 IP를 제한하기 때문입니다.
+이를 해결하기 위해서는 Postgres 서버에서 접속할 수 있는 IP를 추가해야합니다. 하지만 Heroku에서 Postgres 설정파일에 접근할 수 있는
+방법을 찾지 못하여 Local에서 우회해서 credential을 확인하지 않도록 설정하여 해결했습니다.(단 이 방법은 절대 좋은 방법이라고 할 수 없습니다.
+편의를 위해서 사용한 방법이니 추후 좋은 방법이 있으면 수정해야합니다.)
+
+```typescript:config.ts
+    ...
+    return {
+      entities,
+      type: 'postgres',
+      name: 'default',
+      host: this.getString('DB_HOST'),
+      port: this.getNumber('DB_PORT'),
+      username: this.getString('DB_USERNAME'),
+      password: this.getString('DB_PASSWORD'),
+      database: this.getString('DB_DATABASE'),
+      ...
+      ssl: this.getBoolean('DB_SSL')
+        ? {
+            rejectUnauthorized: false,
+          }
+        : false,
+    };
+```
+
+위와 같은 Typeorm이나 Sequalizer를 설정하는 파일이 있을 것 입니다. 위에서 ssl부분을 추가하고
+rejectUnauthorized: false 옵션을 주면 우회할 수 있습니다. 단 오히려 로컬 DB로 테스트할 시 해당 옵션이 켜져 있으면
+에러를 발생시키니 꼭 관련 설정을 해주는 환경변수를 만들어서 관리해주셔야합니다.
+
+### 2. Javascript Heap Memory Overflow
+
+기본적으로 CI/CD 플랫폼들은 어플리케이션을 Build해서 배포 후, devDependencies에 선언된 패키지들을 삭제합니다.
+이는 효율적으로 플랫폼을 관리하기 위해서 사용되는 기능이며, 사용자가 이를 허용하지 않을 수 있습니다.
+단, 이 경우 예상치 못한 에러(ex. CI/CD 플랫폼에서 기본으로 제공되는 메모리 이상으로 사용해서 어플리케이션을 실행할 수 없는 에러가 발생할 수 있음)
+가 발생할 수 있기 때문에, 적절한 패키지 관리가 필요합니다. 실제로 해당 에러에는 R14에러, [Javascript heap out of memory](https://stackoverflow.com/questions/59205530/heroku-server-crashes-with-javascript-heap-out-of-memory-when-deploying-react) 에러 등이 있습니다.
+
+#### 2.0. 알아야할 점
+
+1. Javascript heap out of memory를 해결하기 위해서 [자바스크립트의 Garbage Collector 작동 메모리 설정](https://stackoverflow.com/questions/59205530/heroku-server-crashes-with-javascript-heap-out-of-memory-when-deploying-react)을 하라는 글이
+   검색결과 맨 상단에 위치합니다. 이는 Node 버전 12 이하에서 유효합니다. 왜냐하면 Node 12버전 이하에서 Garbage Collection이 작동하는 기본 메모리는 1.5GB였고 Heroku의 기본 플랜이 제공하는 메모리는 512MB이기 때문입니다.
+   하지만 2022년 기준 Node의 LTS버전이 16으로 올라왔기 때문에 기본적으로 동적인 Garbage Collection이 적용됩니다. 따라서 해당 글은 더 이상 유효하지 않습니다.
+
+#### 2.1. 해결책
+
+1. 가장 간단한 해결책은 Heroku에서 무료로 제공하는 Plan 이 아닌 더 많은 메모리를 제공하는 Plan을 사용하는 것입니다.
+   어플리케이션이 작동할때 대부분의 경우 헤로쿠에서 제공하는 기본 메모리보다 적게 사용하지만
+   특정 시나리오에서 Garbage Collection이 작동하지 전에 Heroku에서 제공하는 512MB 이상을 사용하게 될 수도 있습니다.
+   따라서 더 높은 Plan을 사용하는 것은 좋은 선택입니다.
+   하지만 이 경우 매달 7달러 또는 그 이상의 비용을 내야하기 때문에 취미로 진행하는 프로젝트에 적절하지 않을 수 있습니다
+2. 실제 배포에 필요없는 패키지들을 package.json에서 제거하거나 devDependencies에 선언해주면 됩니다. 이렇게 하면 heroku의 CI/CD 플랫폼이 자동으로 devDependencies에 선언된 패키지들을 삭제해줍니다. `하지만 이 경우, 개발자들이 통상적으로 devDependencies에 선언되어야한다고 생각되는 패키지가 실제 dependencies에 있어야하는 경우가 있어 주의를 해야합니다.(주로 런타임에 발생하기 때문에 주의 필요)`
+
+### 3. devDependencies에서 설치된 모듈이 Heroku에서 배포된 후 사용할 수 없다고 에러가 발생
+
+이 에러는 실제 배포후 에러를 잡을 수 있어 큰 주의를 요합니다(서비스 중에 해당 에러가 발생하면 큰 문제가 됩니다).
+해당 문제는 제가 오픈소스로 풀어놓은 [nestify](https://github.com/woodi97/nestify/blob/main/src/shared/services/api-config.service.ts) 저장소에 있는 파일에서 발생했습니다.
+위 파일의 코드중 if(module.hot) 부분에서 발생했습니다.
+
+```typescript:api-config.service.ts
+...
+get postgresConfig(): TypeOrmModuleOptions {
+    let entities = [
+      __dirname + '/../../modules/**/*.entity{.ts,.js}',
+      __dirname + '/../../modules/**/*.view-entity{.ts,.js}',
+    ];
+    let migrations = [__dirname + '/../../database/migrations/*{.ts,.js}'];
+
+    if (module.hot) {
+      const entityContext = require.context(
+        './../../modules',
+        true,
+        /\.entity\.ts$/,
+      );
+    ...
+}
+...
+```
+
+위 코드는 프로젝트 Hot Reload시 변경된 파일에 대해서만 Refresh를 해주는 코드입니다.
+이 기능을 사용하기 위해서는 아래의 패키지들이 필요합니다.
+
+```json:package.json
+  "dependencies": {
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-node-externals": "^3.0.0",
+    "@types/webpack-env": "^1.17.0",
+    "clean-webpack-plugin": "^4.0.0"
+  }
+```
+
+하지만 통상적으로 위의 webpack과 관련된 패키지들은 dependencies에 선언되는 것이 아닌
+devDependencies에 선언되어야한다고 대부분의 [블로그 글](https://jakekwak.gitbook.io/nestjs/techniques/hot-reload-webpack)에서 안내하고 있습니다.
+이는 분명 맞으며, 또한 위의 selective hot reload 기능은 NODE_ENV가 development인 경우에만 사용하는 기능이므로 논리적으로도 build 이후 필요가 없는 코드입니다.
+게다가 local에서 실행시 에러가 발생하지 않습니다.(local에서는 build하고 실행해서 node_modules에 있는 devDependencies 모듈을 삭제하지 않기 때문입니다)
+
+하지만 Heroku에서 배포해도 에러없이 동작할까요? 그렇지 않습니다. Heroku와 같은 CI/CD 플랫폼은 devDependencies를 모두 삭제합니다.
+즉 프로젝트가 빌드 되고, devDependencies를 node_modules에서 삭제하고, 프로젝트를 실행하면 그때 위와 같은
+devDependencies에 선언된 모듈이 필요한 코드는 에러가 발생하는 것입니다. 따라서 적절하게 패키지의 위치를 선언하지 않으면 아래와 같은 에러가 발생합니다.
+
+![RuntimeError](https://d.pr/i/K6ykSr.png)
+
+#### 3.1. 해결책
+
+1. devDependencies에 선언된 모듈을 dependencies에 선언하여 사용합니다. 하지만 Deploy된 백앤드 어플리케이션의 메모리 사용률을 높일 수 있고,
+   또한 통상적인 모듈 선언 위치가 아니기 때문에 불필요한 오해를 일으킬 수 있습니다. 따라서 정말 필요한 모듈만 위치를 옮겨서 선언해야합니다.
+
+## Heroku Postgres에 Postgis 연결하기
+
+먼저 [블로그](https://m.blog.naver.com/batgirl1/222126972818)를 참조하여 Heroku Postgresql을 설치해주세요
+
+프로젝트와 Postgresql을 연결했다면 heroku postgresql 설정중 Settings 섹션에서 아래와 같은 Credentials 정보를 볼 수 있습니다
+
+![credentials](https://d.pr/TVFj55.png)
+
+그 중 맨 아래에 있는 Heroku CLI에 있는 커맨드를 전부 복사해서 본인의 터미널에 입력해주세요(만약 heroku cli가 설치되어 있지 않다면 설치해주세요)
+
+![install extension](https://d.pr/gzG7Ry.png)
+
+그럼 위와 같은 psql CLI창이 뜨고 `CREATE EXTENSION postgis;`라고 입력해주세요(위의 그림에 postigs라고 오타가 났습니다)
+그렇게 되면 자동으로 postgis가 heroku postgresql에 설치됩니다. 이제 postgis관련 기능을 사용할 수 있습니다.
+Heroku에서 지원하는 postgresql Extension은 [링크](https://devcenter.heroku.com/articles/heroku-postgres-extensions-postgis-full-text-search)에서 확인할 수 있습니다.
+`단 postgis의 경우 Extension 설치시 대략 8500개의 DB Row가 추가됩니다(지리 정보를 추가하기 위해서). 이는 Heroku Postgresql Hobby Tier에서 제공하는 10000개의 Row 제한의 85%를 차지하기 때문에 사용에 주의가 필요합니다`
+
+## 결론
+
+위의 해결책이 여러분에게 도움이 되었으면 좋겠습니다. 궁금한 점이 있다면 댓글에 남겨주세요
