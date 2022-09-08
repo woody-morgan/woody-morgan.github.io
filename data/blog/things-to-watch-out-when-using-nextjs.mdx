@@ -12,3 +12,13 @@ authors: ['default']
 1. Next.js에서 이미지 관련(svg, img 등) ServerSide에서의 state 때문에 조건부 렌더링(특히 dark mode switch 같이 state에 따라 보여지는 이미지가 다른 경우)을 조심해야함
    -> 해결책: mounted 변수를 둬서 useEffect가 실행될때 setMounted(true)를 호출하는 것으로 해결.
    -> 이유: useEffect는 클라이언트쪽에서만 실행되며, 처음 .js파일을 받지 않은 상태에서는 해당 변수는 false로 생각하여 렌더링됨
+
+2. overflow hidden과 auto 태그가 중요한 이유
+   -> https://im-developer.tistory.com/201
+   -> 단순히 지정한 높이를 벗어나는 요소를 지우는 것이 아닌, body에 대한 기본적인 스크롤을 막는 역할도 있다
+
+3. redux나 객체 변수를 만들때, 해당 변수에 대해서 if(anyVar) 이렇게 해놓고
+   만약 const anyVar = {}; 이렇게 선언하면 anyVar는 true이다
+   왜냐면 위에서 객체를 선언할때 이미 객체에 주소값이 할당되어있기 때문..
+
+4. Svg쓸때 ViewBox도 유지해야 디자이너가 의도한 svg 벡터를 유지할 수 있다
