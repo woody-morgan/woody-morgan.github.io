@@ -29,7 +29,7 @@ VanillaJS나 React 프로젝트에서 이미지를 불러올 때 보통 img 태�
 ( [개선된 img태그 구현하기](https://woodi97.github.io/blog/reactjs/implement-reflow-prevented-lazy-loading-image-component)를 참고하면 구현할 수 있습니다 :) )
 
 그래서 Next.js에서는 이 부분을 `<Image />` 태그로 제공하고 있다. 이 태그는 `Intersection Oberserver API`를 이용해 높은 수준의 Lazy Loading을 지원하고 있다.
-게다가 이 태그는 Netlify, Vercel, Cloudinary 등의 이미지 호스팅 서비스(CDN)와 연동하여 사용할 수 있다. next.config.js에 간단히 설정만 하면 전세계에 CDN을 통해
+게다가 이 태그는 Cloudinary 등의 이미지 호스팅 서비스(CDN)와 연동하여 사용할 수 있다. next.config.js에 간단히 설정만 하면 전세계에 CDN을 통해
 이미지 리소스 전달을 최적화 할 수 있는 것이다. 사용법은 아래와 같다.
 
 ```tsx
@@ -141,26 +141,26 @@ export const PageSEO = ({ title, description }: PageSEOProps) => {
 ### 3. Serverless Function 호출 위치 변경하기(Feat. Vercel)
 
 Next.js 프로젝트를 Vercel에 배포하면 Next/Image Tag, getStaticProps, getServerSideProps 등의 함수들은 자동으로 Serverless Function으로 배포된다.
-이렇게 배포된 Serverless Function은 Vercel에서 제공하는 CDN을 통해 호출되는데, 이 CDN이 기본적으로 San Francisco에 위치하고 있다.
+이렇게 배포된 Serverless Function은 Vercel에서 제공하는 서버를 통해 호출되는데, 이 서버는 기본적으로 San Francisco에 위치하고 있다.
 
 즉 한국에서 한 사용자가 서비스 페이지를 요청하면(Serverside에서 호출되는 함수가 있고, 서비스 서버가 한국에 있다고 가정)
 
-1. Vercel 미국 CDN에서 한국으로 api 전송 및 응답 (미국 -> 한국 -> 미국)
+1. Vercel 미국 서버에서 한국으로 api 전송 및 응답 (미국 -> 한국 -> 미국)
 2. 받은 응답을 이용해 페이지 렌더링(SSR)후 클라이언트 브라우저로 전송 (미국 -> 한국)
 3. 클라이언트 브라우저에서 페이지 렌더링 (한국)
 4. 페이지에서 필요한 리소스 및 api 호출 및 응답 (한국 -> 한국 -> 한국, 리소스는 요청하는 이미지에 따라 다름)
 
 이렇게 긴 RTT를 거치게 되고 2번이나 미국에 요청을 보내기 때문에 느려지는 것이다. 실제로 With You 서비스를 개발하면서
 Authorization이 필요한 페이지간 이동을 하면, 1s 이상의 지연이 발생하는 것을 확인할 수 있었다. 문제를 해결하기 위해
-정말 많은 Network탭 분석을 했는데, 결국 Vercel에서 제공하는 CDN을 한국으로 변경하면 해결할 수 있었다.
+정말 많은 Network탭 분석을 했는데, 결국 Vercel에서 제공하는 Serverless Function 호출 위치를 한국으로 변경하면 해결할 수 있었다.
 
-변경하는 방법은 간단하다. Vercel에 배포된 프로젝트의 Settings에서 CDN Location을 변경하면 된다.
+변경하는 방법은 간단하다. Vercel에 배포된 프로젝트의 Settings에서 Serverless Function Region을 변경하면 된다.
 
 ![Vercel Settings](https://d.pr/i/9nFwQK.png)
 
 이렇게 변경하면 Serverless Function 호출 위치가 한국으로 변경되고, 한국과 한국 사이의 통신은 못해도 0.1ms 이하의 RTT를 가지게 된다.(물론 상황에 따라 다르다)
 변경 후 With You 서비스의 페이지간 이동 지연이 1s 이상에서 100ms 이하로 줄어들었다.(사실 그보다 더 줄어들었다.) 만약 Vercel 배포후 이상하게 느리다면
-꼭 CDN Location을 한국으로 변경해보자.
+꼭 Serverless Function Region을 한국으로 변경해보자.
 
 ## 결론
 
