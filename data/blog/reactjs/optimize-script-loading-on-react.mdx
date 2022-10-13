@@ -1,0 +1,173 @@
+---
+title: 'Script 태그 onDemand 로딩하기'
+date: '2022-10-13'
+tags: ['reactjs', 'nextjs']
+draft: false
+summary: '특정 페이지에서만 사용하는 스크립트를 onDemand 로딩하기'
+images: ['/static/images/common/react.png']
+layout: PostLayout
+---
+
+<TOCInline toc={props.toc} exclude={'Intro'} asDisclosure />
+
+## Intro
+
+소셜로그인을 구현하다보면, 소셜로그인을 위한 스크립트를 로딩해야하는 경우가 있다.
+그런데, `소셜로그인 SDK는 대체적으로 100KB 이상의 크기`를 가지고 있어서, 모든 페이지에서 로딩하는 것은 비효율적이다.
+왜냐하면, FCP(First Contentful Paint)을 늦추기 위해서 Bundle Analyzer, Lighthouse 등을 사용해서 최적화를 하고 있는데,
+단 한 번만 사용할 스크립트를 모든 페이지에서 들고 있는 것은 비효율적이기 때문이다. 그래서 필요한 스크립트를 onDemand 하게 로딩하는 방법을 알아보자.
+
+해당 글을 읽기전에 React의 라이프사이클에 대한 이해가 필요하다.(특히 useEffect의 return문이 하는 역할에 대한 이해가 필요하다.)
+
+## Script 태그 onDemand 로딩하기
+
+과정은 다음과 같다.
+
+1. 스크립트를` 비동기적으로 로딩하는 Custom Hook`을 만든다.
+2. 해당 Custom Hook에서 넘긴 `isLoaded 변수를 통해 스크립트가 로딩되었는지 확인`한다.
+3. `로딩이 완료되면`, 해당 SDK에서 제공하는 함수를 호출한다(단 사용하려는 SDK의 Typescript 모듈을 설치하면 Linting이 가능하다).
+
+### 1. 스크립트를 비동기적으로 로딩하는 Custom Hook을 만든다.
+
+```tsx:useLazyScript.tsx
+
+import { useEffect, useState } from 'react';
+
+export default function useLazyScript(src: string) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    script.onload = () => {
+      setIsLoaded(true);
+    };
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+  return [isLoaded] as const;
+}
+
+
+```
+
+`설명`
+
+1. 로딩하려는 스크립트의 src를 파라미터로 받는다.
+2. script 태그를 생성하고, src를 설정한다.(이때 async를 true로 설정한다.)
+3. script 태그의 onload 이벤트를 통해 로딩이 완료되었는지 확인한다.
+4. useEffect의 return문에서는 script 태그를 제거한다.(return문은 해당 컴포넌트가 unmount될 때 실행된다.)
+
+### 2. 해당 Custom Hook에서 넘긴 isLoaded 변수를 통해 스크립트가 로딩되었는지 확인한다.
+
+```tsx:useKakaoAuth.tsx
+
+import { envConfig } from '@src/core/config/envConfig';
+import { useLazyScript } from '@src/hooks';
+
+export default function useKakaoAuth() {
+  const [isLoaded] = useLazyScript('https://developers.kakao.com/sdk/js/kakao.min.js');
+
+  const processKakaoLogin = async () => {
+    if (!isLoaded) {
+      throw new Error('Kakao SDK is not loaded');
+    }
+    if (!Kakao.isInitialized()) {
+      Kakao.init(envConfig.kakaoClientId);
+    }
+    Kakao.Auth.authorize({
+      redirectUri: envConfig.kakaoRedirectUrl,
+    });
+  };
+
+  return [isLoaded, processKakaoLogin] as const;
+}
+
+
+```
+
+`설명`
+
+1. useLazyScript를 통해 스크립트를 로딩한다(이때 isLoaded 변수를 받는다).
+2. isLoaded가 true일 때, Kakao SDK의 함수를 호출한다. 아니면 에러를 발생시킨다.
+3. processKakaoLogin 함수를 정의하고 해당 Hooks를 사용하는 컴포넌트에서 적절히 호출하면 된다.
+
+### 3. 로딩이 완료되면, 해당 SDK에서 제공하는 함수를 호출한다.
+
+```tsx:KakaoLoginButton.tsx
+
+import { ButtonWithIcon } from '@src/components/ui/atom';
+import { SVGTypes } from '@src/components/ui/atom/Icon/Icon';
+import { KakaoAuthHookType } from '@src/core/types/auth-type';
+import { useKakaoAuth } from '@src/hooks';
+import cx from 'classnames';
+import React, { FunctionComponent } from 'react';
+
+const SocialLoginButtonWrapper: FunctionComponent<{
+  isLoaded: boolean;
+  name: SVGTypes;
+  vendorText: '카카오' | '구글' | '애플';
+  className?: string;
+  onClick: () => void;
+}> = ({ isLoaded, vendorText, name, className, onClick }) => (
+  <span className="w-full">
+    <ButtonWithIcon
+      className={cx(className, 'relative my-1.5 disabled:opacity-50 text-md')}
+      nameChange={name}
+      sizeChange={28}
+      fullWidth
+      disabled={!isLoaded}
+      onClick={onClick}
+    >
+      {vendorText}로 시작하기
+    </ButtonWithIcon>
+  </span>
+);
+
+export const KakaoLoginButton: FunctionComponent<KakaoAuthHookType> = ({ ...props }) => {
+  const [isKakaoScriptLoaded, useKakaoLogin] = useKakaoAuth();
+
+  return (
+    <SocialLoginButtonWrapper
+      className="bg-wy-kakao-yellow"
+      isLoaded={isKakaoScriptLoaded}
+      name="kakao"
+      vendorText="카카오"
+      onClick={useKakaoLogin}
+    />
+  );
+};
+
+
+```
+
+`설명`
+
+1. useKakaoAuth를 통해 isLoaded와 processKakaoLogin 함수를 받는다.
+2. isLoaded가 false이면 버튼을 비활성화한다.
+3. 버튼이 활성화된 상태에서 클릭하면 processKakaoLogin 함수를 호출한다.
+
+## 결과물
+
+### `작동화면`
+
+![example](https://d.pr/i/LZWqNy.gif)
+
+### `개발자 도구에서의 결과`
+
+![script-removed](https://d.pr/i/ycQmfj.gif)
+
+`순간적으로 버튼이 비활성화 되는 것`을 볼 수 있다. 이는 스크립트가 로딩되는 동안 버튼을 비활성화 시키기 위함이다.
+또한 개발자 도구에서 확인해보면, 오직 /login 페이지에서만 스크립트가 로딩되는 것을 확인할 수 있다.
+이렇게 로딩하면 React의 index.html 파일이나 Next.js의 \_document.tsx 파일에 스크립트를 추가할 필요가 없다.
+또한 오직 필요한 페이지에서만 스크립트를 로딩하기 때문에, 불필요한 스크립트 로딩을 방지할 수 있다.
+
+`주의`: 해당 Hook은 Social Login SDK 같이 특정 페이지에서만 사용하는 스크립트를 로딩할 때 사용한다.
+만약, 모든 페이지에서 사용하는 스크립트를 로딩할 때는(ex. Font 파일, Google Analytics 등), React의 index.html이나 Next.js의 \_document.tsx 파일에 스크립트를 추가하는 것이 좋다.
+
+## 마치며
+
+이번 포스팅에서는 Social Login SDK 같이 특정 페이지에서만 사용하는 스크립트를 로딩하는 방법에 대해 알아보았다.
+사실 토이프로젝트에서 이렇게까지 최적화할 필요는 없다. 하지만, 좀 더 좋은 사용자 경험을 위해 이런 방법을 알아두면 좋을 것 같다.
