@@ -1,0 +1,347 @@
+---
+title: '[번역] Relay - Graphql mutations'
+date: '2023-01-03'
+tags: ['graphql', 'relay']
+draft: false
+summary: 'Relay 문서의 Graphql Mutation 항목 번역'
+images: []
+layout: PostLayout
+---
+
+## GraphQL Mutation
+
+GraphQL에서는 GraphQL mutations를 통해 서버의 데이터를 업데이트 합니다.
+Mutation은 server operation들을 읽고 쓰며, 두 작업 모두 backend쪽의 데이터를 수정합니다.
+그리고 해당 요청과 같은 요청에 수정된 데이터를 query할 수 있도록 합니다.
+
+### Writing mutations
+
+GraphQL mutation은 query와 매우 비슷해 보입니다. 단지 `mutation`이라는 키워드를 사용할 뿐입니다.
+
+```graphql
+mutation FeedbackLikeMutation($input: FeedbackLikeData!) {
+  feedback_like(data: $input) {
+    feedback {
+      id
+      viewer_does_like
+      like_count
+    }
+  }
+}
+```
+
+- 위에 있는 mutation 코드는 특정 Feedback 오브젝트를 "like"라고 서버 데이터를 수정하도록 만듭니다.
+- `feedback_like`은 mutation root field이며(또는 mutation field일 수도) backend쪽 데이터를 업데이트 하도록 합니다
+- 하나의 mutationdms 2개의 step으로 쪼개집니다. 첫째, 서버에서 업데이트가 진행될때, 그리고 query가 실행되었을때, 이런 작업은 당신이 보는 데이터가 이미 mutation reponse의 일환으로 이미 데이터가 업데이트 되었다는 것을 보장합니다
+
+`주의: 같은 바식으로 쿼리들은 프로세싱 되었다는 것에 주의하세요. Outer selection들은 inner selection에 앞서 이미 계산되었습니다. 즉 이것은 convention의 문제일뿐입니다.(오직 top-level mutation field들만 side-effect가 있고 다른 field는 그렇지 않습니다)`
+
+- mutation field(이 경우 `feedback_like`)는 특정한 GraphQL type을 리턴합니다.(해당 GraphQL type은 mutation response안에서 어떤 데이터를 query 할 수 있는지 노출합니다)
+- 이 경우, 우리는 업데이트 된 feedback object를 querying하고, 업데이트 된 `like_count`와 `viewer_does_like`를 포함해서 쿼리합니다.
+
+성공적인 query reponse는 다음과 같습니다
+
+```graphql
+
+{
+  "feedback_like": {
+    "feedback": {
+      "id": "feedback-id",
+      "viewer_does_like": true,
+      "like_count": 1,
+    }
+  }
+}
+
+```
+
+Relay에서, graphql태그를 사용해서 GraphQL mutation들을 선언할 수 있습니다.
+
+```graphql
+
+const {graphql} = require('react-relay');
+
+const feedbackLikeMutation = graphql`
+  mutation FeedbackLikeMutation($input: FeedbackLikeData!) {
+    feedback_like(data: $input) {
+      feedback {
+        id
+        viewer_does_like
+        like_count
+      }
+    }
+  }
+`;
+
+```
+
+- query나 fragment들이 하는 방식과 똑같이 mutation 또한 GraphQL 변수들을 참조할 수 있습니다
+
+## Using useMutation to execute a mutation
+
+Relay를 통해서 서버에 mutation을 실행시키려면, `commitMutation`이나 useMutation API를 사용할 수 있습니다.
+useMutation API의 예를 한 번 봅시다
+
+```graphql
+
+import type {FeedbackLikeData, LikeButtonMutation} from 'LikeButtonMutation.graphql';
+
+const {useMutation, graphql} = require('react-relay');
+
+function LikeButton({
+  feedbackId: string,
+}) {
+  const [commitMutation, isMutationInFlight] = useMutation<LikeButtonMutation>(
+    graphql`
+      mutation LikeButtonMutation($input: FeedbackLikeData!) {
+        feedback_like(data: $input) {
+          feedback {
+            viewer_does_like
+            like_count
+          }
+        }
+      }
+    `
+  );
+
+  return <button
+    onClick={() => commitMutation({
+      variables: {
+        input: {id: feedbackId},
+      },
+    })}
+    disabled={isMutationInFlight}
+  >
+    Like
+  </button>
+}
+
+```
+
+무슨 일이 일어나는지 한 번 봅시다
+
+- useMutation은 유일한 인자로 graphql literal를 가집니다
+- 해당 API는 tuple item들을 반환합니다
+  - UseMutationConfig을 받는 commitMutation callback과
+  - mutation이 실행되고 있는지 알려주는 boolean 값을 줍니다
+- 게다가, useMutation은 Flow type parameter를 받습니다. query들은, Relay 컴파일러가 생성하는 mutation으로 부터 생성된 Flow Type을 파일을 export합니다
+  - 만약 타입이 제공된다면, `UseMutationConfig`는 statically type할 수 있습니다. 항상 해당 타입을 제공하는 것은 가장 훌륭한 예입니다.
+- 이제 `commitMutation`이 mutation 변수들과 함께 불려진다면, Relay는 feedback_like 필드를 서버에서 실행하는 network request를 만듭니다. 이 예제에서, variable에 의해 특정된 feedback을 찾을 것이며, 서버에 해당 요청이 기록될 것 입니다.
+- field가 실행되면, backend는 업데이트 된 Feedback 객체를 선택할 것이며 `viewer_does_like`과 `like_count`를 특정해서 선택할 것 입니다.
+  - `Feedback` 타입은 id field를 포함하기 때문에, Relay compiler는 자동적으로 id field를 이용해서 자동적으로 selection을 추가할 것 입니다.
+- mutation response를 받게 되면, Relay는 id와 매칭되는 feedback object를 찾을 것이며, 새롭게 업데이트 된 viewer_does_like과 like_count 값을 새롭게 받은 값으로 업데이트 할 것 입니다.
+- 이런 값들이 결과에 의해 변화되면, feedback object에 해당되는 field를 참조하는 컴포넌트는 다시 렌더링 될 것 입니다.
+
+`주의: FeedbackLikeData 파라미터의 이름은 top-level mutation 필드의 이름으로 부터 얻어집니다. 예를 들면 feedback_like과 같이. 해당 타입 또한 생성된 graphql.js 파일로 부터 생성됩니다.`
+
+## Refreshing components in response to mutations
+
+이전 예를 보면, 우리는 수동으로 viewer_does_like과 like_count를 선택했습니다. 해당 필드들을 선택(영향을 받는)한 컴포넌트들은 필드의 값이 변하면 다시 렌더링 될 것입니다.
+
+하지만, 보통 mutation으로 인해 영향을 받는 컴포넌트들에 맞게 mutation을 분할해서 관리하는게 좋습니다.
+왜냐하면 컴포넌트에 의해 선택된 데이터가 변할 수 있기 때문입니다.
+
+개발자로 하여금 그들의 컴포넌트 데이터에 영향을 미칠 수 있는 모든 mutation들을 숙지할 수 있도록 요구하는 것은 Relay가 요구하지 않는 것 입니다(`번역 다시 확인 필요`)
+
+예를 들면, 아래와 같이 mutation을 재작성할 수 있습니다.
+
+```Graphql
+
+mutation FeedbackLikeMutation($input: FeedbackLikeData!) {
+  feedback_like(data: $input) {
+    feedback {
+      ...FeedbackDisplay_feedback
+      ...FeedbackDetail_feedback
+    }
+  }
+}
+
+```
+
+만약 해당 mutation이 실행된다면, FeedbackDislay and FeedbackDetail 컴포넌트에 의해 선택된 필드 모두가 refetch 될 것이며, 해당 컴포넌트들은 consistent한 state에 머무를 것 입니다.
+
+`주의: fragment들을 spreading하는 것은 mutation이 완료된 후 data를 refetching하기 위해서 선호되는 방식입니다. 왜냐하면 업데이트 된 데이터가 single round trip안에 fetch 될 수 있기 때문입니다`
+
+## Executing a callback when the mutation completes or errors
+
+우리는 mutation 성공 여부에 따라서 어떤 state를 update하고 싶을 수 있습니다. 예를 들면, mutation이 실패했을 경우 유저에게 알람을 주고 싶습니다.
+`UseMutationConfig` 객체는 그런 경우에 대비해서 아래와 같은 field를 제공하고 있습니다.
+
+- `OnCompleted`, mutation이 성공했을 경우 callback이 실행됩니다. mutation response가 callback으로서 넘겨집니다.
+  - 넘겨진 해당 인자는 mutation fragment이며 이는 store에서 읽어진 값입니다. 즉 updater와 선언적인 mutation이 적용된 상태입니다. 이것이 의미하는 것은, unmasked fragment들은 읽어오지 않으며, 삭제된 record들(@deleteRecord를 이용해서 표시된)들 또한 null이 될 수 있다는 것 입니다.
+- `OnError`, mutation이 실패했을 경우 실행되는 callback입니다
+
+## Declarative mutation directives
+
+### Manipulating connections in response to mutations
+
+Relay는 mutation에 쉽게 응답하도록 합니다(아이템을 추가하거나 connection으로 부터 아이템을 제거함으로서). 예를 들면, 당신은 주어진 connection에서 새로운 유저를 붙이고 싶을 수 있습니다.
+좀 더 자세한 내용을 원하시면 [Using declarative directives](https://relay.dev/docs/guided-tour/list-data/updating-connections/#using-declarative-directives)문서를 읽어보세요
+
+### Deleting items in response to mutations
+
+추가적으로, mutation 응답을 통해 특정 아이템을 제거하고 싶을 수 있습니다. 해당 작업을 하기 위해서, `@deleteRecord`를 id항목에 추가하세요. 예를 들면
+
+```graphql
+mutation DeletePostMutation($input: DeletePostData!) {
+  delete_post(data: $input) {
+    deleted_post {
+      id @deleteRecord
+    }
+  }
+}
+```
+
+## Imperatively modifying local data
+
+가끔, 우리가 실행한 update들이 field의 값을 업데이트 하는 것 이상의 복잡한 작업을 필요로 할 때가 있습니다. 그리고 이런 작업이 명시적인 mutation 지시어들로 이루어질 수 없을 때가 있습니다.
+이런 상황에서 UseMutationConfig는 `updater`라는 함수를 받을 수 있으며 이는 store를 update하는 모든 과정을 제어할 수 있습니다.
+자세한 내용을 원하시면 [Imperatively modifying store data](https://relay.dev/docs/guided-tour/updating-data/imperatively-modifying-store-data/)문서를 참고하세요
+
+## Optimistic updates
+
+가끔, 유저 인터렉션에 대한 응답을 하기 전에 서버로부터 응답을 기다리는 과정을 거치고 싶지 않을 때가 있습니다.
+예를 들면, 만약 유저가 "Like" 버튼을 눌렀을때, 즉각적으로 유저에게 코멘트, 포스트 등을 보여주고 싶습니다.
+
+이런 경우, 우리는 데이터를 즉각적으로 store에 데이터를 update하고 싶습니다.(단, 이 경우 mutation이 성공적으로 작동했다는 것을 가정해야합니다).
+만약 mutation이 실패로 끝난다면 우리는 최적의 방식으로 roll back를 하고 싶을 것 입니다.
+
+## Optimistic response
+
+이것을 가능하게 하기 위해서, `UseMutationConfig`는 `optimisticResponse` 필드를 제공하고 있습니다.
+
+해당 field가 Flow-type 되기 위해서, useMutation에 Flow type parameter가 넘겨져야하며, 해당 Mutationdms `@raw_response_type` 지시어로 감싸져야합니다
+
+이전 예제를 이용해서 optimistic response를 적용하면 다음과 같습니다
+우선 이전 예제입니다.
+
+```graphql
+
+{
+  feedback_like: {
+    feedback: {
+      // Even though the id field is not explicitly selected, the
+      // compiler selected it for us
+      id: feedbackId,
+      viewer_does_like: true,
+    },
+  },
+}
+
+```
+
+이제,commitMutation을 호출할때, 해당 데이터는 즉각적으로 store에 쓰여질 것 입니다. id에 해당하는 store의 item은 새로운 viewer_does_like 값으로 업데이터 될 것 입니다.
+해당 field의 값을 참조하는 컴포넌트 모두는 다시 렌더링 될 것 입니다.
+
+mutation이 성공하거나 에러가 있을 경우, optimistic response는 roll back 될 것 입니다.
+
+like_count를 업데이트 하는 것은 작업이 좀 더 필요합니다. 업데이트를 하기 위해서, 우리는 현재의 like count를 컴포넌트로 부터 읽어야합니다.
+
+```react
+
+import type {FeedbackLikeData, LikeButtonMutation} from 'LikeButtonMutation.graphql';
+import type {LikeButton_feedback$fragmentType} from 'LikeButton_feedback.graphql';
+
+const {useMutation, graphql} = require('react-relay');
+
+function LikeButton({
+  feedback: LikeButton_feedback$fragmentType,
+}) {
+  const data = useFragment(
+    graphql`
+      fragment LikeButton_feedback on Feedback {
+        __id
+        viewer_does_like @required(action: THROW)
+        like_count @required(action: THROW)
+      }
+    `,
+    feedback
+  );
+
+  const [commitMutation, isMutationInFlight] = useMutation<LikeButtonMutation>(
+    graphql`
+      mutation LikeButtonMutation($input: FeedbackLikeData!)
+      @raw_response_type {
+        feedback_like(data: $input) {
+          feedback {
+            viewer_does_like
+            like_count
+          }
+        }
+      }
+    `
+  );
+
+  const changeToLikeCount = data.viewer_does_like ? -1 : 1;
+  return <button
+    onClick={() => commitMutation({
+      variables: {
+        input: {id: data.__id},
+      },
+      optimisticResponse: {
+        feedback_like: {
+          feedback: {
+            id: data.__id,
+            viewer_does_like: !data.viewer_does_like,
+            like_count: data.like_count + changeToLikeCount,
+          },
+        },
+      },
+    })}
+    disabled={isMutationInFlight}
+  >
+    Like
+  </button>
+}
+
+```
+
+`주의: optimistic updater를 사용할 때 특히 주의해야합니다. optimistic response를 쓰고 싶은 값이 store에 의존적인 값일 수 있고, store value에 영향을 주는 여러개의 optimistic response가 있을 수 있기 때문입니다.
+
+예를 들면, 두개의 optimistic response가 like count를 하나씩 올린다고 한다면, 첫번째 optimistic updater가 roll back될 수 있는 상황입니다.
+그리고 두 번째 optimistic update가 여전히 적용되어 있습니다. 그리고 store에 있는 like count는 2개가 increase된 상태일 수 있기 때문입니다.
+`
+
+`
+주의: Optimistic response는 여러 문제가 있습니다.
+
+- Optimistic response는 full query response를 위한 데이터를 포함할 수도 있습니다. 예를 들면 fragment spread들에 대한 내용들 말이죠.
+  만약 optimistic response로 되어 있는 fragment들을 개발자가 선택해서 사용한다면, optimistic update 동안 부정확하거나 부분적인 데이터가 표시될 수 있습니다.
+- Optimistic update의 타입은 전부 재귀적으로 nest된 fragment된 컨탠츠를 포함하기 때문에, 타입이 매우 클 수 있습니다. @raw_response_type을 특정 mutation에 추가하는 것은 Relay compiler의 성능을 낮출 수 있습니다.
+  `
+
+## Optimistic updaters
+
+Optimistic response들은 모든 경우에 대응하기 충분하지 않습니다. 예를 들면 우리가 mutation에서 선택되지 않은 데이터를 optimistical하게 업데이트하고 싶을 수 있습니다.
+또는, connection을 통해 아이템을 추가하거나 제거하고 싶을 수 있습니다(명시적인 mutation 지시어들로 해당 작업을 하기에는 불충분합니다)
+
+이런 상황을 위해, UseMutationConfig는 optimisticUpdater를 제공하고 있습니다. 해당 필드는 개발자로 하여금 store에 있는 데이터를 명시적이며 최적적인 방법으로 업데이트 할 수 있습니다.
+자세한 내용을 알고 싶다면 [Imperatively updating store data](https://relay.dev/docs/guided-tour/updating-data/imperatively-modifying-store-data/) 문서를 읽어보세요
+
+## Order of execution of updater functions
+
+보통, 다음과 같은 순서에 따라서 updater가 작동합니다
+
+- optimisticResponse가 제공되면, 데이터는 store에 쓰여집니다
+- optimisticUpdater가 제공되면, Relay는 해당 optimisticUpdater를 실행하고 store를 updategkqslek
+- optimisticResponse 제공되면, 명시적으로 지시어가 있는 mutation을 optimistic response에 따라서 처리합니다
+- mutation이 성공적으로 실행되면
+  - optimistic update가 적용된 모든 부분이 roll back 됩니다
+  - Relay는 서버로 부터의 응답을 store에 update 합니다
+  - updater가 제공되었다면, Relay는 해당 updater를 실행하고, store를 업데이트 합니다. server payload가 updater에게 사용가능해질 것 입니다.
+  - Relay는 server response를 사용해서 명시적인 mutation 지시어를 처리할 것 입니다.
+  - onCompleted callback이 실행됩니다.
+- 만약 mutation 요청이 실패한다면
+  - optimistic update가 적용된 모든 부분이 roll back 됩니다
+  - onError callback이 실행됩니다.
+
+## Invalidating data during a mutation
+
+mutation을 실행할때 추천하는 방식은 mutation에 의해 영향을 받은 데이터를 모두 server로 부터 가져오는 것 입니다.
+이를 통해 local Relay store가 지속적으로 server의 최신 상태를 받아오도록 하는 것 입니다.
+
+그렇지만, 어떤 데이터를 항상 최신으로 아는 것이 힘들 때가 있으며, 큰 파급효과를 가진 mutation의 경우 특히 그렇습니다.(예를 들면 유저를 block하거나 그룹에서 나가는 등)
+
+이런 종류의 mutation들은 가끔 어떤 데이터를 stale(또는 whole store)하다고 mark함으로서,
+Relay가 데이터를 다시 가져오도록 하는 것이 좋습니다. 그렇게 하기 위해서, data invalidation API 문서를 읽어보는 것이 좋습니다.
+[Staleness of Data section](https://relay.dev/docs/guided-tour/reusing-cached-data/staleness-of-data/)
