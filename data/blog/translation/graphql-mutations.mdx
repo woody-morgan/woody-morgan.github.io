@@ -11,12 +11,12 @@ layout: PostLayout
 ## GraphQL Mutation
 
 GraphQL에서는 GraphQL mutations를 통해 서버의 데이터를 업데이트 합니다.
-Mutation은 server operation들을 읽고 쓰며, 두 작업 모두 backend쪽의 데이터를 수정합니다.
-그리고 해당 요청과 같은 요청에 수정된 데이터를 query할 수 있도록 합니다.
+Mutation은 server operation들을 읽고 쓰며, 두 작업 모두 backend의 데이터를 수정합니다.
+그리고 해당 요청에 의해 수정된 데이터를 query할 수 있도록 합니다.
 
 ### Writing mutations
 
-GraphQL mutation은 query와 매우 비슷해 보입니다. 단지 `mutation`이라는 키워드를 사용할 뿐입니다.
+GraphQL mutation은 query와 비슷해 보입니다. 단지 `mutation`이라는 키워드를 사용할 뿐입니다.
 
 ```graphql
 mutation FeedbackLikeMutation($input: FeedbackLikeData!) {
@@ -30,11 +30,11 @@ mutation FeedbackLikeMutation($input: FeedbackLikeData!) {
 }
 ```
 
-- 위에 있는 mutation 코드는 특정 Feedback 오브젝트를 "like"라고 서버 데이터를 수정하도록 만듭니다.
-- `feedback_like`은 mutation root field이며(또는 mutation field일 수도) backend쪽 데이터를 업데이트 하도록 합니다
-- 하나의 mutationdms 2개의 step으로 쪼개집니다. 첫째, 서버에서 업데이트가 진행될때, 그리고 query가 실행되었을때, 이런 작업은 당신이 보는 데이터가 이미 mutation reponse의 일환으로 이미 데이터가 업데이트 되었다는 것을 보장합니다
+- 위에 있는 mutation 코드는 특정 Feedback 오브젝트를 "like"라고 표시하도록 서버에 요청합니다
+- `feedback_like`은 mutation root field이며(또는 mutation field일 수도) backend 데이터를 업데이트 하도록 합니다
+- 하나의 mutation은 2개의 step으로 진행됩니다. 첫째, 서버에서 업데이트가 진행될때, 그리고 query가 실행되었을때, 이런 작업은 당신이 보는 데이터가 이미 mutation reponse의 일환으로 이미 데이터가 업데이트 되었다는 것을 보장합니다
 
-`주의: 같은 바식으로 쿼리들은 프로세싱 되었다는 것에 주의하세요. Outer selection들은 inner selection에 앞서 이미 계산되었습니다. 즉 이것은 convention의 문제일뿐입니다.(오직 top-level mutation field들만 side-effect가 있고 다른 field는 그렇지 않습니다)`
+`주의: 같은 방식으로 쿼리들이 프로세싱 되었다는 것에 주의하세요. Outer selection들은 inner selection에 앞서 이미 계산되었습니다. 즉 이것은 convention의 문제일뿐입니다.(오직 top-level mutation field들만 side-effect가 있고 다른 field는 그렇지 않습니다)`
 
 - mutation field(이 경우 `feedback_like`)는 특정한 GraphQL type을 리턴합니다.(해당 GraphQL type은 mutation response안에서 어떤 데이터를 query 할 수 있는지 노출합니다)
 - 이 경우, 우리는 업데이트 된 feedback object를 querying하고, 업데이트 된 `like_count`와 `viewer_does_like`를 포함해서 쿼리합니다.
@@ -55,7 +55,7 @@ mutation FeedbackLikeMutation($input: FeedbackLikeData!) {
 
 ```
 
-Relay에서, graphql태그를 사용해서 GraphQL mutation들을 선언할 수 있습니다.
+Relay에서는 graphql태그를 사용해서 GraphQL mutation들을 선언할 수 있습니다.
 
 ```graphql
 
