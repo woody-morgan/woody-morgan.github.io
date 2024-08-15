@@ -1,12 +1,11 @@
 ---
-name: Tails Azimuth
+name: WOODI(Dong-Wook)
 avatar: /static/images/avatar.png
-occupation: Professor of Atmospheric Science
-company: Stanford University
-email: address@yoursite.com
-twitter: https://twitter.com/Twitter
-linkedin: https://www.linkedin.com
-github: https://github.com
+occupation: Undergraduate of Chung-Ang Univ.
+company: Chung-Ang Univ.
+email: woodi.daily@gmail.com
+linkedin: 'https://www.linkedin.com/in/%EB%8F%99%EC%9A%B1-%EA%B9%80-112973188/'
+github: https://github.com/woodi97
 ---
 
 Tails Azimuth is a professor of atmospheric sciences at the Stanford AI Lab. His research interests includes complexity modelling of tailwinds, headwinds and crosswinds.
