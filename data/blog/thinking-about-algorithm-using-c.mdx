@@ -1,0 +1,32 @@
+---
+title: Thinking about algorithm using c++
+date: '2022-08-11'
+tags: ['algoirthm', 'c++']
+draft: true
+summary: notes on thoughts while solving problems
+images: []
+layout: PostLayout
+---
+
+1. https://www.acmicpc.net/problem/2941 -> 문자열 비교할때
+   -> 처음엔 한 문자씩 비교하려고 했다
+   -> string의 replace를 이용해서 패턴이 매치되는 것을 하나의 문자열로 바꾸면 좀 더 쉽게 풀 수 있다.
+   -> find, replace 사용법을 익힐 수 있다
+
+2. https://www.acmicpc.net/problem/11816
+   -> 8, 10, 16 진수를 10진수로 변환해서 출력하는 문제
+   -> 직접 구현하려면 코드가 매우 길다
+   -> 하지만 scanf의 %i를 이용해서 입력을 받으면 3줄만에 끝난다.
+   -> %i 옵션은 8/10/16진수를 입력받는 옵션이다
+
+3. https://www.acmicpc.net/problem/9093
+   -> c++을 사용하면 한줄 입력을 받을때 getline을 사용할 수 밖에 없다
+   -> 이때 처음에 받는 n과 같은 test case를 받는 경우는 한 줄이 아닌 띄어쓰기 단위로 받는다(>> 연산자를 통해서)
+   -> 이 다음에 getline 함수를 사용하게 되면 \n 이 버퍼에 남아서 getline함수가 \n을 받게 되므로 예상하지 못한 입력이 받아진다
+   -> 이를 해결하기 위해서 cin.ignore()라는 함수를 사용하면 버퍼를 clear해준다.
+
+4. https://www.acmicpc.net/problem/1212
+   -> 이거 브론즈인데 이해가 잘 안간다...왜 내 코드가 안되지?
+
+5. https://www.acmicpc.net/problem/1439
+   -> substr(a,b)함수는 a index ~ b index를 자르는게 아니라, a index부터 + b 만큼 자르는 함수

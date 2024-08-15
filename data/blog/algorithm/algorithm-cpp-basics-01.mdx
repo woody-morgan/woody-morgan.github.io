@@ -1,0 +1,33 @@
+---
+title: '[Algorithm] Cpp Basics - 01'
+date: '2022-08-16'
+tags: ['algorithm', 'c++']
+draft: true
+summary: cpp basic for algorithm
+images: []
+layout: PostLayout
+---
+
+## Tips
+
+1. getline의 delimeter는 char만 가능, 파이썬같은 string 단위로 자르고 싶으면 아래와 같은 함수를 정의해서 사용해야함
+
+```cpp
+vector<string> split(string input, string delimiter) {
+  vector<string> ret;
+  ll pos = 0;
+  string token = "";
+  while ((pos = input.find(delimiter)) != string::npos) {
+    token = input.substr(0, pos);
+    ret.push_back(token);
+    input.erase(0, pos + delimiter.length());
+  }
+  ret.push_back(input);
+  return ret;
+}
+```
+
+## 구간쿼리
+
+1. 정적배열 -> 구간합(Prefix Sum)
+2. 동적배열 -> 트리(세그먼트 트리, 펜윅 트리)
