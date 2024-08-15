@@ -136,10 +136,6 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "markdown-importer:마크다운 형식 가져오기 열기": false,
-      "random-note:랜덤 노트 열기": false,
-      "audio-recorder:녹음 시작/중지": false,
-      "publish:변경사항 출판": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
