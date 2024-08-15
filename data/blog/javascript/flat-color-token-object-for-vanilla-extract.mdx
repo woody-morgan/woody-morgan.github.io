@@ -45,8 +45,8 @@ export const sprinkles = createSprinkles(colorThemeStyles)
 
 createSprinkles 함수를 통해 color 토큰을 정의해놓으면 위와 같이 `intellisense에 사용할 수 있는 토큰 목록이 뜬다`.
 
-`tailwindCSS의 경우`도 tailwind.config.js를 통해 비슷한 기능을 제공하지만, 생성된 util class에 대해
-타입추론이 되지 않기 때문에 `추후 토큰의 이름이 변경되면 존재하지 않는 util class가 감지되지 않는 단점`이 있어서 결과적으로 vanilla-extract를 선택하게 되었다(다른 이유도 있지만 이건 나중에 소개하는걸로..)
+`tailwindCSS의 경우`도 tailwind.config.js를 통해 비슷한 기능을 제공하지만, 더 이상 존재하지 않는 util class에 대해
+타입체크가 되지 않기 때문에 `추후 토큰의 이름이 변경되면 존재하지 않는 util class가 감지되지 않는 단점`이 있어서 결과적으로 vanilla-extract를 선택하게 되었다(다른 이유도 있지만 이건 나중에 소개하는걸로..)
 
 ### Object Flatten의 필요성
 
