@@ -166,7 +166,7 @@ export type FlatKeys<T extends Record<string, unknown>> = FlattenObjectKeys<T>
 ```ts
 export type FlatKeys<T extends Record<string, unknown>> = FlattenObjectKeys<T>
 
-export const flattenObjectKeys = <T extends Record<string, unknown>>(
+export const flatObject = <T extends Record<string, unknown>>(
   obj: T
 ): Record<FlatKeys<T>, string> => {
   // 리턴하는 result 객체, FlatKeys를 담는 빈 객체를 만들기 위해 타입 단언문 사용
@@ -177,7 +177,7 @@ export const flattenObjectKeys = <T extends Record<string, unknown>>(
     Object.keys(currentObj).forEach((key) => {
       const value = currentObj[key]
       // 현재까지의 경로를 이용해서 새로운 경로 생성
-      const newPath = path ? `${path}.${key}` : key
+      const newPath = path ? `${path}-${key}` : key
       // value가 객체이면서 null value가 아니면 재귀함수 작동
       if (typeof value === 'object' && value !== null) {
         traverse(value as Record<string, unknown>, newPath)
@@ -233,7 +233,7 @@ export const flattenObjectKeys = <T extends Record<string, unknown>>(
 위처럼 "-"로 되어있는 부분을 "."으로 경로를 이어주게 만드려면
 
 1. FlattenObjectKey 타입에서 `${Key}-${FlattenObjectKeys<T[Key]>}`로 되어있는 부분을 `${Key}.${FlattenObjectKeys<T[Key]>}`로 변경
-2. flattenObject 함수에서 `${path}-${key}`로 되어있는 부분을 `${path}.${key}`
+2. flatObject 함수에서 `${path}-${key}`로 되어있는 부분을 `${path}.${key}`
 
 같이 2번 변경해줘야한다. 이 부분을 연동되게 만들고 싶었지만 아쉽게도 만들 수 없었다. 혹시 더 좋은 방법을 알고 계신다면 댓글에 남겨주시면 정말 감사드립니다.
 
