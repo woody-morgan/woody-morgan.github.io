@@ -26,33 +26,22 @@ Because when you make your own React/Nextjs App,
 that has tree like shape, but also downloaded packages too.
 
 ```jsx:useWindowSize.ts
-import { useState, useEffect } from 'react'
-import { IWindowSize } from '@src/core/interface'
-import _ from 'lodash'
+import _ from 'lodash';
+import { useCallback, useEffect } from 'react';
 
-const useWindowSize = (delay: number = 0): IWindowSize => {
-  const [windowSize, setWindowSize] = useState<IWindowSize>({
-    width: undefined,
-    height: undefined,
-  })
-
-  const handleResize = _.throttle(() => {
-    setWindowSize({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    })
-  }, delay)
+export default function useWindowResize(callback: () => void, delay: number) {
+  const handleResize = useCallback(() => {
+    callback();
+  }, [callback]);
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize)
-    handleResize()
-    return () => window.removeEventListener('resize', handleResize)
-  }, [handleResize])
-
-  return windowSize
+    const throttled = _.throttle(handleResize, delay);
+    window.addEventListener('resize', throttled);
+    handleResize();
+    return () => window.removeEventListener('resize', throttled);
+  }, [handleResize, delay]);
 }
 
-export default useWindowSize
 ```
 
 ![lodash-not-tree-shaked](https://d.pr/i/ku7g9X.png)
