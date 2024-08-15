@@ -4,16 +4,8 @@
 
 // export default Image
 
-// import NextImage, { ImageProps } from 'next/image'
+import { ImgHTMLAttributes } from 'react'
 
-interface IImageProps {
-  alt: string
-  src: string
-  className?: string
-  width?: number | string
-  height?: number | string
-}
-
-const Image = ({ ...rests }: IImageProps) => <img {...rests} />
+const Image = ({ ...rests }: ImgHTMLAttributes<HTMLImageElement>) => <img {...rests} />
 
 export default Image

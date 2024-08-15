@@ -17,6 +17,12 @@ const projectsData = [
     imgSrc: 'static/images/proj/nextjs-boilerplate.png',
     href: 'https://template-next-two.vercel.app',
   },
+  {
+    title: 'Korean Wordle Project: Infinite Mode',
+    description: 'Korean Wordle Project which support infinite mode',
+    imgSrc: 'static/images/proj/wordle/wordle.png',
+    href: 'https://woodi97.github.io/kodle-modle/',
+  },
 ]
 
 export default projectsData
