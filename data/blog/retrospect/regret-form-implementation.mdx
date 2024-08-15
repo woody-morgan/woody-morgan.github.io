@@ -1,0 +1,151 @@
+---
+title: '[반성] 폼 설계 다시 생각하기'
+date: '2024-03-11'
+tags: ['retrospect']
+draft: false
+summary: '폼 설계에 대해서 안일하게 생각했던 나를 반성하며'
+images: []
+layout: PostLayout
+---
+
+<TOCInline toc={props.toc} exclude={'Intro'} asDisclosure />
+
+최근까지 폼 설계를 대충했다는 생각이 들어서, 반성문을 적어봤습니다.
+
+## 무엇을 대충했는가?
+
+폼 설계를 대충했습니다. 반성합니다.
+
+## 어떻게 대충했는가?
+
+키워드만 모아놓고 제대로 분석해본 라이브러리가 매우 편협합니다.
+함수형과 타입안전성을 높이는 기술, UI를 레고처럼 잘개 쪼개는 기술에만 관심이 많았습니다.
+
+ts-pattern, ts-belt, radix-ui 등 자주 쓰고 좋아하는 라이브러리는 지속적으로 관심을 줬지만
+
+Funnel과 같은 Multistep form에 대한 설계를 너무 소홀히 했습니다.
+이 정도면 괜찮겠지 라고 생각하는 부분에서 항상 뒤통수를 맞고는 하는데, 이번에도 한 방 먹었습니다.
+
+## 자만했던 과거
+
+첫 회사에 입사하고 쳅터 리더님과 1대 1 온보딩을 하면서 들었던 말이 생각납니다.
+
+Network fetching 비용이 더 든다고 해도, `상태를 줄이는 방향으로 코드를 작성해야 유지보수 비용이 줄어든다`.
+
+현재 시장에서 가장 비싼 비용은 개발자 몸값이기 때문에, 가독성 고려를 해야한다.
+
+그래서 한 달 동안 온보딩을 통해 만들어낸 코드는 아래와 같습니다
+
+```reason
+
+module Query = %relay(`
+  query Index_Query($query: String!, $first: Int!, $after: String) {
+    ...RepositoriesView_Fragment @arguments(first: $first, after: $after)
+  }
+`)
+
+module Container = {
+  @react.component
+  let make = (~searchText) => {
+    let router = Next.Router.useRouter()
+
+    let {fragmentRefs} = Query.use(
+      ~variables=Query.makeVariables(~query=searchText, ~first=Env.defaultPagination, ()),
+      (),
+    )
+
+    let handleSubmit = e => {
+      e->ReactEvent.Synthetic.preventDefault
+      let value = (e->ReactEvent.Synthetic.currentTarget)["elements"]["search"]["value"]
+      router->Next.Router.push(`/?search=${value}`)
+    }
+
+    <PageLayout>
+      <form onSubmit={handleSubmit}>
+        <div className="flex">
+          <Input type_="text" fullWidth={true} name="search" />
+          <Button size={Button.Small} type_="submit"> {React.string("Search")} </Button>
+        </div>
+      </form>
+      <RepositoriesView query={fragmentRefs} />
+    </PageLayout>
+  }
+}
+
+type props = {searchText: string}
+
+let default = props => {
+  <React.Suspense fallback={<Spinner position=Spinner.Center width="60" height="60" />}>
+    <Container searchText={props.searchText} />
+  </React.Suspense>
+}
+
+let getServerSideProps = (ctx: Next.GetServerSideProps.context<props, _, _>) => {
+  let initialSearchInput = ctx.query->Js.Dict.get("search")->Option.getWithDefault("")
+  Js.Promise.resolve({"props": {searchText: initialSearchInput}})
+}
+
+```
+
+온보딩 전에는 useState를 남발했을텐데, 온보딩 후에는 searchQuery와 같은 방법을 통해 외부로 상태를 위임시켰습니다.
+
+이 방법을 알게 된 이후에 form 사용하는 방법은 이 정도면 충분하지라고 생각했고, 최근까지도 크게 변하지 않았습니다.
+
+## 프론트엔드를 사랑한다고 했지만, 성의가 없었습니다.
+
+최근에 퍼널 이란 키워드를 다시 찾아보기 시작했습니다.
+퍼널이란 뭘까요?
+
+토스의 모든 자료, feconf를 자주 찾아본다고 했지만 한 번도 퍼널 설계에 대해서 진지하게 고민한 적이 없었습니다.
+[쏟아지는 Funnel 설계하기](https://www.youtube.com/watch?v=NwLWX2RNVcw)
+
+아직 깊이감이 많이 부족한 것 같습니다. 주말동안 미뤄왔던 toss slash library 클론을 해볼까 합니다.
+
+## 현재까지 발굴해낸 성의있는 폼 설계
+
+최근 고민을 통해 우아한 폼 설계 방법을 2가지 찾았습니다.
+
+첫번째는 사이드프로젝트를 진행하면서 만들어낸 방법인데요, useHookForm과 zodResolver을 좀 더 잘 활용하는 방법입니다.
+이건 아래에 코드로 남길게요.
+
+코드에 대해 설명하자면,
+이 부분도 대수적 효과라고 생각하는 부분입니다.
+대수적 효과란 "What과 How를 분리하는 기술이라 정의합니다"
+
+보통 Form Value를 무엇을 어떻게 검증할지 분리해서 정의하고 사용합니다.
+여기에 더 나아가서 Form의 Step 별로 schema를 분리하고, 최종 제출전 merge된 스키마를 통해 step별로 검증할 필드를 명확히 구분하면 가독성과 확장성이 좋아집니다.
+
+검증코드와 step별 검증 로직을 한 함수(또는 문맥)에서 난잡하게 두는 것 보다는 확실히 가독성도 좋아지고 누가와도 유지보수하기 쉬워보입니다.
+
+올해 작성한 코드 중 가장 마음에 드는 코드 중 하나입니다. step 버튼 로직에 api까지 붙인다면 중간저장 기능도 넣기 매우 쉬워보이죠.
+
+두번째는 첫번째 방법보다 더 나아가 우아한 방법입니다. toss slash library에 있는 useFunnel hook을 사용하는 것 입니다.
+
+유튜브 채널에서 진유림 님이 공유했듯이 재사용성을 높이면서 진행이 가능하고, 매우 우아합니다. 그런데 router 코드로 인해서 next.js에 디펜던시가 걸려있더라구요. next.js 디펜던시를 제거해볼까 합니다.
+
+## 앞으로 성의있게 설계하고 싶은 부분
+
+1. 우선 먼저 생각이 드는 부분은 OTP Input Field 입니다.
+   마침 Shadcn-ui에서 OTP Input 컴포넌트가 나와서 참고해서 만들면 될 것 같습니다. 오픈소스는 참 멋진 것 같습니다
+   힘들게 고민한 것들을 모두에게 공유한다는 점에서 인류애가 늘어납니다.
+
+2. zero runtime pattern matching library인 pattycake 코드에 기여하고 싶습니다. 회사에서 패턴매칭 노래를 부르고 다녔었는데요,
+   내부 동작에 대해서는 설명하기 힘들더라구요. 설명할 수 없다면 모르는 것이라 생각합니다. 잘 설명할 수 있는 개발자가 되고 싶습니다.
+
+3. useOverlay Hook을 분석하려고 합니다.
+
+4. Framer-motion exit 애니메이션 동작 원리와 관련해서 자신감 있게 설명하고 싶습니다.
+
+5. 세번째로는 이소영님의 [craft](https://craft.so-so.dev/)를 클론하면서 Framer-motion을 진심으로 사용하는 방법을 익히려구요.
+
+6. UI 테스팅을 소홀히 했습니다. 회사에서 테스트코드 작성 문화를 도입하자고 했지만, 정작 제가 테스트 코드를 짜는 방법을 제대로 모르는 것 같습니다
+
+## 마지막 몇 마디
+
+toss slash library를 분석하면서, 얼마나 오만했는지 반성합니다. 이 정도면 잘하는거지, 이 정도면 더 이상 필요는 없겠다는 생각이 자신을 얼마나 나태하게 만드는지 다시 한 번 깨닫게 되었습니다.
+
+위대한 개발자가 될 수 있도록 더욱 노력하겠습니다.
+
+사실 커리어적인 측면에서 고민이 많습니다. 오히려 오만함을 깨트릴 경험을 하고 나서, 어떻게 성장해야할지 방법을 찾은 것 같습니다.
+
+이상입니다.
