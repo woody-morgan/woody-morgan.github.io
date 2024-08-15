@@ -14,7 +14,7 @@ layout: PostLayout
 
 소셜로그인을 구현하다보면, 소셜로그인을 위한 스크립트를 로딩해야하는 경우가 있다.
 그런데, `소셜로그인 SDK는 대체적으로 100KB 이상의 크기`를 가지고 있어서, 모든 페이지에서 로딩하는 것은 비효율적이다.
-왜냐하면, FCP(First Contentful Paint)을 늦추기 위해서 Bundle Analyzer, Lighthouse 등을 사용해서 최적화를 하고 있는데,
+왜냐하면, FCP(First Contentful Paint)을 늦추기 위해서 Bundle Analyzer, Lighthouse 등을 사용해서 분석 및 최적화를 하고 있는데,
 단 한 번만 사용할 스크립트를 모든 페이지에서 들고 있는 것은 비효율적이기 때문이다. 그래서 필요한 스크립트를 onDemand 하게 로딩하는 방법을 알아보자.
 
 해당 글을 읽기전에 React의 라이프사이클에 대한 이해가 필요하다.(특히 useEffect의 return문이 하는 역할에 대한 이해가 필요하다.)
