@@ -2,8 +2,8 @@ name: Deploy
 
 on:
   schedule:
-    # Runs at 2:00 AM KST, which is 5:00 PM UTC
-    - cron: '0 17 * * *'
+    # Runs at 1:00 AM KST, which is 4:00 PM UTC
+    - cron: '0 16 * * *'
   workflow_dispatch: # Allows you to manually trigger the workflow
 
 jobs:
@@ -12,7 +12,13 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        run: |
+          git clone git@github.com:woody-morgan/woody-morgan.github.io.git
+
+      - name: Set up Git identity
+        run: |
+          git config --global user.name "morgan-crafts-bot"
+          git config --global user.email "woody.morgan.crafts@gmail.com"
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -34,8 +40,5 @@ jobs:
         run: pnpm install
 
       - name: Deploy
-        run: pnpm deploy
-        env:
-          # Add any environment variables needed for deployment here
-          # Example:
-          # DEPLOY_ENV: production
+        run: |
+          pnpm run deploy
