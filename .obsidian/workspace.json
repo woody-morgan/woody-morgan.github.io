@@ -11,11 +11,9 @@
             "id": "b19a19352142c113",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
+                "file": "data/logo.svg"
               }
             }
           }
@@ -85,7 +83,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "data/logo.svg",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +100,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "data/logo.svg",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +123,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "data/logo.svg"
               }
             }
           }
@@ -150,8 +148,10 @@
       "publish:Publish changes...": false
     }
   },
-  "active": "b19a19352142c113",
+  "active": "67cfe87703c02881",
   "lastOpenFiles": [
+    "public/static/favicons/apple-touch-icon.png",
+    "README.md",
     "무제 파일.md",
     "무제 파일.canvas"
   ]
