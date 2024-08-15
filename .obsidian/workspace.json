@@ -4,17 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "242012b58a8267bf",
+        "id": "791168811117c317",
         "type": "tabs",
         "children": [
           {
-            "id": "b19a19352142c113",
+            "id": "fa42f62b3ffefbbf",
             "type": "leaf",
             "state": {
-              "type": "image",
-              "state": {
-                "file": "data/logo.svg"
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -83,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/logo.svg",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/logo.svg",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -122,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "data/logo.svg"
-              }
+              "state": {}
             }
           }
         ]
@@ -136,20 +130,21 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "markdown-importer:Open format converter": false,
-      "random-note:Open random note": false,
-      "audio-recorder:Start/stop recording": false,
-      "publish:Publish changes...": false
+      "switcher:퀵 스위처 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 데일리 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "markdown-importer:마크다운 형식 가져오기 열기": false,
+      "random-note:랜덤 노트 열기": false,
+      "audio-recorder:녹음 시작/중지": false,
+      "publish:변경사항 출판": false
     }
   },
-  "active": "67cfe87703c02881",
+  "active": "fa42f62b3ffefbbf",
   "lastOpenFiles": [
+    "data/logo.svg",
     "public/static/favicons/apple-touch-icon.png",
     "README.md",
     "무제 파일.md",
