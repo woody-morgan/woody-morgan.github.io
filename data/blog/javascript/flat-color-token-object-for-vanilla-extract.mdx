@@ -1,0 +1,238 @@
+---
+title: 'Vanilla Extract CSS를 위한 ColorToken Flattening하기(feat. Typescript)'
+date: '2023-06-04'
+tags: ['vanilla-extract', 'javascript']
+draft: false
+summary: 'colorToken을 Vanilla Extract Sprinkles에 할당하기 위한 Object Flattening 하기'
+images: []
+layout: PostLayout
+---
+
+<TOCInline toc={props.toc} asDisclosure />
+
+## Intro
+
+### Vanilla Extract CSS 간단 소개
+
+현재 소속되어 있는 회사에서 디자인시스템을 제작하고 있다. 고성능이면서 토큰기반(breakpoint, color, spacing 등)으로 작동하는
+디자인시스템에 대한 요구가 있었고, 이를 충족하기 위해서 zero-runtime css면서 타입추론이 되는 Vanilla-Extract를 선택하게 되었다.
+
+Vanilla-Extract를 소개하는 글은 아니여서 자세히 소개하진 않겠지만 대략 아래와 같은 기능을 지원한다.
+
+```ts
+const colors = {
+  'blue-50': '#eff6ff',
+  'blue-100': '#dbeafe',
+  'blue-200': '#bfdbfe',
+  'gray-700': '#374151',
+  'gray-800': '#1f2937',
+  'gray-900': '#111827',
+  // etc.
+}
+
+export const colorThemeStyles = defineProperties({
+  properties: {
+    color: colors,
+    borderColor: colors,
+    backgroundColor: colors,
+    outlineColor: colors,
+  },
+})
+export const sprinkles = createSprinkles(colorThemeStyles)
+```
+
+![sprinkles grammar](https://d.pr/i/6LrmTq.png)
+
+createSprinkles 함수를 통해 color 토큰을 정의해놓으면 위와 같이 `intellisense에 사용할 수 있는 토큰 목록이 뜬다`.
+
+`tailwindCSS의 경우`도 tailwind.config.js를 통해 비슷한 기능을 제공하지만, 생성된 util class에 대해
+타입추론이 되지 않기 때문에 `추후 토큰의 이름이 변경되면 존재하지 않는 util class가 감지되지 않는 단점`이 있어서 결과적으로 vanilla-extract를 선택하게 되었다(다른 이유도 있지만 이건 나중에 소개하는걸로..)
+
+### Object Flatten의 필요성
+
+token 기반으로 제작하고 있다보니 다음과 같은 이유로 Object Flattening 기능이 필요했다.
+
+#### Vanilla Extract가 지원하는 토큰 형식
+
+우선 Vanilla Extract CSS가 지원하는 토큰 형식은 Nested Object가 아닌 `Record<Key, Value>` 형식이다.
+예를 들면
+
+```ts
+// 지원됨
+const colors = {
+  'blue-50': '#eff6ff',
+  'blue-100': '#dbeafe',
+  'blue-200': '#bfdbfe',
+  'gray-700': '#374151',
+  'gray-800': '#1f2937',
+  'gray-900': '#111827',
+  // etc.
+}
+
+// 지원되지 않음
+const nestedColors = {
+  blue: {
+    '50': '#eff6ff',
+    '100': '#dbeafe',
+    '200': '#bfdbfe',
+  },
+  gray: {
+    '700': '#374151',
+    '800': '#1f2937',
+    '900': '#111827',
+  },
+}
+```
+
+위와 같이 nested된 Token을 지원하지 않는다. Vanilla Extract 그대로 써도 될 것 같지만,
+추후 추가될 Token들에 대한 유지보수 측면(가독성 등)에서 중첩구조를 지원하면 좋겠다는 의견이 있어서
+Flattening하는 기능을 제공하게 되었다.
+
+## Type 설계
+
+설계하기에 앞서 나올 수 있는 토큰의 형식이 무한히 중첩될 수 있다고 가정했다.
+따라서 다음과 같은 구조의 Token이 만들어질 수 있다고 생각했다.
+
+```ts
+const flattenObject = (obj) => {
+  //... do some work
+}
+
+const colors = {
+  red: {
+    light: {
+      '100': '#ffffff',
+      '200': '#ffffff',
+      '300': null,
+    },
+    dark: {
+      '100': '#ffffff',
+      '200': '#ffffff',
+    },
+    default: {
+      '100': '#ffffff',
+      '200': '#ffffff',
+    },
+  },
+  blue: {
+    '100': '#ffffff',
+    '200': '#ffffff',
+  },
+} as const
+
+// "red-light-100" : "#ffffff"
+// "red-light-200" : "#ffffff"
+// "red-dark-100" : "#ffffff"
+// "red-dark-200" : "#ffffff"
+// ...etc
+export const flattenColors = flattenObject(colors)
+```
+
+즉 Typescript의 `Nested Type 기능을 사용해야한다 판단`했으며,
+`object의 value가 string일 때만 type을 생성하기 위해서 TS ?연산자를 사용했다`.
+
+```ts
+type FlattenObjectKeys<T extends Record<string, unknown>, Key = keyof T> = Key extends string
+  ? T[Key] extends Record<string, unknown>
+    ? `${Key}-${FlattenObjectKeys<T[Key]>}`
+    : T[Key] extends string
+    ? `${Key}`
+    : never
+  : never
+
+export type FlatKeys<T extends Record<string, unknown>> = FlattenObjectKeys<T>
+```
+
+위의 타입을 설명하면 다음과 같다
+
+```
+1. 만약 Record 타입의 Key가 string type이라면?
+  1.1 Key가 string 타입일 경우, Record 타입의 Value가 Record<string, unknown> 타입이라면?
+      1.1.1 nested Object이므로 현재의 Key 값을 붙이고 1번 과정을 다시 반복
+      1.1.2 nested Object가 아니므로, 만약 Value가 string이라면?
+        1.1.2.1 Key를 리턴
+        1.1.2.2 아닐시 무시(never)
+  1.2 Key string타입이 아니면 무시(never)
+```
+
+위의 타입을 통해 추론된 Key는 다음과 같이 정상적으로 추론된 것을 확인할 수 있다.
+
+![FlattenedObjectKey](https://d.pr/i/1GvijS.png)
+
+## Type기반 함수 설계
+
+이제 위에서 제작한 type을 기반으로 재귀함수를 통해 실제 flatten된 Object를 생성해주면 된다.
+
+```ts
+const flattenObject = <T extends Record<string, unknown>>(obj: T): Record<FlatKeys, string> => {
+  // 리턴하는 result 객체, FlatKeys를 담는 빈 객체를 만들기 위해 타입 단언문 사용
+  let result: Record<FlatKeys, string> = {} as Record<FlatKeys, string>
+
+  // 재귀함수를 통해 모든 내부 객체를 순환
+  const traverse = (currentObj: Record<string, unknown>, path: string) => {
+    Object.keys(currentObj).forEach((key) => {
+      const value = currentObj[key]
+      // 현재까지의 경로를 이용해서 새로운 경로 생성
+      const newPath = path ? `${path}-${key}` : key
+      // value가 객체이면서 null value가 아니면 재귀함수 작동
+      if (typeof value === 'object' && value !== null) {
+        traverse(value as Record<string, unknown>, newPath)
+      }
+      // value의 타입이 string일 때만 result에 할당될 수 있도록 타입 체크
+      else if (typeof value === 'string') {
+        result[newPath as FlatKeys] = value
+      }
+    })
+  }
+
+  // 파싱 시작
+  traverse(obj, '')
+
+  return result
+}
+```
+
+설계한 Type과 같이 실제 flatten하는 함수도 재귀함수를 통해 비슷한 구조로 만들 수 있었다.
+
+## 결과
+
+![FlattenedObjectKey](https://d.pr/i/1GvijS.png)
+![flattened object](https://d.pr/i/uLSQ8G.png)
+
+우리가 예상한대로 type과 실제 결과가 일치하는 모습을 확인할 수 있다.
+
+[Flattening Object - TS Playground](https://www.typescriptlang.org/play?ts=4.9.5#code/MYewdgzgLgBApgDwIYFsAOAbOMC8MDeAUDDAE5wAmAXAcSTBgJYDmAFlDUffQOQCMABgE8aPAMQAzKdJ4AaOtx4AmISJjjpM+dxI8AzKppgArhgzb6AXwskKSUgGtOC3oOGjJmiXJe6V79U9NH25rFwo4CSRTDloddTc1DS8QnWVDQK9vGxgwkjyYACMMYzhnRUSPLNS-DOTgizDLGCQIGFBIKABuQkIoAE80bAAxDCQoKDgwAHlCgCs4YCgAaTh+iAAeOgAVeARJsAo2gCVFkFIKDehSRjBmWRhjMAcwEAB3MAA+C1X+3BgHGsQBIYNtCJ9-r89gcjjBrrdmHQAPyggDavwAutCprDTqALlcoDc7g8ni93l8XCiAAYAEnwv0sAFp6aNxgdZgslr9Ntt0WsMZ9LNSXDQ+ZjsYc2vC7jBfPQafTGdSYEY4AA3OCkOhqzWkHp9QYjMYrNZtPBsiZTTmLU3rDYDIbAvaoTBwT4GjrQGASE0c+a2-4bXaIGEnM4EmX3R7PV4fT6fAAUdBA8zFhAAlDQ8edLpaeQ8oxCcBCuAw4LByBAYtmI3mTQW4USEcWCM1WjAcwT82bC827h7eiQvbAiUg9RBsHhE8BjKRyGAoJza-jLlHSbGKd8YGhxqwaFGM7hSy4bUsAHSA9YzucLpfzDPniTnACiSGArETiavR5LcR0I4wOqSAlFO7S3lM95zKiV4Yj08SAWAcBvAACnu-y7lArAwIq+CYawzL0lewqqgCazwTojAgomjpwM6wGgbgOB4DwqZclAPAwAAZFxQEgaUMAAITMTAJhmEeZbxGOE5wImDECR2XZrv20ZknGXwPEhqF7hmFGhPAGCTjAVE0Ua9H8VOIkAERRlZ3G8fJ2DCXgYkYBmkk6FWMSolpaFYS0bQ9usWJ4I5elWC4li6XQlgGiQ0lapOiZsQ8PA8NFdDkFAc5gGQcDVhg3SELFvSAb67JTJQPL-OVVozAGSyJogrpYNFXogFg54YCAzCJlZtUwmesAJhCVmyANlUUDyulAA)에서 실제 예제를 실행해볼 수 있다.
+
+## 아쉬운 점
+
+한가지 해결하지 못한 부분이 있었는데, 바로 각 경로마다 붙여주는 문자열(예를 들면 "-", "." 등)을 파라미터를 통해 바꿔주는 방법을 찾지 못했다.
+자동으로 Flattening해주는게 아니라 타입을 만들고, 해당 타입에 끼워맞추는 방식이다보니 경로마다 이어주는 문자열을 static하게 넣어주게 되는데, 이 부분을 파라미터로 변경하는 방법을 찾지 못했다.
+그래서 만약
+
+```
+// "red-light-100" : "#ffffff"
+// "red-light-200" : "#ffffff"
+// "red-dark-100" : "#ffffff"
+// "red-dark-200" : "#ffffff"
+// ...etc
+
+-> 아래와 같이 변경
+
+// "red.light.100" : "#ffffff"
+// "red.light.200" : "#ffffff"
+// "red.dark.100" : "#ffffff"
+// "red.dark.200" : "#ffffff"
+// ...etc
+
+```
+
+위처럼 "-"로 되어있는 부분을 "."으로 경로를 이어주게 만드려면
+
+1. FlattenObjectKey 타입에서 `${Key}-${FlattenObjectKeys<T[Key]>}`로 되어있는 부분을 `${Key}.${FlattenObjectKeys<T[Key]>}`로 변경
+2. flattenObject 함수에서 `${path}-${key}`로 되어있는 부분을 `${path}.${key}`
+
+같이 2번 변경해줘야한다. 이 부분을 연동되게 만들고 싶었지만 아쉽게도 만들 수 없었다. 혹시 더 좋은 방법을 알고 계신다면 댓글에 남겨주시면 정말 감사드립니다.
+
+## 결론
+
+이런 util함수 제작할 때마다 typescript의 한계를 느끼곤 하는데.. 이럴땐 가끔 쓰기 힘들어도 Rescript 사용하던 때로 돌아가고 싶어진다.
