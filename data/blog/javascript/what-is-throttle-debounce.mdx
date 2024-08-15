@@ -1,9 +1,91 @@
 ---
 title: What is throttle & debounce
-date: '2022-03-26'
+date: '2022-05-03'
 tags: ['javascript']
-draft: true
+draft: false
 summary: Simple summary of throttle & debounce function
-images: []
+images: ['/static/images/javascript.png']
 layout: PostLayout
 ---
+
+<TOCInline toc={props.toc} exclude={'Intro'} asDisclosure />
+
+## Intro
+
+Today I will share the basics of throttle & debounce function.
+
+## Concepts & Definitions
+
+Throttle and Debounce are two functions that are used to throttle and debounce the execution of a function.
+The both functions are used to prevent the function from being executed too often.
+Their concept is similar but different from guaranteeing that a function will be executed at most once.
+
+### Throttle
+
+Throttle is a function that `Guarantees execution of callback function in "n" milliseconds`.
+It is used when we want to execute a function only after a certain amount of time has passed.
+For example, Web Browser fires the `scroll` event every time the user scrolls the page.
+We can use throttle to prevent the `scroll` event from being fired too often. By this we can
+get the improved performance of the browser.
+
+To implement this we need to use the `setTimeout` function.
+
+```jsx:throttle.js
+function throttle(callback, delay){
+  // it is possible because js supports closures
+  let timer;
+
+  return function(){
+    // if there is a timer, reject new event
+    if(!timer){
+      timer = setTimeout(() => {
+        timer = null;
+        callback.apply(this, arguments);
+      }, delay)
+    }
+  }
+```
+
+At this point, we need to know what `closure` is. `closure` is a property that programming language supports
+for the purpose of keeping the state of the function. By definition, `closure` is an ability
+to memorize the execution context of declared `lexical scope` when the function is created and to use it when the function is called.
+To sum up, `closure` is an ability to use the function like an Object(we call it `first class function`)
+
+So we can save timer variable in throttle function and check if there is a timer that is running or not.
+If there is a timer, we reject the new event. If there is no timer, we set the new timer and execute callback when the timer ends.
+When the timer is done, we set the timer to null.
+
+### Debounce
+
+Debounce is a function that `Execute the callback function only for the last event that exceeds a certain amount of time among consecutive events`. So even if the client fires the event multiple times,
+and the events are fired faster than the delay, the callback function will only be executed once.
+It is commonly used when we want to optimize the performance of showing results of a search.
+(For example, if the user types in the search box, the results are shown after the user stops typing for a certain amount of time.
+It reduces the number of requests to the server.)
+
+To implement this we need to use the `clearTimeout and setTimeout` function.
+
+```jsx:debounce.js
+function debounce(callback, delay){
+  let timer;
+
+  return function(){
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      callback.apply(this, arguments);
+    }, delay)
+  }
+}
+```
+
+If new event is fired before the timer is done, we clear(or reset) the current timer and set the new timer.
+If the timer is done, we execute the callback function. By doing this, we can call the last event that exceeds the delay
+which leads to performance improvement.
+
+But Debounce function has a disadvantage. If you want to execute the callback function which needs to guarantee the execution,
+It is not a good idea to use this. Because the Debounced function will not execute until the input is stopped.
+To prevent this, we can use the `throttle` function instead.
+
+## Conclusion
+
+Feel the difference between throttle and debounce function.
