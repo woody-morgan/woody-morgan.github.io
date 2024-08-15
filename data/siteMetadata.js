@@ -1,7 +1,7 @@
 const siteMetadata = {
   title: 'woodi97.github.io',
   author: 'woodi97',
-  headerTitle: 'WOODI DAILY',
+  headerTitle: 'WOODI',
   description: '이유를 찾는 개발블로그',
   language: 'ko-KR',
   theme: 'system', // system, dark or light
