@@ -2,7 +2,7 @@ const siteMetadata = {
   title: 'woodi97 - Portfolio',
   author: 'WOODI',
   headerTitle: 'WOODI',
-  description: '깊이있는 개발자가 되기 위한 노력',
+  description: '개발과 관련된 이야기를 적는 공간입니다.',
   language: 'ko-KR',
   theme: 'system', // system, dark or light
   siteUrl: 'https://woodi97.github.io/',
