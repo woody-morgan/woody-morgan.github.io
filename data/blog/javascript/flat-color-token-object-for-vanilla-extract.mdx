@@ -164,23 +164,27 @@ export type FlatKeys<T extends Record<string, unknown>> = FlattenObjectKeys<T>
 이제 위에서 제작한 type을 기반으로 재귀함수를 통해 실제 flatten된 Object를 생성해주면 된다.
 
 ```ts
-const flattenObject = <T extends Record<string, unknown>>(obj: T): Record<FlatKeys, string> => {
+export type FlatKeys<T extends Record<string, unknown>> = FlattenObjectKeys<T>
+
+export const flattenObjectKeys = <T extends Record<string, unknown>>(
+  obj: T
+): Record<FlatKeys<T>, string> => {
   // 리턴하는 result 객체, FlatKeys를 담는 빈 객체를 만들기 위해 타입 단언문 사용
-  let result: Record<FlatKeys, string> = {} as Record<FlatKeys, string>
+  let result: Record<FlatKeys<T>, string> = {} as Record<FlatKeys<T>, string>
 
   // 재귀함수를 통해 모든 내부 객체를 순환
   const traverse = (currentObj: Record<string, unknown>, path: string) => {
     Object.keys(currentObj).forEach((key) => {
       const value = currentObj[key]
       // 현재까지의 경로를 이용해서 새로운 경로 생성
-      const newPath = path ? `${path}-${key}` : key
+      const newPath = path ? `${path}.${key}` : key
       // value가 객체이면서 null value가 아니면 재귀함수 작동
       if (typeof value === 'object' && value !== null) {
         traverse(value as Record<string, unknown>, newPath)
       }
       // value의 타입이 string일 때만 result에 할당될 수 있도록 타입 체크
       else if (typeof value === 'string') {
-        result[newPath as FlatKeys] = value
+        result[newPath as FlatKeys<T>] = value
       }
     })
   }
