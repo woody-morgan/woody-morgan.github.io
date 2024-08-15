@@ -1,0 +1,76 @@
+---
+title: '[Network App & Design Course] lecture 1-1'
+date: '2022-04-18 00:01:47'
+tags: ['network', 'cse']
+draft: false
+summary: summary for network application & design course lecture 1-1
+images: ['/static/images/network.jpeg']
+layout: PostLayout
+---
+
+<TOCInline toc={props.toc} asDisclosure />
+
+## Summary
+
+> Synthesis: "a day in the life of a web request"
+
+- Scenario: A student attaches laptop to campus network, and wants to access www.google.com
+- Question: What happends?
+  - DHCP, ARP, DNS, TCP, IP, HTTP ...
+  - App Layer, Transport Layer, Network Layer, Link Layer ...
+
+## 구글과 연결하는 순서
+
+### First Step
+
+- 연결된 컴퓨터는 자체적인 IP주소와 First-Hop-Router의 주소, DNS서버의 주소를 알아낸다(DHCP를 이용)
+- DHCP request는 UDP형식으로 전송된다.(UDP -> IP -> Ethernet 순으로 Capsulate된다).
+- Capsule화된 Ethernet frame을 LAN으로 broadcast한다.
+
+### Second Step
+
+- DHCP서버가 받으면 순차적으로 Decapsulate한다
+- DHCP Client의 IP address를 포함한 DHCP ACK를 형성한다(First-Hop-Router의 주소와 DNS 서버의 주소를 포함한다)
+- 형성된 정보를 DHCP Server가 Encapsulation하고, 이를 LAN으로 Frame Forwarding한다.
+- DHCP Client는 DHCP ACK응답을 받는다.
+
+### Third Step(DNS Server와 연결)
+
+- www.google.com의 IP주소를 알아내기 위해 DHCP 서버로부터 받은 DNS 주소를 이용해 DNS Server로 요청한다.
+- DNS Server에 정보를 요청하기 위한 DNS Query를 생성한뒤, 이를 `UDP 프로토콜로 Capsule화 한다.`
+- Capsule화된 DNS Query를 보내기 위해 ARP Protocol(Address Resolution Protocol)을 이용하여 Router의 MAC Address를 알아낸다.
+- ARP Query는 Broadcasting을 이용하며, 해당 Query를 Router가 수신하면 MAC Address를 ARP Reply로 보내준다.
+- 위의 방법을 통해 DNS Query를 보낼 수 있게 된다.
+- DNS Query를 DNS Server로 보내면 Switch, First-Hop-Router, ISP Network를 거쳐서 송/수신된다.
+
+### Fourth Step(Google과 연결)
+
+- DNS Server로 부터 받은 Google의 실제 IP주소를 이용해서 Google의 웹페이지를 요청한다.
+- HTTP Protocol -> TCP Protocol -> ...을 거쳐 패킷을 생성한다.
+- 그 후 Google 웹서버에 TCP Socket을 열어달라고 요청한다
+  - TCP SYN을 Google 웹서버에 보낸다
+  - 그 후 웹서버로 부터 TCP SYN ACK를 받는다(3-way handshake)
+- 생성된 TCP 패킷을 웹서버에 전송한다.(HTTP Request)
+- 웹서버는 받은 패킷을 Decapsulate하고, 송신자에게 정보를 Reply한다.
+
+## 시나리오(Using my Laptop which is inside CAU network)
+
+![Scenario](https://d.pr/i/ZV3Aj4.png)
+
+- Laptop을 연결하기 위해서는 자신의 IP주소, First-Hop-Router의 IP주소, DNS Server의 IP주소를 알아내야 한다.
+- DHCP를 통해 DHCP서버를 구동중인 Router로 부터 정보를 얻는다.(특히 First-Hop-Router는 Gateway Router라고 불린다).
+- ARP Protocol을 통해 First-Hop-Router의 MAC Address를 알아낸다.(IP -> MAC Addr)
+- DNS Server로 DNS Query를 보내고, Google의 실제 IP주소를 알아낸다.
+- HTTP Request를 보내기 위해, Client는 웹서버에게 TCP socket을 열어달라고 요청한다
+  - TCP SYN을 웹서버에 보낸다
+  - 그 후 웹서버로 부터 TCP SYN ACK를 받는다(3-way handshake)
+  - 웹서버와 연결 성공
+- 생성된 TCP 패킷을 웹서버에 전송한다.(HTTP Request)
+- 웹서버는 받은 패킷을 Decapsulate하고, 송신자에게 정보를 Reply한다.
+
+## Additional(Wireless)
+
+- Wifi AP(Access Point)와 연결하기 위해 아래와 같은 작업이 필요하다
+  - Association Authentification(SSID, Password)
+- 이때 Wifi AP는 라우터+게이트웨이+DHCP+NAT 등의 서버로서 역할을 한다(즉 하나의 기기 또는 여러개의 기기일 수 있다)
+- 나머지는 Wired와 비슷하거나 같다.
