@@ -1,7 +1,7 @@
 const siteMetadata = {
   title: 'woodi97 - Portfolio',
   author: 'WOODI',
-  headerTitle: 'Mircats',
+  headerTitle: 'WOODI',
   description: 'Walkthrough of My Learning Journey',
   language: 'ko-KR',
   theme: 'system', // system, dark or light
