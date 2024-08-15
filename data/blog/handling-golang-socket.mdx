@@ -1,0 +1,199 @@
+---
+title: Handling Golang Socket
+date: '2022-04-04'
+tags: ['golang', 'socket-programming']
+draft: false
+summary: introduce golang socket programming
+images: ['/static/images/blog/handling-golang-socket/golang-socket.png']
+layout: PostLayout
+---
+
+<TOCInline toc={props.toc} exclude={'Intro'} asDisclosure />
+
+## Intro
+
+As an assignment of Network Design Course, I have a chance to handle golang socket programming.
+I will introduce golang socket programming in this article. And you could learn how to handle
+multi-client supported Server Program & `Go Routine`
+
+## Before Start
+
+This Project should be run on any system with network connection.
+And also Server-side program should support multi-client connection.
+To support this, we should use `Go Routine` which is light weight thread.
+
+### How go handle Multi-Client using Go Routine?
+
+`Go Routine` is a way to handle multi-thread program. More simply, it could make your program faster(usually).
+When new Client try to connect with server,
+we create a connection with that Client, and run a function to handle this connection using `Go Routine`.
+By using this way, we can have the same effect like `fork` in Clang socket programming.
+It means, we can handle the connections separately and effectively.
+
+Here are the example of `Go Routine`
+
+```go
+
+...
+
+func showGoRoutine(idx int) {
+	time.Sleep(time.Second * 1)
+	fmt.Println("idx :", idx, " showGoRoutine")
+}
+
+func main() {
+	for i := 0; i < 5; i++ {
+		go showGoRoutine(i)
+	}
+	time.Sleep(time.Second * 3)
+}
+
+
+// print(order of print differs every runtime)
+// idx : 3  showGoRoutine
+// idx : 2  showGoRoutine
+// idx : 1  showGoRoutine
+// idx : 0  showGoRoutine
+// idx : 4  showGoRoutine
+
+```
+
+## Server Program
+
+Handling server program is very simple.
+Create a Listener to be notified when a new client is connected.
+When we get a new connection from client, we accept the connection.
+Then read the data from client and write the data to client.
+
+### Handling Single-Client Connection
+
+But the problem is, we close socket right after we got the data from client.
+So, we feels like it support multi-client connection.
+But it doesn't keep the connection, which means meaningless.
+To support multi-client in genuine way, we should use `Go Routine`
+
+```go
+func main() {
+	listener, _ := net.Listen("tcp", ":"+serverPort)
+	buffer := make([]byte, 1024)
+
+	for {
+		conn, _ := listener.Accept()
+		count, _ := conn.Read(buffer)
+		conn.Write(bytes.ToUpper(buffer[:count]))
+		conn.Close()
+	}
+}
+```
+
+### Handling Multi-Client Connection
+
+```go
+func main() {
+	conn, err := net.Listen("tcp", ":12000")
+	defer conn.Close()
+
+	for {
+		conn, err := conn.Accept()
+    // run a function for every new connection(using Go Routine)
+		go handleConnection(conn)
+	}
+}
+
+func handleConnection(conn net.Conn) {
+	buffer := make([]byte, 1024)
+	for {
+    n, err := conn.Read(buffer)
+    data := buffer[:n]
+  	_, err := conn.Write([]byte(strings.ToUpper(data)))
+	}
+}
+
+```
+
+## Client Program
+
+Handling client program is very simple.
+Create a socket and connect to server. Then get user input and send to server.
+When we get the response from server, we print it.
+
+### One-time data transfer
+
+One-time data transfer means we close the connection after we send the data.
+To keep the connection(we are using TCP protocol) & support Multi-time data transfer,
+we will separate data transfer and data receiving code using `Go Routine`.
+
+```go
+func main() {
+	conn, _ := net.Dial("tcp", serverName+":"+serverPort)
+	defer conn.Close()
+
+	fmt.Printf("Input lowercase sentence: ")
+	input, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	// Send data which is received from user
+	conn.Write([]byte(input))
+
+	buffer := make([]byte, 1024)
+	// Wait for response from server
+	conn.Read(buffer)
+	fmt.Printf("Reply from server: %s", string(buffer))
+}
+
+```
+
+### Multi-time data transfer
+
+```go
+func main(){
+  conn, _ := net.Dial("tcp", serverName+":"+serverPort)
+	defer conn.Close()
+
+  // To prevent user-input while waitiing response from server
+  isWaitingResponse := false
+
+  // Data Receiving Code(Go Routine)
+  // Keep waiting for response from server
+	go func() {
+		data := make([]byte, 1024)
+
+		for {
+			n, err := conn.Read(data)
+			if err != nil {
+				fmt.Println("Server is closed")
+				os.Exit(1)
+			}
+
+			fmt.Println("Server send : " + string(data[:n]))
+      // Release flag to receive user-input
+			isWaitingResponse = false
+		}
+	}()
+
+  for {
+		if !isWaitingResponse {
+      fmt.Printf("Input sentence: ")
+      input, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+      conn.Write([]byte(input))
+      // Set flag to prevent user-input while waiting response from server
+      isWaitingResponse = true
+		}
+	}
+}
+```
+
+## Graceful Shutdown
+
+Graceful Shutdown means we close the connection for both client & server in normal way.
+To reach this, when we got interrupt from user or EOF from Client or Error from Write & Read process,
+terminate the Go routine function using `break` or shutdown the Server/Client program using `os.Exit(1)`.
+We are using TCP protocol, so Server/Client program should know the status of Client/Server connection.
+Then Server/Client program should also be shutdown the connection(For Client program, should be terminated).
+
+## Conclusion
+
+> For Clang, you can support multi-client connection by using fork.
+
+> For OOP languages, you can support multi-client connection by Multi-Thread Programming.
+
+The traditional way we handle multi-client connection in Clang & OOP languages is very diffult.
+But by using Go Routine, which is very well abstracted and easy to use, we can support multi-client connection very very easy.
