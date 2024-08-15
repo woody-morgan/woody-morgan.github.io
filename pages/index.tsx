@@ -9,7 +9,7 @@ import { PostFrontMatter } from 'types/PostFrontMatter'
 import NewsletterForm from '@/components/NewsletterForm'
 import Transition from '@/components/Transition'
 
-const MAX_DISPLAY = 5
+const MAX_DISPLAY = 8
 
 export const getStaticProps: GetStaticProps<{ posts: PostFrontMatter[] }> = async () => {
   const posts = await getAllFilesFrontMatter('blog')
