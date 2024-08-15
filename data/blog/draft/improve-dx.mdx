@@ -1,0 +1,44 @@
+---
+title: 'DX를 개선시키는 방법'
+date: '2023-12-05'
+tags: ['experience']
+draft: true
+summary: 'dx를 개선시키는 작업들'
+images: []
+layout: PostLayout
+---
+
+1. 너무 넓은 Type을 사용하지 않기(string, number등은 사실상 any와 같다)
+2. 똑같은 작업을 위해서 너무 많은 타입을 만들지 않기(예를 들어, api의 타입을 지정할때, )
+3. 확장성을 고려해서 컴포넌트 설계하기, flex 컴포넌트를 만들때 css flex속성이 가질 수 있는 속성을 prop으로 설계하지만, className과 같은 속성을 함께 주어서 확장성에 관대하게 만들어야 한다.
+4. polymorphism을 사용해서 확장성을 높이기
+5. 컴포넌트를 만들때, 필요한 속성만 prop으로 받는게 아닌, PropFrom과 같은 유틸을 이용해서 Wrapper Component의 prop을 가져오고, 커스텀이 필요한 속성 외의 prop을 spread operator로 빼서 설계
+6. 공통 컴포이트일수록 forwardRef를 사용해서 ref를 전달할 수 있도록 설계
+7. 공통 컴포넌트 + 기획이 들어간 컴포넌트(예를 들면 몇개 이상의 요소가 있을때만 렌더링)라면, 이름을 통해서 컴포넌트의 기능을 들어갸고 + 유연하게 변경이 가능하도록 설계 + 기본 prop의 value를 주어서 설계(왜냐면 기획이 들어간 컴포넌트 일수록 자주 변경될 수 있음)
+8. 제작자가 들어낸 type보다는 ReturnType, PropsFrom, Awaited 등의 유틸을 통해서 타입을 추론해서 사용하도록 만들기. 왜냐하면 type파일은 타입의 이름을 통해서 개발자가 의도를 파악해야하지만, Propfrom ReturnType과 같은 유틸을 잘 사용하면 타입의 이름을 통해서 의도를 파악할 필요가 없기 때문이다.
+9. 사용할 공통 Design Token을 미리 정의하고, 이를 통해서 컴포넌트를 만들기(예시로 Flex 태그의 gap 소개)
+10. 디자인 토큰(컬러토큰),아이콘, Text 컴포넌트의 prop을 figma에서 사용하는 네이밍과 일치 시키기 -> 예상 가능한 네이밍의 중요성
+11. rest api + React Query를 사용한다면 api의 endpoint와 queryKey를 일치시키고, 같은 파일에서 export해서 사용하기
+12. 비슷한 기능을 하는 컴포넌트(예를 들면 NameFilter, DateFiler와 PriceInput, NameInput 같이 비슷한 것들)를 만들때, Named Export를 통해 묶어놓기
+13. Make, Skeleton Pattern을 통해 컴포넌트와 컴포넌트의 형상을 함께 Export 시켜서 Fallback UI를 함께 제공하기
+
+고민하는 법
+
+1. 2depth까지가 아니라 5depth까지 고민해보자
+2. 고민을 하면서 무엇을 얻고자 하는지 명확히 하자
+3. 특히 패키지 매니징, 마이크로프론트엔드를 하면서 왜 하고 또 무슨 문제가 일어날지 정확히 알고 고민하자
+4. 무조건 소스코드만 보는게 중요한건 아니다
+
+내가 Typescript를 중요하게 생각하는 이유는 흔히 말하는 안정성 때문만은 아니다.
+바로 DX 때문이다.
+Javascript로만 개발을 하게 되면 모든 타입이 사실상 무엇이든 넣을 수 있는(사실상 any) 타입이 되어버린다.
+하지만 Typescript기능을 잘 활용하면, 예를 들면 컴파일러를 통해 개발자가 쓸 수 있는 화면상의 Flex Gap을 제한하는 등, 개발자의 실수를 줄이고 나아가 안정감있는 리펙토링, 프로그램 개발에 도움을 줄 수 있다.
+하지만 내가 느끼기엔, 많은 회사들이 단지 "시간이 없어서"라는 핑계로 Typescript를 사실상 Javascript처럼 사용하면서 Typescript 왜 굳이 써야하냐고 생각하는 회사가 많다고 느꼈다.
+
+열심히하는걸 안좋아함 -> 잘 하는 걸 좋아함
+열심히 하는 것 -> 모든 것에서 이유를 찾는 것
+
+## typescript 에 대한 나의 견해
+
+올해 일을 하면서 가장 많이 들었던 말은 typescript 왜 써요? 인 것 같다.
+또 typescript 퇴출하는 이슈가 있을때 조롱?받는 듯한 느낌을 받았던 적도 있다.

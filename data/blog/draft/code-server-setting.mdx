@@ -1,0 +1,28 @@
+---
+title: 'mac mini에 code-server 올리기'
+date: '2023-11-22'
+tags: ['review', 'growth']
+draft: true
+summary: 힘들고 길었던 2023년을 마무리하며
+images: []
+layout: PostLayout
+---
+
+# 전반적인 정리
+
+https://www.hakawati.co.kr/445
+
+# m1이라서 안되는 부분
+
+1. sudo certbot --nginx -d woodi97.site --nginx-server-root /opt/homebrew/etc/nginx/
+2. brew로 nginx설치시 /opt/homebrew/etc/nginx/에 설정파일이 있음
+3. brew로 nginx설치시 기본 nginx.conf 파일이 sites-enabled가 연결되어있지 않음 -> 기본 파일 삭제 후 sites-enabled에 링크 걸어주기
+4. 가비아 도메인 거는 법
+
+# automatic renewal
+
+https://certbot.eff.org/instructions?ws=nginx&os=osx
+
+# 포트열기
+
+80, 443 포트를 포트포워딩 해줘야함
