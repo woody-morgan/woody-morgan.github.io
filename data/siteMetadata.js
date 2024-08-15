@@ -15,7 +15,7 @@ const siteMetadata = {
   twitter: '',
   facebook: '',
   youtube: '',
-  linkedin: 'https://www.linkedin.com/in/%EB%8F%99%EC%9A%B1-%EA%B9%80-112973188/',
+  linkedin: 'https://www.linkedin.com/in/woodi97',
   locale: 'ko-KR',
   analytics: {
     // supports plausible, simpleAnalytics or googleAnalytics
