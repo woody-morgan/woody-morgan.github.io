@@ -7,6 +7,7 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { AuthorFrontMatter } from 'types/AuthorFrontMatter'
 import { PostFrontMatter } from 'types/PostFrontMatter'
 import { Toc } from 'types/Toc'
+import Transition from '@/components/Transition'
 
 const DEFAULT_LAYOUT = 'PostLayout'
 
@@ -68,7 +69,7 @@ export default function Blog({
   const { mdxSource, toc, frontMatter } = post
 
   return (
-    <>
+    <Transition>
       {'draft' in frontMatter && frontMatter.draft !== true ? (
         <MDXLayoutRenderer
           layout={frontMatter.layout || DEFAULT_LAYOUT}
@@ -89,6 +90,6 @@ export default function Blog({
           </PageTitle>
         </div>
       )}
-    </>
+    </Transition>
   )
 }
