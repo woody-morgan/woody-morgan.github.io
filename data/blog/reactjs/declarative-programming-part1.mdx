@@ -1,0 +1,361 @@
+---
+title: 'React로 시작하는 선언적 프로그래밍 Part 1'
+date: '2023-05-31'
+tags: ['declarative', 'algebraic effect', 'reactjs', 'suspense']
+draft: false
+summary: 'React Suspense와 Compound Component Pattern으로 알아보는 선언적 프로그래밍(feat. 대수적 효과)'
+images: []
+layout: PostLayout
+---
+
+<TOCInline toc={props.toc} exclude={'Intro'} asDisclosure />
+
+## Intro
+
+오늘은 지난 6개월 동안 웹 프론트엔드 개발자로서 일하며, 가장 중요하다고 생각된 부분을 글로 정리하려고 합니다.
+지난 3년 동안 React 프로그래밍을 하면서 고민했던 부분을 아래에서 소개할 내용을 통해 우아하게 처리할 수 있었으며,
+해당 내용이 재사용성을 높이고 프로젝트 코드에서 스파게티 코드를 없애고 싶은 분들께 많은 도움이 되었으면 합니다.
+
+정리하기에 앞서 해당 글을 작성하는데 큰 도움이 된
+[Toss Slash 21 - 박서진님](https://www.youtube.com/watch?v=FvRtoViujGg&ab_channel=%ED%86%A0%EC%8A%A4)과
+[Feconf 22 - 이소영님](https://www.youtube.com/watch?v=21eiJc90ggo&t=566s&ab_channel=FEConfKorea)의 발표에 정말 감사드립니다.
+
+또한 해당 글은 추후 동아리 발표자료로 사용하기 위해서 미리 정리하는 느낌의 글임을 미리 밝힙니다.
+
+## 우아하게 비동기 컴포넌트 선언적으로 프로그래밍하기
+
+### 절차적으로 음식 만들기
+
+조금 뜬금없지만 음식을 만드는 과정을 컴포넌트 제작하는 것에 빗대어 글을 쓰겠습니다.
+
+저는 오늘 오랜만에 만난 친구들을 위해 `파스타 컴포넌트`를 직접 만들어주려고 합니다.
+다행히도 누군가가 만들어준 `파스타 만들기 API`를 통해서 파스타 컴포넌트를 만들 수 있는데요.
+
+기존에 절차적 프로그래밍 밖에 모르던 저는 다음과 같이 파스타 컴포넌트를 제작했습니다.
+
+```tsx:ProgressivePasta.tsx
+import { FunctionComponent, useEffect, useState } from 'react'
+import { 파스타제작 } from '@/api/food'
+import { useQuery } from '@/hooks'
+
+type Props = {
+  name: string
+}
+
+const ProgressivePasta: FunctionComponent<Props> = ({ name }) => {
+  const [isLoading, setLoading] = useState(false)
+  const [isError, setError] = useState(false)
+  const [food, setFood] = useState<FoodReponse['food'] | undefined>(undefined)
+
+  useEffect(() => {
+    ;(async () => {
+      setLoading(true)
+      try {
+        const { food } = await 파스타제작(name)
+        setFood(food)
+      } catch (e) {
+        setError(true)
+      } finally {
+        setLoading(false)
+      }
+    })()
+  }, [name])
+
+  if (isLoading)
+    return (
+      <div>
+        절차적 {name}파스타가 만들어지는 중입니다
+      </div>
+    )
+
+  if (isError)
+    return (
+      <div>
+        {name}파스타가 만들어지는 중 실패했습니다
+      </div>
+    )
+
+  return (
+    <div>
+      {food?.name}파스타가 만들어졌습니다
+    </div>
+  )
+}
+
+export default ProgressivePasta
+```
+
+우선 3가지의 상태를 React의 useState Hook을 통해 만들었습니다. 각각의 상태는 다음과 같은 상태를 저장합니다.
+
+1. 파스타제작 API를 통해 파스타를 만드는 중을 저장하는 상태
+2. 파스타제작 API를 통해 음식을 만드는데 실패한 상태
+3. 파스타제작 API를 통해 우리가 원하는 파스타 정보를 저장하는 상태
+
+그리고 각각의 상태에 맞게 ProgressivePasta 컴포넌트가 어떤 JSX값을 리턴할지 아래와 같이 프로그래밍 합니다
+
+```tsx
+if (isLoading)
+  return (
+    <div>
+      절차적 <strong className="text-yellow-500">{name}</strong>파스타가 만들어지는 중입니다
+    </div>
+  )
+```
+
+```tsx
+if (isError)
+  return (
+    <div>
+      <strong className="text-yellow-800">{name}</strong>파스타가 만들어지는 중 실패했습니다
+    </div>
+  )
+```
+
+```tsx
+return (
+  <div>
+    <strong className="text-yellow-500">{food?.name}</strong>파스타가 만들어졌습니다
+  </div>
+)
+```
+
+위의 방식은 절차적 프로그래밍에 익숙한 분들께는 오히려 명확하고 명시적으로 보일 것 입니다.
+파스타를 만드는 과정에 있거나, 만드는 과정 중 에러가 있으면 해당하는 상태를 업데이트하고,
+해당 상태에 따라서 명시적으로 어떻게 제공할지 한 문맥에서 정해줄 수 있기 때문입니다.
+
+하지만 배가 고팠던 친구들은 파스타 뿐만이 아닌 스테이크 또한 먹고 싶다고 하여,
+저는 위에서 사용한 `절차적 방식`을 그대로 사용하여`스테이크제작 API`를 이용해 파스타&스테이크 컴포넌트를 제작했습니다
+
+```tsx:PastAndSteak.tsx
+
+import { FunctionComponent, useEffect, useState, useCallback } from 'react'
+import { 파스타제작, 스테이크제작 } from '@/api/food'
+
+type Props = {
+  pastaName: string
+  steakName: string
+}
+
+// 위의 코드를 간단한 버전으로 Hook와 시킨 코드
+export default function useQuery<T>(callback: Promise<T>) {
+  const [data, setData] = useState<T | null>(null);
+  const [isError, setError] = useState<any>(null);
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    ;(async () => {
+      setLoading(true)
+      try {
+        const response = await callback;
+        setData(response);
+      } catch (e) {
+        setError(e);
+      } finally {
+        setLoading(false);
+      }
+    })()
+  }, [callback])
+
+  return { data, isError, isLoading };
+}
+
+
+const ProgressivePastaAndSteak: FunctionComponent<Props> = ({ pastaName, steakName }) => {
+  const {data: pastaData, isError: pastaIsError, isLoading: pastaIsLoading} = useQuery(파스타제작(pastaName))
+  const {data: steakData, isError: steakIsError, isLoading: steakIsLoading} = useQuery(스테이크제작(steakName))
+
+  if (pastaIsLoading || steakIsLoading)
+    return (
+      <div>
+        절차적 요리가 만들어지는 중입니다
+      </div>
+    )
+
+  if (pastaIsError || steakIsError)
+    return (
+      <div>
+        요리가 실패했습니다
+      </div>
+    )
+
+  return (
+    <div>
+      {pastaData.name}와 {steakData.name}이 만들어졌습니다.
+    </div>
+  )
+}
+
+export default ProgressivePastaAndSteak
+```
+
+어떤가요? 저는 위의 코드를 통해 친구들에게 성공적으로 파스타와 스테이크를 전달할 수 있겠지만,
+음식을 2개만 만들어도 관련된 상태가 각각 3개씩, 총 9가지의 경우의 수가 있음을 깨닫고 더 이상 요리를 하고 싶지 않을 것 입니다.(즉 3^n의 케이스가 발생)
+
+[Toss Slash 21 - 박서진님](https://www.youtube.com/watch?v=FvRtoViujGg&ab_channel=%ED%86%A0%EC%8A%A4)의 발표자료를 빌려보자면
+다음과 같이 정리할 수 있습니다.
+
+![곱연산적 효과](https://d.pr/i/YEqcsE.png)
+
+즉, 저희가 음식을 추가로 만들수록(다르게 말하자면, 어떤 비동기적 행위를 추가할수록) 음식들에 대해서 `곱타입 효과`가 난다고 정리할 수 있습니다.
+게다가 위의 코드들은 `한 문맥안에 저희가 제공하려는 음식 그 자체에 집중하지 못하고, 음식이 만들어지는 과정과 에러에 대한 처리`도 한다고 볼 수 있습니다
+
+어떻게 하면 위의 문제를 우아하게 해결할 수 있을까요?
+
+### 상태를 숨기지 않고 그대로 드러내기(또는 부모에게 책임 전가하기)
+
+해결방법은 `숨기지 않고 그대로 드러내기` 입니다. 또는 부모에게 책임 전가하기라고도 합니다.
+자세하게 설명하기에 앞서 이전 코드를 다시 한 번 보겠습니다
+
+```tsx:ProgressivePasta.tsx
+//...
+useEffect(() => {
+  ;(async () => {
+    setLoading(true)
+    try {
+      const { food } = await 파스타제작(name)
+      setFood(food)
+    } catch (e) {
+      setError(true)
+    } finally {
+      setLoading(false)
+    }
+  })()
+}, [name])
+//...
+```
+
+절차적 프로그래밍에 익숙한 저는 그동안 위와 같이 `부수효과를 일으키는 useEffect Hook`안에서
+비동기 상황에 따라서 상태(로딩, 에러, 불러오기 완료)를 업데이트 했습니다.
+
+즉 이는 다르게 해석하면 `어떤 상태를 처리하는 책임을 부수효과를 일으키는 곳에서 가지고 있다`고 볼 수 있는데요,
+`부모에게 책임 전가하기`란 이를 해당 문맥에서 책임지지 않고 `throw 문법`을 통해서 부모 컴포넌트에게 책임을 전가하는 것 입니다.
+
+그리고 전가된 책임을 처리하는 부모컴포넌트가 있다면, 자식 컴포넌트는 내부에서 아무리 많은 API를 호출해도
+상태(로딩, 에러, 불러오기 완료)를 신경쓰지 않고 데이터 그 자체에 집중할 수 있게 되는 것 입니다.
+
+```tsx:createResource.tsx
+// 전달받은 Promise 객체를 통해 데이터를 불러오는 함수
+export function createResource<T>(promise: Promise<T>) {
+  let status: 'success' | 'pending' | 'error' = 'pending'
+  let result: any
+
+  const suspender = promise.then(
+    (response) => {
+      status = 'success'
+      result = response
+    },
+    (error) => {
+      status = 'error'
+      result = error
+    }
+  )
+
+  return {
+    read() {
+      switch (status) {
+        case 'pending':
+          // pending(loading)상태일 경우 Promise 객체를 throw
+          throw suspender
+        case 'error':
+          // error일 경우 Error 객체를 throw
+          throw result
+        default:
+          // 위의 pending, error가 아닐 경우 result 리턴
+          return result
+      }
+    },
+  }
+}
+```
+
+```tsx:DeclarativePasta.tsx
+import { FoodReponse } from '@/api/food';
+import React, { FunctionComponent } from 'react';
+
+type Props = {
+  resources: { read(): FoodReponse };
+};
+
+const DeclarativePasta: FunctionComponent<Props> = ({ resources }) => {
+  const { food } = resources.read();
+
+  return (
+    <div>
+      {food.name}파스타가 만들어졌습니다
+    </div>
+  );
+};
+
+export default DeclarativePasta;
+
+```
+
+```tsx:Restaurant.tsx
+//...
+
+<"전가된 책임중 에러를 처리하는 컴포넌트"
+  fallback={
+    <div>
+      알리오올리오 파스타를 만드는데에 실패했습니다
+    </div>
+  }
+>
+  {/* Promise, Error가 변환될때 적절하게 처리해주는 컴포넌트 */}
+  <"전가된 책임을 처리하는 컴포넌트"
+    fallback={<div>선언적 알리오올리오 파스타를 만드는 중입니다</div>}
+  >
+    <DeclarativePasta
+      resources={createResource(파스타제작('알리오올리오'))}
+    />
+  </"전가된 책임을 처리하는 컴포넌트">
+</"전가된 책임중 에러를 처리하는 컴포넌트">
+
+//...
+```
+
+위와 같이 작성함으로써 얻을 수 있는 효과는 분명합니다.
+DeclarativePasta 컴포넌트 안에서 2~5 또는 그 이상의 API를 호출해도
+DeclarativePasta 컴포넌트를 렌더링 하는 책임은 `전가된 책임을 처리하는 컴포넌트`가 가지고 있기 때문에
+DeclarativePasta는 데이터 자체에 집중할 수 있습니다. (만약 친구가 파스타와 스테이크 외에 다른 음식도 먹고 싶다면 부담없이 만들기가 가능하겠죠😎)
+
+즉 `곱연산적 효과가 합연산적 효과`로 바뀌었다고 볼 수 있으며,
+`어떻게`하기 보다는 `무엇`을 할지에 집중한다고 볼 수 있는 것 입니다.
+
+결론적으로 위의 방식을 통해 이전에는 처리해야할 경우의 수가 3^n가지였지만
+`전가된 책임을 처리하는 컴포넌트`를 만듦으로써 로직의 복잡도를 줄일 수 있는 것이죠.
+
+그리고 React는 이미 `전가된 책임을 처리하는 컴포넌트`와 `전가된 책임중 에러를 처리하는 컴포넌트`를
+기본기능으로 제공하고 있습니다. 해당 기능을 통해 Restaurant.tsx를 다음과 같이 바꿀 수 있을 것 같습니다
+
+```tsx:Restaurant.tsx
+//...
+
+<ErrorBoundary
+  fallback={
+    <div>
+      알리오올리오 파스타를 만드는데에 실패했습니다
+    </div>
+  }
+>
+  {/* Promise, Error가 변환될때 적절하게 처리해주는 컴포넌트 */}
+  <Suspense
+    fallback={<div>선언적 알리오올리오 파스타를 만드는 중입니다</div>}
+  >
+    <DeclarativePasta
+      resources={createResource(파스타제작('알리오올리오'))}
+    />
+  </Suspense>
+</ErrorBoundary>
+
+//...
+```
+
+## Part1 중간결론
+
+React는 선언적 프로그래밍을 중요시하는 프레임워크이며 저희 또한 알게모르게 선언적 프로그래밍을 하고 있습니다.
+예시로 많은 UI 프레임워크들이 지원하는 `<Flex />, <Grid />, <VisuallyHidden /> 등`과 같은 것들이 그 예시이며
+`<InputBox />, <Button />`등 익숙한 것들도 모두 선언적이라고 할 수 있겠습니다.
+하지만 리엑트는 UI뿐만 아니라 비동기 처리 또한 Suspense와 ErrorBoundary를 통해 선언적으로 처리할 수 있게 함으로써
+더 견고하고 안전한 어플리케이션을 만들 수 있게 해줍니다.
+
+즉 `적은 코드로 더 안전하고 더 많은 것들을 할 수 있습니다`
