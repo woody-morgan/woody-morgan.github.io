@@ -1,0 +1,132 @@
+---
+title: 'Effective Typescript 정리 - 2'
+date: '2023-03-22 12:45:00'
+tags: ['typescript']
+draft: false
+summary: 'Effective Typescript 정리 - 2'
+images: []
+layout: PostLayout
+---
+
+<TOCInline toc={props.toc} exclude={'Intro'} asDisclosure />
+
+# Effective Typescript 정리 - 1(아이템 4 ~ 6)
+
+## 구조적 타이핑 익숙해지기
+
+```ts
+interface Vector2D {
+  x: number
+  y: number
+}
+
+interface NamedVector {
+  name: string
+  x: number
+  y: number
+}
+
+function calculateLength(v: Vector2D) {
+  return Math.sqrt(v.x * v.x + v.y * v.y)
+}
+
+// 위와 같은 함수가 있을때 아래와 같은 코드는 정상적으로 동작합니다.
+
+const v: NamedVector = { name: 'v', x: 3, y: 4 }
+console.log(calculateLength(v)) // 5
+```
+
+- 타입스크립트의 타입 시스템은 자바스크립트의 런타임 동작을 모델링하기 때문에 이를 허용하며, `구조적 타이핑`이라고 합니다.
+- 하지만 이 특성 때문에 예상치 못한 동작이 발생할 수 있습니다.
+
+```ts
+function normalize(v: Vector3D) {
+  const length = calculateLength(v)
+  return { x: v.x / length, y: v.y / length, z: v.z / length }
+}
+
+// normalize({ x: 3, y: 4, z: 5}) => 정상작동
+// return 값: { x: 0.6, y: 0.8, z: 1 } => z값이 normalize 값에 포함되지 않음
+```
+
+- Vector3D는 Vector2D와 호환되기 때문에 위와같은 문제가 발생합니다.
+- 이를 해결하는 방법은 추후 아이템 37에서 다룬다고 합니다.
+- 이런 타입스크립트의 특성은 "열려있는 타입 시스템"이라고 합니다.(확장 가능하고, 타입이 다르더라도 내부 구조가 같다면 호환됨)
+- class 문법에서도 마찬가지로 동작합니다.
+
+```ts
+class C {
+  foo: string
+  constructor(foo: string) {
+    this.foo = foo
+  }
+}
+
+const c = new C('hello')
+const d: C = { foo: 'world' } // 정상작동
+```
+
+- 구조적으로 d는 C가 될 수 있기 때문에 정상작동합니다.
+- 하지만 만약 C의 생성자에 단순 할당이 아닌 다른 로직이 있다면 d의 경우 생성자를 호출하지 않기 때문에 문제가 발생할 수 있습니다.
+- 이는 C++이나 Java언어와 매우 다른 특징입니다(이 언어들은 서브클래스임을 명시해야만 상속이 가능합니다.)
+
+- 하지만 이 특성때문에 DB test code를 작성할 때 매우 편리합니다(실제 서브클래스임을 체크하지 않아도, 구조적으로 같다면 테스트가 가능하니까요)
+- 이런 특성을 잘 이용하면 라이브러리간 의존성을 완벽히 분리할 수 있다는 점 입니다.(이건 아이템 51에서 자세히 소개)
+
+## 아이템 4 요약
+
+- 자바스크립트의 덕 타이핑을 모델링하기 위해 타입스크립트는 구조적 타이핑을 사용합니다.(`열려있음`)
+- 클래스 문법 역시 구조적 타이핑을 사용하며, 데이터 구조만 같다면 서로 호환됩니다.(하지만 생성자를 호출하지 않기 때문에 주의가 필요합니다.)
+- 구조적 타이핑 특성 덕분에 유닛 테스팅을 할 때 매우 편리합니다.
+
+## any 타입 지양하기
+
+- Typescript의 점진적/선택적 타이핑은 any 타입 덕분
+- 하지만 any 타입이나, as any를 사용하면 타입스크립트의 장점을 누리지 못합니다.
+
+```ts
+// 변수 케이스
+
+let age: number
+age = '12'
+age = '12' as any // 가능하지만 아래와 같은 문제가 발생할 수 있습니다.
+
+age += 1 // 런타임에서는 정상, age는 "121"
+
+// 함수 케이스
+
+function calculateAge(birthDate: Date): number {
+  // ...
+}
+
+let birthDate: any = '1990-01-01'
+calculateAge(birthDate) // 정상작동
+```
+
+- 또한 any 타입을 사용시 개발툴에서 린팅이 되지 않기 때문에 생산성에 영향을 줍니다.
+- 외에 코드 리펙토링시 버그를 감추는 문제가 발생할 수 있으며, 타입 설계 감춤, 타입시스템 신뢰도 하락 등의 문제가 발생합니다.
+- 하지만 any를 써야만 하는 상황이 있습니다(5장에서 자세히 다룸)
+
+## 아이템 5 요약
+
+- any 타입은 가급적 사용하지 않는 것이 좋습니다.
+- any 타입을 쓰면 점차 막을 수 없는 타입의 누수가 발생합니다..
+
+## 편집기를 사용하여 타입 시스템 탐색하기
+
+- 처음 타입스크립트를 쓴다면 변수에 마우스 커서를 올려보면 타입을 알 수 있습니다.
+- 그리고 맥 기준 command + 마우스 왼쪽 클릭을 하면 타입 정의로 이동할 수 있기 떄문에 처음 공부할때 매우 편리합니다.
+- 게다가 인풋 아웃풋 뿐만이 아닌 if else / switch 등에서도 타입을 모델링 해줍니다
+
+```ts
+function logMessage(message: string | null) {
+  message // 타입이 string | null로 추론됨
+  if (message) {
+    message // 타입이 string으로 추론됨
+  }
+}
+
+function splitMessage(message: string, delimeter: string) {
+  return message.split(delimeter) // 타입이 string[]로 추론됨
+}
+```
