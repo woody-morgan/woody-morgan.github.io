@@ -1,0 +1,271 @@
+---
+title: Improve React Image Component
+date: '2022-08-01'
+tags: ['reactjs', 'javascript']
+draft: false
+summary: implement reflow prevented & load only observed image component
+images: ['/static/images/img.jpeg']
+layout: PostLayout
+---
+
+<TOCInline toc={props.toc} exclude={'Intro'} asDisclosure />
+
+## Intro
+
+While studying React, I want to implement a new lazy loadable image component.
+I usually run a project with Next.js. Next.js provides NextImage as a default image component.
+It supports not only lazy loading and also reflow prevention. But in React, there is no such feature.
+So I decided to implement my own image component that supports these properties.
+In this article, I will share the experience while making this.
+
+## Why we need new Image component?
+
+Normal html image tag has a lot of problem. `First`, it is not responsive.
+We need to add 'max-width' to make it responsive. `Second`, it loads all images in DOM.
+Imagine a situation where the website has a lot of images, and it takes 10 or more seconds
+to load all the images. The user will see a lot of blank spaces in the screen.
+`Third`, it is not reflow prevention. If the user does not provide a width and height,
+the browser will recalculate the width and height of the image right after the image is loaded.
+It leads to a wrong layout which is a.k.a. `Cumulative Layout Shift` problem.
+
+## How to implement new Image component?
+
+Actually NextImage already solved all these problems.Even supports CDN(Content Delivery Network) optimized image delivery.
+If you want to use NextImage, learn Next.js and use it.
+
+But I want to implement my own image component.
+
+## Properties of new Image component
+
+These are features of new Image component.
+
+1. Load when Browser Intersects Viewport
+2. Support reflow prevention(actually buggy)
+3. Support Responsive Attribute
+
+I want to support CDN optimized image delivery. But I don't know how to do it.
+If you know(using Akamai, Cloudflare, etc.), please let me know.
+
+### 1. Load when Browser Intersects Viewport
+
+The way to implement this is using Intersection Observer API.
+When the component is mounted in react rendering tree,
+the browser will start observing the Image element.
+When the Image element intersect with viewport, the browser will execute the callback function.
+In this case, we set the isLoad variable to true.
+Then the image will start loading. The advantage of this is that the image will be loaded
+when the user see it. So it leads to lower network usage when it first appears.
+
+```jsx:MyCustomImage.tsx
+const Image: FC<ImageWrapperProps> = ({
+  src,
+  width,
+  height,
+  alt,
+  className,
+}) => {
+  const imgRef = useRef<HTMLImageElement>(null);
+  const observerRef = useRef<IntersectionObserver>();
+  const [isLoad, setIsLoad] = useState(false);
+
+  function onIntersection(
+    entries: IntersectionObserverEntry[],
+    io: IntersectionObserver,
+  ) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        io.unobserve(entry.target);
+        setIsLoad(true);
+      }
+    });
+  }
+
+  useEffect(() => {
+    if (!observerRef.current) {
+      observerRef.current = new IntersectionObserver(onIntersection);
+    }
+    imgRef.current && observerRef.current?.observe(imgRef.current);
+  }, []);
+
+  return (
+    <img
+      ref={imgRef}
+      width={width}
+      height={height}
+      src={isLoad ? src : undefined}
+      alt={alt}
+    />
+  );
+};
+```
+
+![intersect-but-reflowed](https://d.pr/i/H7Ukc7.gif)
+
+Now the Image component supports loading when the user sees it.
+But it still has a problem. Reflow is happening.
+As you can see above, browser recalculates the width and height of the image right after the image is loaded.
+It makes the performance of the website slow & cause wrong layout. We can solve this problem
+by adding custom `placeHolder` image which is shown before the image is loaded.
+
+### 2. Support reflow prevention(actually buggy)
+
+To solve this problem, we can add a placeHolder image when it is not loaded.
+Image component should be given the width and height of the image.
+So use this props, we show the svg placeholder image.
+
+```jsx:MyCustomImage.tsx
+
+export const placeholderSrc = (width: number, height: number) =>
+  `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}"%3E%3C/svg%3E`;
+
+const Image: FC<ImageWrapperProps> = ({
+  src,
+  width,
+  height,
+  alt,
+  className,
+}) => {
+  ...same as above
+
+  return (
+    <img
+      ref={imgRef}
+      width={width}
+      height={height}
+      src={isLoad ? src : placeholderSrc(width, height)}
+      alt={alt}
+    />
+  );
+};
+
+```
+
+So when the image is not loaded, browser already knows the actual width and height of the image.
+So it will not recalculate the width and height of the image.(But actually, it differs by CSS Property...)
+
+### 3. Support Responsive Attribute
+
+NextImage provides "responsive" | "fixed" | "fill" | "intrinsic" attribute.
+We will implement "responsive" and "fill" attribute.
+For "responsive", the height of the image will be calculated by the width of the image.
+So, set max of the width is 100% of the parent element & the height is auto.
+Then the height is decreased and increased by the width of the parent element.
+For "fill", the image will be filled the whole parent container.
+Both width and height are 100% of the parent element. But the image will be cropped.
+So we need to give objectFit property to the image so user can see the image correctly.
+
+```jsx:MyCustomImage.tsx
+
+const Image: FC<ImageWrapperProps> = ({
+  src,
+  width,
+  height,
+  alt,
+  layout = 'responsive',
+  objectFit = 'cover',
+  className,
+}) => {
+  ...same as above
+
+  return (
+    <img
+      className={cx(
+        'bg-none outline-none',
+        layout === 'fill' ? 'w-full h-full' : 'max-w-full h-auto',
+        objectFit === 'contain' ? 'object-contain' : 'object-cover',
+        className,
+      )}
+      ref={imgRef}
+      width={width}
+      height={height}
+      src={isLoad ? src : placeholderSrc(width, height)}
+      alt={alt}
+    />
+  );
+};
+
+```
+
+![responsive-image](https://d.pr/i/ZsJcTY.gif)
+
+#### 4. Full Code
+
+```jsx:MyCustomImage.tsx
+import { FC, useEffect, useRef, useState } from 'react';
+import cx from 'classnames';
+
+export const placeholderSrc = (width: number, height: number) =>
+  `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}"%3E%3C/svg%3E`;
+
+
+export type ImageWrapperProps = {
+  src: string;
+  width: number;
+  height: number;
+  alt?: string;
+  layout?: 'fill' | 'responsive';
+  objectFit?: 'contain' | 'cover';
+  className?: string;
+};
+
+const Image: FC<ImageWrapperProps> = ({
+  src,
+  width,
+  height,
+  alt,
+  layout = 'responsive',
+  objectFit = 'cover',
+  className,
+}) => {
+  const imgRef = useRef<HTMLImageElement>(null);
+  const observerRef = useRef<IntersectionObserver>();
+  const [isLoad, setIsLoad] = useState(false);
+
+  function onIntersection(
+    entries: IntersectionObserverEntry[],
+    io: IntersectionObserver,
+  ) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        io.unobserve(entry.target);
+        setIsLoad(true);
+      }
+    });
+  }
+
+  useEffect(() => {
+    if (!observerRef.current) {
+      observerRef.current = new IntersectionObserver(onIntersection);
+    }
+    imgRef.current && observerRef.current?.observe(imgRef.current);
+  }, []);
+
+  return (
+    <img
+      className={cx(
+        'bg-none outline-none',
+        layout === 'fill' ? 'w-full h-full' : 'max-w-full h-auto',
+        objectFit === 'contain' ? 'object-contain' : 'object-cover',
+        className,
+      )}
+      ref={imgRef}
+      width={width}
+      height={height}
+      src={isLoad ? src : placeholderSrc(width, height)}
+      alt={alt}
+    />
+  );
+};
+export default Image;
+
+```
+
+## Conclusion
+
+1. Browser Intersection Observer API is a great tool to optimize the performance of the website.
+   But too much use of it can cause the performance of the website slow.
+   So we need to use it carefully.
+
+2. SVG could be a good choice to use as a placeholder image.
+
+3. Production ready image component need to have more optimizing features.
