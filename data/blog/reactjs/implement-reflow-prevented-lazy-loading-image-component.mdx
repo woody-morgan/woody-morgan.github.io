@@ -3,7 +3,7 @@ title: '개선된 <img/> 컴포넌트 제작기'
 date: '2022-08-01'
 tags: ['reactjs', 'javascript']
 draft: false
-summary: 'Reflow를 줄이고 렌더링 성능을 개선한 <img/> 컴포넌트 제작기'
+summary: 'CLS(Cumulative Layout Shift)를 줄이고 렌더링 성능을 개선한 <img/> 컴포넌트 제작기'
 images: ['/static/images/img.jpeg']
 layout: PostLayout
 ---
@@ -14,7 +14,7 @@ layout: PostLayout
 
 While studying React, I want to implement a new lazy loadable image component.
 I usually run a project with Next.js. Next.js provides NextImage as a default image component.
-It supports not only lazy loading and also reflow prevention. But in React, there is no such feature.
+It supports not only lazy loading and also CLS prevention. But in React, there is no such feature.
 So I decided to implement my own image component that supports these properties.
 In this article, I will share the experience while making this.
 
@@ -24,7 +24,7 @@ Normal html image tag has a lot of problem. `First`, it is not responsive.
 We need to add 'max-width' to make it responsive. `Second`, it loads all images in DOM.
 Imagine a situation where the website has a lot of images, and it takes 10 or more seconds
 to load all the images. The user will see a lot of blank spaces in the screen.
-`Third`, it is not reflow prevention. If the user does not provide a width and height,
+`Third`, it is not CLS prevention. If the user does not provide a width and height,
 the browser will recalculate the width and height of the image right after the image is loaded.
 It leads to a wrong layout which is a.k.a. `Cumulative Layout Shift` problem.
 
@@ -40,7 +40,7 @@ But I want to implement my own image component.
 These are features of new Image component.
 
 1. Load when Browser Intersects Viewport
-2. Support reflow prevention(actually buggy)
+2. Support CLS prevention(actually buggy)
 3. Support Responsive Attribute
 
 I want to support CDN optimized image delivery. But I don't know how to do it.
@@ -99,15 +99,15 @@ const Image: FC<ImageWrapperProps> = ({
 };
 ```
 
-![intersect-but-reflowed](https://d.pr/i/H7Ukc7.gif)
+![intersect-but-CLSed](https://d.pr/i/H7Ukc7.gif)
 
 Now the Image component supports loading when the user sees it.
-But it still has a problem. Reflow is happening.
+But it still has a problem. CLS is happening.
 As you can see above, browser recalculates the width and height of the image right after the image is loaded.
 It makes the performance of the website slow & cause wrong layout. We can solve this problem
 by adding custom `placeHolder` image which is shown before the image is loaded.
 
-### 2. Support reflow prevention(actually buggy)
+### 2. Support CLS prevention(actually buggy)
 
 To solve this problem, we can add a placeHolder image when it is not loaded.
 Image component should be given the width and height of the image.
