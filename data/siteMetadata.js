@@ -1,7 +1,7 @@
 const siteMetadata = {
   title: 'woodi97 - Portfolio',
-  author: 'WOODI(Dong-Wook)',
-  headerTitle: 'Compass',
+  author: 'WOODI',
+  headerTitle: 'Mircats',
   description: 'Walkthrough of My Learning Journey',
   language: 'ko-KR',
   theme: 'system', // system, dark or light
@@ -9,13 +9,13 @@ const siteMetadata = {
   siteRepo: 'https://github.com/woodi97/woodi97.github.io',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
-  socialBanner: '/static/images/twitter-card.png',
-  email: 'address@yoursite.com',
-  github: 'https://github.com',
-  twitter: 'https://twitter.com/Twitter',
-  facebook: 'https://facebook.com',
-  youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com',
+  // socialBanner: '/static/images/twitter-card.png',
+  email: 'woodi.daily@gmail.com',
+  github: 'https://github.com/woodi97',
+  // twitter: 'https://twitter.com/Twitter',
+  // facebook: 'https://facebook.com',
+  // youtube: 'https://youtube.com',
+  linkedin: 'https://www.linkedin.com/in/%EB%8F%99%EC%9A%B1-%EA%B9%80-112973188/',
   locale: 'ko-KR',
   analytics: {
     // supports plausible, simpleAnalytics or googleAnalytics
