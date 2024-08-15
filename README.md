@@ -5,6 +5,7 @@
 Things to do
 
 1. Support Next Article to show Nested Article
+2. Do Something Test with Obsidian Git
 
 Things to know
 
