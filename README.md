@@ -1,13 +1,6 @@
-# ![tailwind-nextjs-banner](/public/static/images/avatar.png)
+# Woody Morgan's blog repository
 
-## Woodi97's blog repository
-
-Things to do
-
-1. Support Next Article to show Nested Article
-2. Do Something Test with Obsidian Git
-
-Things to know
+## Before Start
 
 1. Turn Draft false, it doesn't appear in the list of articles
 2. You can change DEFAULT_LAYOUT At pages/blog/[...slug].tsx

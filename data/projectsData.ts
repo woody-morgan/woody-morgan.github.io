@@ -6,12 +6,6 @@ const projectsData = [
     href: 'https://surrounds-fe.vercel.app',
   },
   {
-    title: 'Advent Calendar',
-    description: 'Share Your Article on Advent Calendar',
-    imgSrc: 'static/images/proj/advent/advent.png',
-    href: 'https://woodi97.github.io/zp-advent-calendar',
-  },
-  {
     title: 'Study Cafe',
     description: 'Online Study Management Platform',
     imgSrc: 'static/images/proj/study-cafe.png',
@@ -22,12 +16,6 @@ const projectsData = [
     description: 'Baby Logger Application',
     imgSrc: 'static/images/proj/with-you.png',
     href: 'https://with-you-front-end.vercel.app',
-  },
-  {
-    title: 'Korean Wordle Project: Infinite Mode',
-    description: 'Korean Wordle Project which support infinite mode',
-    imgSrc: 'static/images/proj/wordle.png',
-    href: 'https://woodi97.github.io/kodle-modle',
   },
 ]
 

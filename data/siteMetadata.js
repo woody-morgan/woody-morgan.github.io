@@ -1,27 +1,21 @@
 const siteMetadata = {
-  title: 'woodi97.github.io',
-  author: 'woodi97',
-  headerTitle: 'WOODI',
+  title: 'woody-morgan.github.io',
+  author: 'woody morgan',
+  headerTitle: 'Woody Morgan',
   description: 'Beyond contentment, greatness',
   language: 'ko-KR',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://woodi97.github.io/',
-  siteRepo: 'https://github.com/woodi97/woodi97.github.io',
+  siteUrl: 'https://woody-morgan.github.io/',
+  siteRepo: 'https://github.com/woody-morgan/woody-morgan.github.io',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
   socialBanner: '/static/images/avatar.png',
-  email: 'woodi.daily@gmail.com',
-  github: 'https://github.com/woodi97',
-  twitter: '',
-  facebook: '',
-  youtube: '',
-  linkedin: 'https://www.linkedin.com/in/woodi97',
+  email: 'woody.morgan.crafts@gmail.com',
+  github: 'https://github.com/woody-morgan',
+  linkedin: 'https://www.linkedin.com/in/woody-morgan',
   locale: 'ko-KR',
   analytics: {
-    // supports plausible, simpleAnalytics or googleAnalytics
-    plausibleDataDomain: 'https://woodi97.github.io/', // e.g. tailwind-nextjs-starter-blog.vercel.app
     simpleAnalytics: true, // true or false
-    umamiWebsiteId: '', // e.g. 123e4567-e89b-12d3-a456-426614174000
     googleAnalyticsId: 'G-0G7SNT9K17', // e.g. UA-000000-2 or G-XXXXXXX
   },
   newsletter: {
