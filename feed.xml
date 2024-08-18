@@ -141,16 +141,6 @@
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/algorithm/algorithm-python-basics-01</guid>
-    <title>[알고리즘] 파이썬 기초 - 01</title>
-    <link>https://woodi97.github.io//blog/algorithm/algorithm-python-basics-01</link>
-    <description>알고리즘을 위한 파이썬 기초 문법을 정리해보았습니다.</description>
-    <pubDate>Wed, 03 Aug 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
-    <category>algorithm</category><category>python</category>
-  </item>
-
-  <item>
     <guid>https://woodi97.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</guid>
     <title>개선된 &lt;img/&gt; 컴포넌트 제작기</title>
     <link>https://woodi97.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</link>
@@ -178,26 +168,6 @@
     <pubDate>Tue, 03 May 2022 00:00:00 GMT</pubDate>
     <author>woodi.daily@gmail.com (woodi97)</author>
     <category>javascript</category>
-  </item>
-
-  <item>
-    <guid>https://woodi97.github.io//blog/translation/golang-code-convention</guid>
-    <title>[번역] Golang - 코드 컨벤션</title>
-    <link>https://woodi97.github.io//blog/translation/golang-code-convention</link>
-    <description>Golang의 코드 컨벤션에 대해 알아봅니다.</description>
-    <pubDate>Mon, 11 Apr 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
-    <category>golang</category><category>convention</category><category>translation</category>
-  </item>
-
-  <item>
-    <guid>https://woodi97.github.io//blog/algorithm/algorithm-remove-duplicate-vector-elements</guid>
-    <title>[Algorithm] Remove Duplicate Vector Elements</title>
-    <link>https://woodi97.github.io//blog/algorithm/algorithm-remove-duplicate-vector-elements</link>
-    <description>remove duplicate elems on c++ program</description>
-    <pubDate>Thu, 07 Apr 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
-    <category>c++</category><category>stl</category><category>algorithm</category>
   </item>
 
   <item>
@@ -238,16 +208,6 @@
     <pubDate>Tue, 01 Feb 2022 00:00:00 GMT</pubDate>
     <author>woodi.daily@gmail.com (woodi97)</author>
     <category>reactjs</category><category>nextjs</category><category>components</category>
-  </item>
-
-  <item>
-    <guid>https://woodi97.github.io//blog/etc/deriving-ols-estimator</guid>
-    <title>Deriving the OLS Estimator</title>
-    <link>https://woodi97.github.io//blog/etc/deriving-ols-estimator</link>
-    <description>How to derive the OLS Estimator with matrix notation and a tour of math typesetting using markdown with the help of KaTeX.</description>
-    <pubDate>Mon, 21 Dec 2020 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
-    <category>nextjs</category><category>math</category><category>ols</category>
   </item>
 
     </channel>
