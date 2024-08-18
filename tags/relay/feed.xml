@@ -1,62 +1,62 @@
 
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>woodi97.github.io</title>
-      <link>https://woodi97.github.io//blog</link>
+      <title>woody-morgan.github.io</title>
+      <link>https://woody-morgan.github.io//blog</link>
       <description>Beyond contentment, greatness</description>
       <language>ko-KR</language>
-      <managingEditor>woodi.daily@gmail.com (woodi97)</managingEditor>
-      <webMaster>woodi.daily@gmail.com (woodi97)</webMaster>
+      <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
+      <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
       <lastBuildDate>Thu, 26 Jan 2023 00:00:00 GMT</lastBuildDate>
-      <atom:link href="https://woodi97.github.io//tags/relay/feed.xml" rel="self" type="application/rss+xml"/>
+      <atom:link href="https://woody-morgan.github.io//tags/relay/feed.xml" rel="self" type="application/rss+xml"/>
       
   <item>
-    <guid>https://woodi97.github.io//blog/translation/graphql-connections-n-pagination</guid>
+    <guid>https://woody-morgan.github.io//blog/translation/graphql-connections-n-pagination</guid>
     <title>[번역] Relay - Graphql Connections &amp; Pagination</title>
-    <link>https://woodi97.github.io//blog/translation/graphql-connections-n-pagination</link>
+    <link>https://woody-morgan.github.io//blog/translation/graphql-connections-n-pagination</link>
     <description>Relay 문서의 Graphql Connections &amp; Pagination 항목 번역</description>
     <pubDate>Thu, 26 Jan 2023 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>graphql</category><category>relay</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/translation/graphql-queries-for-interactions</guid>
+    <guid>https://woody-morgan.github.io//blog/translation/graphql-queries-for-interactions</guid>
     <title>[번역] Relay - Graphql Queries for Interactions</title>
-    <link>https://woodi97.github.io//blog/translation/graphql-queries-for-interactions</link>
+    <link>https://woody-morgan.github.io//blog/translation/graphql-queries-for-interactions</link>
     <description>Relay 문서의 Graphql Queries for Interactions 항목 번역</description>
     <pubDate>Mon, 09 Jan 2023 08:10:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>graphql</category><category>relay</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/translation/graphql-arrays-n-lists</guid>
+    <guid>https://woody-morgan.github.io//blog/translation/graphql-arrays-n-lists</guid>
     <title>[번역] Relay - Graphql Arrays and Lists</title>
-    <link>https://woodi97.github.io//blog/translation/graphql-arrays-n-lists</link>
+    <link>https://woody-morgan.github.io//blog/translation/graphql-arrays-n-lists</link>
     <description>Relay 문서의 Graphql Arrays and Lists 항목 번역</description>
     <pubDate>Mon, 09 Jan 2023 07:49:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>graphql</category><category>relay</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/translation/graphql-queries</guid>
+    <guid>https://woody-morgan.github.io//blog/translation/graphql-queries</guid>
     <title>[번역] Relay - Graphql Queries</title>
-    <link>https://woodi97.github.io//blog/translation/graphql-queries</link>
+    <link>https://woody-morgan.github.io//blog/translation/graphql-queries</link>
     <description>Relay 문서의 Graphql Queries 항목 번역</description>
     <pubDate>Wed, 04 Jan 2023 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>graphql</category><category>relay</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/translation/graphql-mutations</guid>
+    <guid>https://woody-morgan.github.io//blog/translation/graphql-mutations</guid>
     <title>[번역] Relay - Graphql mutations</title>
-    <link>https://woodi97.github.io//blog/translation/graphql-mutations</link>
+    <link>https://woody-morgan.github.io//blog/translation/graphql-mutations</link>
     <description>Relay 문서의 Graphql Mutation 항목 번역</description>
     <pubDate>Tue, 03 Jan 2023 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>graphql</category><category>relay</category>
   </item>
 

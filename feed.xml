@@ -1,212 +1,212 @@
 
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>woodi97.github.io</title>
-      <link>https://woodi97.github.io//blog</link>
+      <title>woody-morgan.github.io</title>
+      <link>https://woody-morgan.github.io//blog</link>
       <description>Beyond contentment, greatness</description>
       <language>ko-KR</language>
-      <managingEditor>woodi.daily@gmail.com (woodi97)</managingEditor>
-      <webMaster>woodi.daily@gmail.com (woodi97)</webMaster>
+      <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
+      <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
       <lastBuildDate>Mon, 11 Mar 2024 00:00:00 GMT</lastBuildDate>
-      <atom:link href="https://woodi97.github.io//feed.xml" rel="self" type="application/rss+xml"/>
+      <atom:link href="https://woody-morgan.github.io//feed.xml" rel="self" type="application/rss+xml"/>
       
   <item>
-    <guid>https://woodi97.github.io//blog/retrospect/retrospect-krafton</guid>
+    <guid>https://woody-morgan.github.io//blog/retrospect/retrospect-krafton</guid>
     <title>Retrospect - Move to Krafton</title>
-    <link>https://woodi97.github.io//blog/retrospect/retrospect-krafton</link>
+    <link>https://woody-morgan.github.io//blog/retrospect/retrospect-krafton</link>
     <description>retrospect</description>
     <pubDate>Mon, 11 Mar 2024 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>retrospect</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</guid>
+    <guid>https://woody-morgan.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</guid>
     <title>ColorToken Flattening For Vanilla Extract CSS (feat. Typescript)</title>
-    <link>https://woodi97.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</link>
+    <link>https://woody-morgan.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</link>
     <description>colorToken을 Vanilla Extract Sprinkles에 할당하기 위한 Object Flattening 하기</description>
     <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>vanilla-extract</category><category>javascript</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/reactjs/declarative-programming-part2</guid>
+    <guid>https://woody-morgan.github.io//blog/reactjs/declarative-programming-part2</guid>
     <title>Declarative Programming With React. Part 2</title>
-    <link>https://woodi97.github.io//blog/reactjs/declarative-programming-part2</link>
+    <link>https://woody-morgan.github.io//blog/reactjs/declarative-programming-part2</link>
     <description>React Suspense와 Compound Component Pattern으로 알아보는 선언적 프로그래밍(feat. 대수적 효과)</description>
     <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>declarative</category><category>reactjs</category><category>compound-pattern</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/reactjs/declarative-programming-part1</guid>
+    <guid>https://woody-morgan.github.io//blog/reactjs/declarative-programming-part1</guid>
     <title>Declarative Programming With React. Part 1</title>
-    <link>https://woodi97.github.io//blog/reactjs/declarative-programming-part1</link>
+    <link>https://woody-morgan.github.io//blog/reactjs/declarative-programming-part1</link>
     <description>React Suspense와 Compound Component Pattern으로 알아보는 선언적 프로그래밍(feat. 대수적 효과)</description>
     <pubDate>Wed, 31 May 2023 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>declarative</category><category>algebraic effect</category><category>reactjs</category><category>suspense</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/translation/graphql-connections-n-pagination</guid>
+    <guid>https://woody-morgan.github.io//blog/translation/graphql-connections-n-pagination</guid>
     <title>[번역] Relay - Graphql Connections &amp; Pagination</title>
-    <link>https://woodi97.github.io//blog/translation/graphql-connections-n-pagination</link>
+    <link>https://woody-morgan.github.io//blog/translation/graphql-connections-n-pagination</link>
     <description>Relay 문서의 Graphql Connections &amp; Pagination 항목 번역</description>
     <pubDate>Thu, 26 Jan 2023 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>graphql</category><category>relay</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/translation/graphql-queries-for-interactions</guid>
+    <guid>https://woody-morgan.github.io//blog/translation/graphql-queries-for-interactions</guid>
     <title>[번역] Relay - Graphql Queries for Interactions</title>
-    <link>https://woodi97.github.io//blog/translation/graphql-queries-for-interactions</link>
+    <link>https://woody-morgan.github.io//blog/translation/graphql-queries-for-interactions</link>
     <description>Relay 문서의 Graphql Queries for Interactions 항목 번역</description>
     <pubDate>Mon, 09 Jan 2023 08:10:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>graphql</category><category>relay</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/translation/graphql-arrays-n-lists</guid>
+    <guid>https://woody-morgan.github.io//blog/translation/graphql-arrays-n-lists</guid>
     <title>[번역] Relay - Graphql Arrays and Lists</title>
-    <link>https://woodi97.github.io//blog/translation/graphql-arrays-n-lists</link>
+    <link>https://woody-morgan.github.io//blog/translation/graphql-arrays-n-lists</link>
     <description>Relay 문서의 Graphql Arrays and Lists 항목 번역</description>
     <pubDate>Mon, 09 Jan 2023 07:49:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>graphql</category><category>relay</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/translation/graphql-queries</guid>
+    <guid>https://woody-morgan.github.io//blog/translation/graphql-queries</guid>
     <title>[번역] Relay - Graphql Queries</title>
-    <link>https://woodi97.github.io//blog/translation/graphql-queries</link>
+    <link>https://woody-morgan.github.io//blog/translation/graphql-queries</link>
     <description>Relay 문서의 Graphql Queries 항목 번역</description>
     <pubDate>Wed, 04 Jan 2023 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>graphql</category><category>relay</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/translation/graphql-mutations</guid>
+    <guid>https://woody-morgan.github.io//blog/translation/graphql-mutations</guid>
     <title>[번역] Relay - Graphql mutations</title>
-    <link>https://woodi97.github.io//blog/translation/graphql-mutations</link>
+    <link>https://woody-morgan.github.io//blog/translation/graphql-mutations</link>
     <description>Relay 문서의 Graphql Mutation 항목 번역</description>
     <pubDate>Tue, 03 Jan 2023 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>graphql</category><category>relay</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/reactjs/optimize-script-loading-on-react</guid>
+    <guid>https://woody-morgan.github.io//blog/reactjs/optimize-script-loading-on-react</guid>
     <title>onDemand Loading Script tag in React</title>
-    <link>https://woodi97.github.io//blog/reactjs/optimize-script-loading-on-react</link>
+    <link>https://woody-morgan.github.io//blog/reactjs/optimize-script-loading-on-react</link>
     <description>특정 페이지에서만 사용하는 스크립트를 onDemand 로딩하기</description>
     <pubDate>Thu, 13 Oct 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>reactjs</category><category>nextjs</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/components/create-native-like-image-slider-component</guid>
+    <guid>https://woody-morgan.github.io//blog/components/create-native-like-image-slider-component</guid>
     <title>Create Native App Like Image Slider Component</title>
-    <link>https://woodi97.github.io//blog/components/create-native-like-image-slider-component</link>
+    <link>https://woody-morgan.github.io//blog/components/create-native-like-image-slider-component</link>
     <description>네이티브 Like 이미지 슬라이더를 HTML과 Framer-motion으로 제작하는 법</description>
     <pubDate>Wed, 05 Oct 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>reactjs</category><category>nextjs</category><category>animation</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/nextjs/optimizing-nextjs-application</guid>
+    <guid>https://woody-morgan.github.io//blog/nextjs/optimizing-nextjs-application</guid>
     <title>Optimizing Next.js Application(feat. Vercel)</title>
-    <link>https://woodi97.github.io//blog/nextjs/optimizing-nextjs-application</link>
+    <link>https://woody-morgan.github.io//blog/nextjs/optimizing-nextjs-application</link>
     <description>Serverless Function 및 Next Image 태그, SEO 최적화 등 Next.js 어플리케이션 최적화 방법을 알아봅니다.</description>
     <pubDate>Fri, 30 Sep 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>nextjs</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/nestjs/deploy-nestjs-application-on-heroku-system</guid>
+    <guid>https://woody-morgan.github.io//blog/nestjs/deploy-nestjs-application-on-heroku-system</guid>
     <title>Deploy Nestjs Application on Heroku</title>
-    <link>https://woodi97.github.io//blog/nestjs/deploy-nestjs-application-on-heroku-system</link>
+    <link>https://woody-morgan.github.io//blog/nestjs/deploy-nestjs-application-on-heroku-system</link>
     <description>Nestjs 어플리케이션을 배포하면서 생긴 문제점을 정리하였습니다</description>
     <pubDate>Sun, 07 Aug 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>backend</category><category>nestjs</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</guid>
+    <guid>https://woody-morgan.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</guid>
     <title>Implement Reuseable &lt;img/&gt;</title>
-    <link>https://woodi97.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</link>
+    <link>https://woody-morgan.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</link>
     <description>CLS(Cumulative Layout Shift)를 줄이고 렌더링 성능을 개선한 &lt;img/&gt; 컴포넌트 제작기</description>
     <pubDate>Mon, 01 Aug 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>reactjs</category><category>javascript</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/reactjs/making-full-page-scroll-effect</guid>
+    <guid>https://woody-morgan.github.io//blog/reactjs/making-full-page-scroll-effect</guid>
     <title>How to Apply Full Page Scroll Effect</title>
-    <link>https://woodi97.github.io//blog/reactjs/making-full-page-scroll-effect</link>
+    <link>https://woody-morgan.github.io//blog/reactjs/making-full-page-scroll-effect</link>
     <description>Full Page Scroll Effect 만들면서 생긴 이슈들을 정리해보았습니다.</description>
     <pubDate>Sat, 30 Jul 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>reactjs</category><category>nextjs</category><category>javascript</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/javascript/what-is-throttle-debounce</guid>
+    <guid>https://woody-morgan.github.io//blog/javascript/what-is-throttle-debounce</guid>
     <title>What is Throttle &amp; Debounce</title>
-    <link>https://woodi97.github.io//blog/javascript/what-is-throttle-debounce</link>
+    <link>https://woody-morgan.github.io//blog/javascript/what-is-throttle-debounce</link>
     <description>Throttle &amp; Debounce 함수의 역할과 차이점 정리</description>
     <pubDate>Tue, 03 May 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>javascript</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/network/handling-golang-socket</guid>
+    <guid>https://woody-morgan.github.io//blog/network/handling-golang-socket</guid>
     <title>Handling Golang Socket</title>
-    <link>https://woodi97.github.io//blog/network/handling-golang-socket</link>
+    <link>https://woody-morgan.github.io//blog/network/handling-golang-socket</link>
     <description>introduce golang socket programming</description>
     <pubDate>Mon, 04 Apr 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>golang</category><category>socket-programming</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/reactjs/pagetransition-animation-using-framer-motion</guid>
+    <guid>https://woody-morgan.github.io//blog/reactjs/pagetransition-animation-using-framer-motion</guid>
     <title>PageTransition Animation using Framer Motion</title>
-    <link>https://woodi97.github.io//blog/reactjs/pagetransition-animation-using-framer-motion</link>
+    <link>https://woody-morgan.github.io//blog/reactjs/pagetransition-animation-using-framer-motion</link>
     <description>Guide to apply pagetransition animation using framer-motion</description>
     <pubDate>Tue, 01 Mar 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>reactjs</category><category>nextjs</category><category>animation</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/reactjs/ways-to-optimize-your-nextjs-application</guid>
+    <guid>https://woody-morgan.github.io//blog/reactjs/ways-to-optimize-your-nextjs-application</guid>
     <title>Ways to Optimize your React/Nextjs Application</title>
-    <link>https://woodi97.github.io//blog/reactjs/ways-to-optimize-your-nextjs-application</link>
+    <link>https://woody-morgan.github.io//blog/reactjs/ways-to-optimize-your-nextjs-application</link>
     <description>apply tree-shaking &amp; constate on my app</description>
     <pubDate>Mon, 07 Feb 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>reactjs</category><category>nextjs</category><category>optimization</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/project/how-to-make-advent-calendar</guid>
+    <guid>https://woody-morgan.github.io//blog/project/how-to-make-advent-calendar</guid>
     <title>How to make Advent Calendar</title>
-    <link>https://woodi97.github.io//blog/project/how-to-make-advent-calendar</link>
+    <link>https://woody-morgan.github.io//blog/project/how-to-make-advent-calendar</link>
     <description>Introducing React-Dates for Calendar Component</description>
     <pubDate>Tue, 01 Feb 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>reactjs</category><category>nextjs</category><category>components</category>
   </item>
 

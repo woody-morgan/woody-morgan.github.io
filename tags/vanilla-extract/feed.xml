@@ -1,22 +1,22 @@
 
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>woodi97.github.io</title>
-      <link>https://woodi97.github.io//blog</link>
+      <title>woody-morgan.github.io</title>
+      <link>https://woody-morgan.github.io//blog</link>
       <description>Beyond contentment, greatness</description>
       <language>ko-KR</language>
-      <managingEditor>woodi.daily@gmail.com (woodi97)</managingEditor>
-      <webMaster>woodi.daily@gmail.com (woodi97)</webMaster>
+      <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
+      <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
       <lastBuildDate>Sun, 04 Jun 2023 00:00:00 GMT</lastBuildDate>
-      <atom:link href="https://woodi97.github.io//tags/vanilla-extract/feed.xml" rel="self" type="application/rss+xml"/>
+      <atom:link href="https://woody-morgan.github.io//tags/vanilla-extract/feed.xml" rel="self" type="application/rss+xml"/>
       
   <item>
-    <guid>https://woodi97.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</guid>
+    <guid>https://woody-morgan.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</guid>
     <title>ColorToken Flattening For Vanilla Extract CSS (feat. Typescript)</title>
-    <link>https://woodi97.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</link>
+    <link>https://woody-morgan.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</link>
     <description>colorToken을 Vanilla Extract Sprinkles에 할당하기 위한 Object Flattening 하기</description>
     <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>vanilla-extract</category><category>javascript</category>
   </item>
 

@@ -1,52 +1,52 @@
 
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>woodi97.github.io</title>
-      <link>https://woodi97.github.io//blog</link>
+      <title>woody-morgan.github.io</title>
+      <link>https://woody-morgan.github.io//blog</link>
       <description>Beyond contentment, greatness</description>
       <language>ko-KR</language>
-      <managingEditor>woodi.daily@gmail.com (woodi97)</managingEditor>
-      <webMaster>woodi.daily@gmail.com (woodi97)</webMaster>
+      <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
+      <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
       <lastBuildDate>Sun, 04 Jun 2023 00:00:00 GMT</lastBuildDate>
-      <atom:link href="https://woodi97.github.io//tags/javascript/feed.xml" rel="self" type="application/rss+xml"/>
+      <atom:link href="https://woody-morgan.github.io//tags/javascript/feed.xml" rel="self" type="application/rss+xml"/>
       
   <item>
-    <guid>https://woodi97.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</guid>
+    <guid>https://woody-morgan.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</guid>
     <title>ColorToken Flattening For Vanilla Extract CSS (feat. Typescript)</title>
-    <link>https://woodi97.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</link>
+    <link>https://woody-morgan.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</link>
     <description>colorToken을 Vanilla Extract Sprinkles에 할당하기 위한 Object Flattening 하기</description>
     <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>vanilla-extract</category><category>javascript</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</guid>
+    <guid>https://woody-morgan.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</guid>
     <title>Implement Reuseable &lt;img/&gt;</title>
-    <link>https://woodi97.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</link>
+    <link>https://woody-morgan.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</link>
     <description>CLS(Cumulative Layout Shift)를 줄이고 렌더링 성능을 개선한 &lt;img/&gt; 컴포넌트 제작기</description>
     <pubDate>Mon, 01 Aug 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>reactjs</category><category>javascript</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/reactjs/making-full-page-scroll-effect</guid>
+    <guid>https://woody-morgan.github.io//blog/reactjs/making-full-page-scroll-effect</guid>
     <title>How to Apply Full Page Scroll Effect</title>
-    <link>https://woodi97.github.io//blog/reactjs/making-full-page-scroll-effect</link>
+    <link>https://woody-morgan.github.io//blog/reactjs/making-full-page-scroll-effect</link>
     <description>Full Page Scroll Effect 만들면서 생긴 이슈들을 정리해보았습니다.</description>
     <pubDate>Sat, 30 Jul 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>reactjs</category><category>nextjs</category><category>javascript</category>
   </item>
 
   <item>
-    <guid>https://woodi97.github.io//blog/javascript/what-is-throttle-debounce</guid>
+    <guid>https://woody-morgan.github.io//blog/javascript/what-is-throttle-debounce</guid>
     <title>What is Throttle &amp; Debounce</title>
-    <link>https://woodi97.github.io//blog/javascript/what-is-throttle-debounce</link>
+    <link>https://woody-morgan.github.io//blog/javascript/what-is-throttle-debounce</link>
     <description>Throttle &amp; Debounce 함수의 역할과 차이점 정리</description>
     <pubDate>Tue, 03 May 2022 00:00:00 GMT</pubDate>
-    <author>woodi.daily@gmail.com (woodi97)</author>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>javascript</category>
   </item>
 
