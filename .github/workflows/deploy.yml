@@ -6,39 +6,37 @@ on:
     - cron: '0 16 * * *'
   workflow_dispatch: # Allows you to manually trigger the workflow
 
+permissions:
+  contents: write
+
 jobs:
-  deploy:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
 
-      - name: Set up Git identity
-        run: |
-          git config --global user.name "morgan-crafts-bot"
-          git config --global user.email "woody.morgan.crafts@gmail.com"
-          git config --global url.https://${{ secrets.GH_TOKEN }}@github.com
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
         with:
-          node-version: '20' # specify the Node.js version
+          version: 8
+          run_install: false
 
-      - name: Cache pnpm modules
-        uses: actions/cache@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
-
-      - name: Install pnpm
-        run: npm install -g pnpm
+          node-version: 20
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Deploy
+      - name: Build 🔧
         run: |
-          pnpm run deploy
+          pnpm run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build # The folder the action should deploy.

@@ -1,8 +1,7 @@
 {
-  "name": "woodi97.github.io",
-  "version": "1.5.0",
-  "private": true,
-  "homepage": "https://woodi97.github.io",
+  "name": "woody-morgan.github.io",
+  "version": "2.0.0",
+  "homepage": "https://woody-morgan.github.io",
   "scripts": {
     "start": "cross-env SOCKET=true node ./scripts/next-remote-watch.js ./data",
     "dev": "next dev",
