@@ -12,7 +12,7 @@
       
   <item>
     <guid>https://woodi97.github.io//blog/retrospect/retrospect-krafton</guid>
-    <title>[회고] 이직을 하며</title>
+    <title>Retrospect - Move to Krafton</title>
     <link>https://woodi97.github.io//blog/retrospect/retrospect-krafton</link>
     <description>retrospect</description>
     <pubDate>Mon, 11 Mar 2024 00:00:00 GMT</pubDate>
@@ -22,7 +22,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</guid>
-    <title>Vanilla Extract CSS를 위한 ColorToken Flattening하기(feat. Typescript)</title>
+    <title>ColorToken Flattening For Vanilla Extract CSS (feat. Typescript)</title>
     <link>https://woodi97.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</link>
     <description>colorToken을 Vanilla Extract Sprinkles에 할당하기 위한 Object Flattening 하기</description>
     <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>
@@ -32,7 +32,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/reactjs/declarative-programming-part2</guid>
-    <title>React로 시작하는 선언적 프로그래밍 Part 2</title>
+    <title>Declarative Programming With React. Part 2</title>
     <link>https://woodi97.github.io//blog/reactjs/declarative-programming-part2</link>
     <description>React Suspense와 Compound Component Pattern으로 알아보는 선언적 프로그래밍(feat. 대수적 효과)</description>
     <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>
@@ -42,7 +42,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/reactjs/declarative-programming-part1</guid>
-    <title>React로 시작하는 선언적 프로그래밍 Part 1</title>
+    <title>Declarative Programming With React. Part 1</title>
     <link>https://woodi97.github.io//blog/reactjs/declarative-programming-part1</link>
     <description>React Suspense와 Compound Component Pattern으로 알아보는 선언적 프로그래밍(feat. 대수적 효과)</description>
     <pubDate>Wed, 31 May 2023 00:00:00 GMT</pubDate>
@@ -102,7 +102,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/reactjs/optimize-script-loading-on-react</guid>
-    <title>Script 태그 onDemand 로딩하기</title>
+    <title>onDemand Loading Script tag in React</title>
     <link>https://woodi97.github.io//blog/reactjs/optimize-script-loading-on-react</link>
     <description>특정 페이지에서만 사용하는 스크립트를 onDemand 로딩하기</description>
     <pubDate>Thu, 13 Oct 2022 00:00:00 GMT</pubDate>
@@ -112,7 +112,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/components/create-native-like-image-slider-component</guid>
-    <title>네이티브 Like 이미지 슬라이더 제작기</title>
+    <title>Create Native App Like Image Slider Component</title>
     <link>https://woodi97.github.io//blog/components/create-native-like-image-slider-component</link>
     <description>네이티브 Like 이미지 슬라이더를 HTML과 Framer-motion으로 제작하는 법</description>
     <pubDate>Wed, 05 Oct 2022 00:00:00 GMT</pubDate>
@@ -122,7 +122,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/nextjs/optimizing-nextjs-application</guid>
-    <title>Next.js 어플리케이션 최적화하기(feat. Vercel)</title>
+    <title>Optimizing Next.js Application(feat. Vercel)</title>
     <link>https://woodi97.github.io//blog/nextjs/optimizing-nextjs-application</link>
     <description>Serverless Function 및 Next Image 태그, SEO 최적화 등 Next.js 어플리케이션 최적화 방법을 알아봅니다.</description>
     <pubDate>Fri, 30 Sep 2022 00:00:00 GMT</pubDate>
@@ -132,7 +132,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/nestjs/deploy-nestjs-application-on-heroku-system</guid>
-    <title>Heroku에 Nest.js 어플리케이션 배포하기</title>
+    <title>Deploy Nestjs Application on Heroku</title>
     <link>https://woodi97.github.io//blog/nestjs/deploy-nestjs-application-on-heroku-system</link>
     <description>Nestjs 어플리케이션을 배포하면서 생긴 문제점을 정리하였습니다</description>
     <pubDate>Sun, 07 Aug 2022 00:00:00 GMT</pubDate>
@@ -142,7 +142,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</guid>
-    <title>개선된 &lt;img/&gt; 컴포넌트 제작기</title>
+    <title>Implement Reuseable &lt;img/&gt;</title>
     <link>https://woodi97.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</link>
     <description>CLS(Cumulative Layout Shift)를 줄이고 렌더링 성능을 개선한 &lt;img/&gt; 컴포넌트 제작기</description>
     <pubDate>Mon, 01 Aug 2022 00:00:00 GMT</pubDate>
@@ -152,7 +152,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/reactjs/making-full-page-scroll-effect</guid>
-    <title>Full Page Scroll Effect 만드는법</title>
+    <title>How to Apply Full Page Scroll Effect</title>
     <link>https://woodi97.github.io//blog/reactjs/making-full-page-scroll-effect</link>
     <description>Full Page Scroll Effect 만들면서 생긴 이슈들을 정리해보았습니다.</description>
     <pubDate>Sat, 30 Jul 2022 00:00:00 GMT</pubDate>
@@ -162,7 +162,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/javascript/what-is-throttle-debounce</guid>
-    <title>Throttle &amp; Debounce 함수의 역할</title>
+    <title>What is Throttle &amp; Debounce</title>
     <link>https://woodi97.github.io//blog/javascript/what-is-throttle-debounce</link>
     <description>Throttle &amp; Debounce 함수의 역할과 차이점 정리</description>
     <pubDate>Tue, 03 May 2022 00:00:00 GMT</pubDate>

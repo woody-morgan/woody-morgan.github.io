@@ -12,7 +12,7 @@
       
   <item>
     <guid>https://woodi97.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</guid>
-    <title>Vanilla Extract CSS를 위한 ColorToken Flattening하기(feat. Typescript)</title>
+    <title>ColorToken Flattening For Vanilla Extract CSS (feat. Typescript)</title>
     <link>https://woodi97.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</link>
     <description>colorToken을 Vanilla Extract Sprinkles에 할당하기 위한 Object Flattening 하기</description>
     <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>
@@ -22,7 +22,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</guid>
-    <title>개선된 &lt;img/&gt; 컴포넌트 제작기</title>
+    <title>Implement Reuseable &lt;img/&gt;</title>
     <link>https://woodi97.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</link>
     <description>CLS(Cumulative Layout Shift)를 줄이고 렌더링 성능을 개선한 &lt;img/&gt; 컴포넌트 제작기</description>
     <pubDate>Mon, 01 Aug 2022 00:00:00 GMT</pubDate>
@@ -32,7 +32,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/reactjs/making-full-page-scroll-effect</guid>
-    <title>Full Page Scroll Effect 만드는법</title>
+    <title>How to Apply Full Page Scroll Effect</title>
     <link>https://woodi97.github.io//blog/reactjs/making-full-page-scroll-effect</link>
     <description>Full Page Scroll Effect 만들면서 생긴 이슈들을 정리해보았습니다.</description>
     <pubDate>Sat, 30 Jul 2022 00:00:00 GMT</pubDate>
@@ -42,7 +42,7 @@
 
   <item>
     <guid>https://woodi97.github.io//blog/javascript/what-is-throttle-debounce</guid>
-    <title>Throttle &amp; Debounce 함수의 역할</title>
+    <title>What is Throttle &amp; Debounce</title>
     <link>https://woodi97.github.io//blog/javascript/what-is-throttle-debounce</link>
     <description>Throttle &amp; Debounce 함수의 역할과 차이점 정리</description>
     <pubDate>Tue, 03 May 2022 00:00:00 GMT</pubDate>

@@ -12,7 +12,7 @@
       
   <item>
     <guid>https://woodi97.github.io//blog/nestjs/deploy-nestjs-application-on-heroku-system</guid>
-    <title>Heroku에 Nest.js 어플리케이션 배포하기</title>
+    <title>Deploy Nestjs Application on Heroku</title>
     <link>https://woodi97.github.io//blog/nestjs/deploy-nestjs-application-on-heroku-system</link>
     <description>Nestjs 어플리케이션을 배포하면서 생긴 문제점을 정리하였습니다</description>
     <pubDate>Sun, 07 Aug 2022 00:00:00 GMT</pubDate>
