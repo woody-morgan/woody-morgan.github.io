@@ -1,0 +1,24 @@
+
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+      <title>woodi97.github.io</title>
+      <link>https://woodi97.github.io//blog</link>
+      <description>Beyond contentment, greatness</description>
+      <language>ko-KR</language>
+      <managingEditor>woodi.daily@gmail.com (woodi97)</managingEditor>
+      <webMaster>woodi.daily@gmail.com (woodi97)</webMaster>
+      <lastBuildDate>Tue, 01 Feb 2022 00:00:00 GMT</lastBuildDate>
+      <atom:link href="https://woodi97.github.io//tags/components/feed.xml" rel="self" type="application/rss+xml"/>
+      
+  <item>
+    <guid>https://woodi97.github.io//blog/project/how-to-make-advent-calendar</guid>
+    <title>How to make Advent Calendar</title>
+    <link>https://woodi97.github.io//blog/project/how-to-make-advent-calendar</link>
+    <description>Introducing React-Dates for Calendar Component</description>
+    <pubDate>Tue, 01 Feb 2022 00:00:00 GMT</pubDate>
+    <author>woodi.daily@gmail.com (woodi97)</author>
+    <category>reactjs</category><category>nextjs</category><category>components</category>
+  </item>
+
+    </channel>
+  </rss>

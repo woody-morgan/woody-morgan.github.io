@@ -1,0 +1,104 @@
+
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+      <title>woodi97.github.io</title>
+      <link>https://woodi97.github.io//blog</link>
+      <description>Beyond contentment, greatness</description>
+      <language>ko-KR</language>
+      <managingEditor>woodi.daily@gmail.com (woodi97)</managingEditor>
+      <webMaster>woodi.daily@gmail.com (woodi97)</webMaster>
+      <lastBuildDate>Sun, 04 Jun 2023 00:00:00 GMT</lastBuildDate>
+      <atom:link href="https://woodi97.github.io//tags/reactjs/feed.xml" rel="self" type="application/rss+xml"/>
+      
+  <item>
+    <guid>https://woodi97.github.io//blog/reactjs/declarative-programming-part2</guid>
+    <title>React로 시작하는 선언적 프로그래밍 Part 2</title>
+    <link>https://woodi97.github.io//blog/reactjs/declarative-programming-part2</link>
+    <description>React Suspense와 Compound Component Pattern으로 알아보는 선언적 프로그래밍(feat. 대수적 효과)</description>
+    <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>
+    <author>woodi.daily@gmail.com (woodi97)</author>
+    <category>declarative</category><category>reactjs</category><category>compound-pattern</category>
+  </item>
+
+  <item>
+    <guid>https://woodi97.github.io//blog/reactjs/declarative-programming-part1</guid>
+    <title>React로 시작하는 선언적 프로그래밍 Part 1</title>
+    <link>https://woodi97.github.io//blog/reactjs/declarative-programming-part1</link>
+    <description>React Suspense와 Compound Component Pattern으로 알아보는 선언적 프로그래밍(feat. 대수적 효과)</description>
+    <pubDate>Wed, 31 May 2023 00:00:00 GMT</pubDate>
+    <author>woodi.daily@gmail.com (woodi97)</author>
+    <category>declarative</category><category>algebraic effect</category><category>reactjs</category><category>suspense</category>
+  </item>
+
+  <item>
+    <guid>https://woodi97.github.io//blog/reactjs/optimize-script-loading-on-react</guid>
+    <title>Script 태그 onDemand 로딩하기</title>
+    <link>https://woodi97.github.io//blog/reactjs/optimize-script-loading-on-react</link>
+    <description>특정 페이지에서만 사용하는 스크립트를 onDemand 로딩하기</description>
+    <pubDate>Thu, 13 Oct 2022 00:00:00 GMT</pubDate>
+    <author>woodi.daily@gmail.com (woodi97)</author>
+    <category>reactjs</category><category>nextjs</category>
+  </item>
+
+  <item>
+    <guid>https://woodi97.github.io//blog/components/create-native-like-image-slider-component</guid>
+    <title>네이티브 Like 이미지 슬라이더 제작기</title>
+    <link>https://woodi97.github.io//blog/components/create-native-like-image-slider-component</link>
+    <description>네이티브 Like 이미지 슬라이더를 HTML과 Framer-motion으로 제작하는 법</description>
+    <pubDate>Wed, 05 Oct 2022 00:00:00 GMT</pubDate>
+    <author>woodi.daily@gmail.com (woodi97)</author>
+    <category>reactjs</category><category>nextjs</category><category>animation</category>
+  </item>
+
+  <item>
+    <guid>https://woodi97.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</guid>
+    <title>개선된 &lt;img/&gt; 컴포넌트 제작기</title>
+    <link>https://woodi97.github.io//blog/reactjs/implement-reflow-prevented-lazy-loading-image-component</link>
+    <description>CLS(Cumulative Layout Shift)를 줄이고 렌더링 성능을 개선한 &lt;img/&gt; 컴포넌트 제작기</description>
+    <pubDate>Mon, 01 Aug 2022 00:00:00 GMT</pubDate>
+    <author>woodi.daily@gmail.com (woodi97)</author>
+    <category>reactjs</category><category>javascript</category>
+  </item>
+
+  <item>
+    <guid>https://woodi97.github.io//blog/reactjs/making-full-page-scroll-effect</guid>
+    <title>Full Page Scroll Effect 만드는법</title>
+    <link>https://woodi97.github.io//blog/reactjs/making-full-page-scroll-effect</link>
+    <description>Full Page Scroll Effect 만들면서 생긴 이슈들을 정리해보았습니다.</description>
+    <pubDate>Sat, 30 Jul 2022 00:00:00 GMT</pubDate>
+    <author>woodi.daily@gmail.com (woodi97)</author>
+    <category>reactjs</category><category>nextjs</category><category>javascript</category>
+  </item>
+
+  <item>
+    <guid>https://woodi97.github.io//blog/reactjs/pagetransition-animation-using-framer-motion</guid>
+    <title>PageTransition Animation using Framer Motion</title>
+    <link>https://woodi97.github.io//blog/reactjs/pagetransition-animation-using-framer-motion</link>
+    <description>Guide to apply pagetransition animation using framer-motion</description>
+    <pubDate>Tue, 01 Mar 2022 00:00:00 GMT</pubDate>
+    <author>woodi.daily@gmail.com (woodi97)</author>
+    <category>reactjs</category><category>nextjs</category><category>animation</category>
+  </item>
+
+  <item>
+    <guid>https://woodi97.github.io//blog/reactjs/ways-to-optimize-your-nextjs-application</guid>
+    <title>Ways to Optimize your React/Nextjs Application</title>
+    <link>https://woodi97.github.io//blog/reactjs/ways-to-optimize-your-nextjs-application</link>
+    <description>apply tree-shaking &amp; constate on my app</description>
+    <pubDate>Mon, 07 Feb 2022 00:00:00 GMT</pubDate>
+    <author>woodi.daily@gmail.com (woodi97)</author>
+    <category>reactjs</category><category>nextjs</category><category>optimization</category>
+  </item>
+
+  <item>
+    <guid>https://woodi97.github.io//blog/project/how-to-make-advent-calendar</guid>
+    <title>How to make Advent Calendar</title>
+    <link>https://woodi97.github.io//blog/project/how-to-make-advent-calendar</link>
+    <description>Introducing React-Dates for Calendar Component</description>
+    <pubDate>Tue, 01 Feb 2022 00:00:00 GMT</pubDate>
+    <author>woodi.daily@gmail.com (woodi97)</author>
+    <category>reactjs</category><category>nextjs</category><category>components</category>
+  </item>
+
+    </channel>
+  </rss>
