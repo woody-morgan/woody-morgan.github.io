@@ -11,9 +11,9 @@
       <atom:link href="https://woody-morgan.github.io//tags/algebraic-effect/feed.xml" rel="self" type="application/rss+xml"/>
       
   <item>
-    <guid>https://woody-morgan.github.io//blog/reactjs/declarative-programming-part1</guid>
+    <guid>https://woody-morgan.github.io//blog/project/declarative-programming-part1</guid>
     <title>Declarative Programming With React. Part 1</title>
-    <link>https://woody-morgan.github.io//blog/reactjs/declarative-programming-part1</link>
+    <link>https://woody-morgan.github.io//blog/project/declarative-programming-part1</link>
     <description>React Suspense와 Compound Component Pattern으로 알아보는 선언적 프로그래밍(feat. 대수적 효과)</description>
     <pubDate>Wed, 31 May 2023 00:00:00 GMT</pubDate>
     <author>woody.morgan.crafts@gmail.com (woody morgan)</author>

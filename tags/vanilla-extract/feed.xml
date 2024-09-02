@@ -11,9 +11,9 @@
       <atom:link href="https://woody-morgan.github.io//tags/vanilla-extract/feed.xml" rel="self" type="application/rss+xml"/>
       
   <item>
-    <guid>https://woody-morgan.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</guid>
+    <guid>https://woody-morgan.github.io//blog/core/flat-color-token-object-for-vanilla-extract</guid>
     <title>ColorToken Flattening For Vanilla Extract CSS (feat. Typescript)</title>
-    <link>https://woody-morgan.github.io//blog/javascript/flat-color-token-object-for-vanilla-extract</link>
+    <link>https://woody-morgan.github.io//blog/core/flat-color-token-object-for-vanilla-extract</link>
     <description>colorToken을 Vanilla Extract Sprinkles에 할당하기 위한 Object Flattening 하기</description>
     <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>
     <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
