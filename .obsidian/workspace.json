@@ -13,13 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/translation/graphql-queries-for-interactions.mdx",
+                "file": "data/legacy/algorithm/algorithm-tips-bitmasking.mdx",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d0d24040e1e0f58f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "data/blog/draft/what-closure-mean-in-a-language-with-1stclass-functions.mdx",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/translation/graphql-queries-for-interactions.mdx",
+                "file": "data/blog/draft/what-closure-mean-in-a-language-with-1stclass-functions.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/translation/graphql-queries-for-interactions.mdx",
+                "file": "data/blog/draft/what-closure-mean-in-a-language-with-1stclass-functions.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/translation/graphql-queries-for-interactions.mdx"
+                "file": "data/blog/draft/what-closure-mean-in-a-language-with-1stclass-functions.mdx"
               }
             }
           }
@@ -150,19 +163,19 @@
       "publish:Publish changes...": false
     }
   },
-  "active": "67cfe87703c02881",
+  "active": "d0d24040e1e0f58f",
   "lastOpenFiles": [
-    "data/blog/mandate-and-responsibility.mdx",
-    "data/blog/translation/graphql-queries-for-interactions.mdx",
-    "data/blog/translation/graphql-queries.mdx",
-    "data/blog/translation/graphql-mutations.mdx",
-    "data/blog/translation/graphql-connections-n-pagination.mdx",
-    "data/blog/translation/graphql-arrays-n-lists.mdx",
-    "data/blog/translation/golang-code-convention.mdx",
-    "data/blog/retrospect/retrospect-2024-start.mdx",
-    "data/blog/retrospect/retrospect-krafton.mdx",
-    "data/blog/retrospect/retrospect-2024-half.mdx",
-    "data/blog/retrospect/regret-form-implementation.mdx",
+    "data/blog/draft/what-is-atomic-design-for-me.mdx",
+    "data/blog/draft/useful-blogs-for-web-dev.mdx",
+    "data/blog/draft/tips-for-react.mdx",
+    "data/legacy/algorithm/thinking-about-algorithm-using-c.mdx",
+    "data/blog/draft/things-to-watch-out-when-using-nextjs.mdx",
+    "data/blog/draft/react-index-as-a-key.mdx",
+    "data/blog/draft/solution-for-problems-while-happened-on-with-you-project.mdx",
+    "data/blog/draft/polymorphism-for-react.mdx",
+    "data/blog/draft/parse-dont-validate.mdx",
+    "data/blog/draft/improve-ux.mdx",
+    "data/blog/draft/improve-dx.mdx",
     "draft/Program Tip 2024-08-16.md",
     "draft/Today I Learn/2024-08-16.md",
     "draft/Today I Learn/TIL 2024-08-16.md",
