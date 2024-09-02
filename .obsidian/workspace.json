@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/series/good-fe-engineer/become-good-fe-engineer-00.mdx",
+                "file": "data/blog/series/good-fe-engineer/become-good-fe-engineer-01.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/series/good-fe-engineer/become-good-fe-engineer-00.mdx",
+                "file": "data/blog/series/good-fe-engineer/become-good-fe-engineer-01.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/series/good-fe-engineer/become-good-fe-engineer-00.mdx",
+                "file": "data/blog/series/good-fe-engineer/become-good-fe-engineer-01.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/series/good-fe-engineer/become-good-fe-engineer-00.mdx"
+                "file": "data/blog/series/good-fe-engineer/become-good-fe-engineer-01.mdx"
               }
             }
           }
@@ -165,8 +165,8 @@
   },
   "active": "d0d24040e1e0f58f",
   "lastOpenFiles": [
-    "data/blog/series/good-fe-engineer/become-good-fe-engineer-01.mdx",
     "data/blog/series/good-fe-engineer/become-good-fe-engineer-00.mdx",
+    "data/blog/series/good-fe-engineer/become-good-fe-engineer-01.mdx",
     "data/blog/series/engineer-as-frontend-ops/engineer-as-frontend-ops-00.mdx",
     "data/blog/series/engineer-as-frontend-ops",
     "2023-05-31.md",
