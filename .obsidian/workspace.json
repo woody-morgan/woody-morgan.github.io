@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/draft/what-closure-mean-in-a-language-with-1stclass-functions.mdx",
+                "file": "data/blog/series/good-fe-engineer/become-good-fe-engineer-01.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/draft/what-closure-mean-in-a-language-with-1stclass-functions.mdx",
+                "file": "data/blog/series/good-fe-engineer/become-good-fe-engineer-01.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/draft/what-closure-mean-in-a-language-with-1stclass-functions.mdx",
+                "file": "data/blog/series/good-fe-engineer/become-good-fe-engineer-01.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/draft/what-closure-mean-in-a-language-with-1stclass-functions.mdx"
+                "file": "data/blog/series/good-fe-engineer/become-good-fe-engineer-01.mdx"
               }
             }
           }
@@ -165,17 +165,17 @@
   },
   "active": "d0d24040e1e0f58f",
   "lastOpenFiles": [
+    "2023-05-31.md",
+    "data/blog/series/good-fe-engineer/become-good-fe-engineer-01.mdx",
+    "data/blog/project/declarative-programming-part1.mdx",
+    "data/blog/draft/what-closure-mean-in-a-language-with-1stclass-functions.mdx",
+    "data/blog/series/good-fe-engineer",
+    "data/blog/series",
+    "Untitled",
+    "data/blog/frontend",
     "data/blog/draft/what-is-atomic-design-for-me.mdx",
     "data/blog/draft/useful-blogs-for-web-dev.mdx",
     "data/blog/draft/tips-for-react.mdx",
-    "data/legacy/algorithm/thinking-about-algorithm-using-c.mdx",
-    "data/blog/draft/things-to-watch-out-when-using-nextjs.mdx",
-    "data/blog/draft/react-index-as-a-key.mdx",
-    "data/blog/draft/solution-for-problems-while-happened-on-with-you-project.mdx",
-    "data/blog/draft/polymorphism-for-react.mdx",
-    "data/blog/draft/parse-dont-validate.mdx",
-    "data/blog/draft/improve-ux.mdx",
-    "data/blog/draft/improve-dx.mdx",
     "draft/Program Tip 2024-08-16.md",
     "draft/Today I Learn/2024-08-16.md",
     "draft/Today I Learn/TIL 2024-08-16.md",
