@@ -1,0 +1,170 @@
+---
+title: 내부 배포 서비스 만든 후기
+date: 2022-09-30
+tags:
+  - frontend-ops
+draft: true
+summary: Serverless Function 및 Next Image 태그, SEO 최적화 등 Next.js 어플리케이션 최적화 방법을 알아봅니다.
+images: 
+layout: PostLayout
+---
+
+<TOCInline toc={props.toc} exclude={'Intro'} asDisclosure />
+
+## Intro
+
+현재 소프트웨어 마에스트로 프로그램에서 진행하고 있는 육아 서비스 어플리케이션을 개발하고 있다.
+개발하면서 Next.js를 사용하고 있는데, 이번 프로젝트를 성능(Lighthouse에서 평가해주는 성능들, 예를 들면 SEO, Accessibility 등)을 높이기 위해 어떤 방법들을 사용했는지 정리해보려고 한다.
+또한 현재 프로젝트 CI/CD를 Vercel로 진행하고 있기 때문에 Vercel에서 제공하는 Serverless Function 호출 위치 변경을 통한 SSR 최적화 방법도 함께 정리해보려고 한다.
+
+## 최적화하기
+
+### 1. Next Image 태그 사용하기
+
+VanillaJS나 React 프로젝트에서 이미지를 불러올 때 보통 img 태그를 사용한다.
+이 `<img />` 태그는 브라우저 버전에 따라 다르지면, 크롬 기준 자체적으로 Lazy Loading을 지원한다.
+하지만 이 `Lazy Loading`은 필요한 리소스가 전부 로딩이 되기 전에 DOM 렌더링을 허용하여 하얀창이 수십초 동안 보이는 현상을 막는 `낮은` 수준의 Lazy Loading이다.
+즉 `Intersection Oberserver API`를 이용해 유저의 브라우저에 이미지가 보이는지 안보이는지 판단하여 리소스를 로딩하는 `높은` 수준의 Lazy Loading은 지원하지 않는다.
+
+이 부분을 직접 React를 이용해 구현하려면 Intersection Oberserver API를 이용하는게 가장 쉬운데, 그럼에도 FE 개발에 익숙하지 않은 개발자가 이 부분을 구현하기에는 어려울 수 있다.
+( [개선된 img태그 구현하기](https://woodi97.github.io/blog/reactjs/implement-reflow-prevented-lazy-loading-image-component)를 참고하면 구현할 수 있습니다 :) )
+
+그래서 Next.js에서는 이 부분을 `<Image />` 태그로 제공하고 있다. 이 태그는 `Intersection Oberserver API`를 이용해 높은 수준의 Lazy Loading을 지원하고 있다.
+게다가 이 태그는 Cloudinary 등의 이미지 호스팅 서비스(CDN)와 연동하여 사용할 수 있다. next.config.js에 간단히 설정만 하면 전세계에 CDN을 통해
+이미지 리소스 전달을 최적화 할 수 있는 것이다. 사용법은 아래와 같다.
+
+```tsx
+import Image from 'next/image'
+
+export default function Home() {
+  return (
+    <div>
+      <Image src="/images/profile.jpg" alt="Picture of the author" width={500} height={500} />
+    </div>
+  )
+}
+```
+
+자세하게 설명하기에는 기능이 너무 많아서 간단하게 설명하자면, layout 속성을 통해 responsive, static, fill, fixed, intrinsic 등의 이미지 레이아웃을 지원하고 있다.
+이 부분을 자세히 설명하면 너무 길어지기 때문에 [공식문서](https://nextjs.org/docs/api-reference/next/image)를 참고하면 좋을 것 같다.
+
+참고로 본인은 ImageWrapper라는 Wrapping Component를 만들어서 추후 기능추가를 고려해서 사용하고 있다.
+
+```tsx
+import classNames from 'classnames'
+import NextImage, { ImageProps } from 'next/image'
+import { Fragment } from 'react'
+
+type CustomImageType = {
+  bgFilter?: string
+}
+
+/**
+ * @param {string} bgFilter - pass bgFilter to add filter to image(parent should be relative)
+ * @example 'bg-gradient-to-r from-gray-500/10 to-gray-500/50'
+ */
+const Image = ({ bgFilter, ...rest }: ImageProps & CustomImageType) => (
+  <div className="relative">
+    <div
+      className={bgFilter ? classNames('absolute top-0 left-0 z-10 h-full w-full', bgFilter) : ''}
+    />
+    <NextImage {...rest} />
+  </div>
+)
+
+export default Image
+```
+
+이렇게 Wrapping Component를 만들어서 사용하면 추후에 기능을 추가할 때 편리하다.(위 코드는 tailwindCSS를 사용하여 bgFilter 속성을 추가한 코드이다.)
+
+### 2. SEO 최적화하기
+
+React에서는 react-helmet 라이브러리를 설치해서 SEO 최적화를 해야한다. 하지만 Next.js는 기본적으로 next/head 라이브러리를 제공하고 있어서 별도의 설치가 필요없다.
+이 라이브러리를 사용하면 title, meta, link, og tag 등을 쉽게 `페이지마다 동적으로 설정`할 수 있다. 아래 PageSEO 컴포넌트를 만들어서 공통적으로 사용되는 SEO 관련 태그를
+관리하면서 사용하고 있다. 아래 코드를 그대로 복사/붙여넣기 해서 사용해도 된다.
+
+```tsx
+import siteMetadata from '@src/core/config/siteMetadata'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+
+interface CommonSEOProps {
+  title: string
+  description: string
+  ogType: string
+  ogImage:
+    | string
+    | {
+        '@type': string
+        url: string
+      }[]
+}
+
+const CommonSEO = ({ title, description, ogType, ogImage }: CommonSEOProps) => {
+  const router = useRouter()
+  return (
+    <Head>
+      <title>{title}</title>
+      <meta name="robots" content="follow, index" />
+      <meta name="description" content={description} />
+      <meta property="og:url" content={`${siteMetadata.siteUrl}${router.asPath}`} />
+      <meta property="og:type" content={ogType} />
+      <meta property="og:site_name" content={siteMetadata.title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:title" content={title} />
+      {Array.isArray(ogImage) ? (
+        ogImage.map(({ url }) => <meta property="og:image" content={url} key={url} />)
+      ) : (
+        <meta property="og:image" content={ogImage} key={ogImage} />
+      )}
+    </Head>
+  )
+}
+
+interface PageSEOProps {
+  title: string
+  description: string
+}
+
+export const PageSEO = ({ title, description }: PageSEOProps) => {
+  const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
+  return <CommonSEO title={title} description={description} ogType="website" ogImage={ogImageUrl} />
+}
+```
+
+![카톡공유](https://d.pr/i/BHsRcm.png)
+![Lighthouse SEO 점수](https://d.pr/i/r2821M.png)
+
+위 컴포넌트에 데이터를 적절히 넣어서 사용하면 위와 같이 카카오톡 채팅방에 URL을 공유하면 아래와 같이 썸네일이 나오는 것을 확인할 수 있다.
+또한 Lighthouse에서 SEO 점수도 90점 이상으로 나오는 것을 확인할 수 있다. 특히 이 LightHouse 점수가 중요한 이유가 Google 검색결과에서
+페이지 순위를 결정하는 요소 중 하나가 SEO 점수이기 때문이다. 혹 본인의 사이트가 좀 더 높은 순위로 노출되고 싶다면 위의 컴포넌트를 적절히 사용했으면 좋겠다.
+
+### 3. Serverless Function 호출 위치 변경하기(Feat. Vercel)
+
+Next.js 프로젝트를 Vercel에 배포하면 Next/Image Tag, getStaticProps, getServerSideProps 등의 함수들은 자동으로 Serverless Function으로 배포된다.
+이렇게 배포된 Serverless Function은 Vercel에서 제공하는 서버를 통해 호출되는데, 이 서버는 기본적으로 San Francisco에 위치하고 있다.
+
+즉 한국에서 한 사용자가 서비스 페이지를 요청하면(Serverside에서 호출되는 함수가 있고, 서비스 서버가 한국에 있다고 가정)
+
+1. Vercel 미국 서버에서 한국으로 api 전송 및 응답 (미국 -> 한국 -> 미국)
+2. 받은 응답을 이용해 페이지 렌더링(SSR)후 클라이언트 브라우저로 전송 (미국 -> 한국)
+3. 클라이언트 브라우저에서 페이지 렌더링 (한국)
+4. 페이지에서 필요한 리소스 및 api 호출 및 응답 (한국 -> 한국 -> 한국, 리소스는 요청하는 이미지에 따라 다름)
+
+이렇게 긴 RTT를 거치게 되고 2번이나 미국에 요청을 보내기 때문에 느려지는 것이다. 실제로 With You 서비스를 개발하면서
+Authorization이 필요한 페이지간 이동을 하면, 1s 이상의 지연이 발생하는 것을 확인할 수 있었다. 문제를 해결하기 위해
+정말 많은 Network탭 분석을 했는데, 결국 Vercel에서 제공하는 Serverless Function 호출 위치를 한국으로 변경하면 해결할 수 있었다.
+
+변경하는 방법은 간단하다. Vercel에 배포된 프로젝트의 Settings에서 Serverless Function Region을 변경하면 된다.
+
+이렇게 변경하면 Serverless Function 호출 위치가 한국으로 변경되고, 한국과 한국 사이의 통신은 못해도 0.1ms 이하의 RTT를 가지게 된다.(물론 상황에 따라 다르다)
+변경 후 With You 서비스의 페이지간 이동 지연이 1s 이상에서 100ms 이하로 줄어들었다.(사실 그보다 더 줄어들었다.) 만약 Vercel 배포후 이상하게 느리다면
+꼭 Serverless Function Region을 한국으로 변경해보자.
+
+
+
+
+## 결론
+
+이렇게 최적화를 고민한다면 누구나 충분히 쾌적하고 검색엔진 상단에 노출되는 서비스를 만들 수 있다. 물론 이 글에서 다루지 않은 부분도 많고, 더 최적화할 수 있는 부분도 많다.
+특히 Sitemap을 만드는 것도 중요한데, 이 부분은 아직 깊게 알지 못해서 다음에 다루도록 하겠다.
