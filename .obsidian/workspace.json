@@ -11,8 +11,12 @@
             "id": "fa42f62b3ffefbbf",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "data/blog/translation/graphql-queries-for-interactions.mdx",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "data/blog/translation/graphql-queries-for-interactions.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "data/blog/translation/graphql-queries-for-interactions.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "data/blog/translation/graphql-queries-for-interactions.mdx"
+              }
             }
           }
         ]
@@ -144,20 +152,23 @@
   },
   "active": "67cfe87703c02881",
   "lastOpenFiles": [
+    "data/blog/mandate-and-responsibility.mdx",
+    "data/blog/translation/graphql-queries-for-interactions.mdx",
+    "data/blog/translation/graphql-queries.mdx",
+    "data/blog/translation/graphql-mutations.mdx",
+    "data/blog/translation/graphql-connections-n-pagination.mdx",
+    "data/blog/translation/graphql-arrays-n-lists.mdx",
+    "data/blog/translation/golang-code-convention.mdx",
+    "data/blog/retrospect/retrospect-2024-start.mdx",
+    "data/blog/retrospect/retrospect-krafton.mdx",
+    "data/blog/retrospect/retrospect-2024-half.mdx",
+    "data/blog/retrospect/regret-form-implementation.mdx",
     "draft/Program Tip 2024-08-16.md",
     "draft/Today I Learn/2024-08-16.md",
     "draft/Today I Learn/TIL 2024-08-16.md",
-    "draft/Today I Learn",
-    "draft/Untitled",
     "draft/TIL 2024-08-16.md",
     "draft/Untitled.md",
     "draft/Tip 2024-08-16.md",
-    "draft",
-    "data/legacy/university/senior/network/network-app-design-course-lecture-1-1.mdx",
-    "data/legacy/university/senior/network/network-app-design-course-lecture-1-2.mdx",
-    "data/legacy/university/senior/network",
-    "data/legacy/university/senior",
-    "data/legacy/university",
     "public/static/images/proj/advent/toast-ui-calendar.png",
     "public/static/images/proj/advent/react-dates.gif",
     "public/static/images/proj/advent/advent-modal.png",
@@ -168,8 +179,6 @@
     "public/static/images/proj/with-you.png",
     "public/static/images/proj/surrounds.png",
     "public/static/images/proj/study-cafe.png",
-    "public/static/images/proj/advent",
-    "public/static/images/proj",
     "data/authors/sparrowhawk.md",
     "README.md",
     "README 2.md",
