@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/draft/algorithm-cpp-basics-01.mdx",
+                "file": "data/blog/2024-draft/copy-and-paste-development.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "data/blog/draft/algorithm-cpp-basics-01.mdx",
+            "file": "data/blog/2024-draft/copy-and-paste-development.mdx",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
         "state": {
           "type": "outgoing-link",
           "state": {
-            "file": "data/blog/draft/algorithm-cpp-basics-01.mdx",
+            "file": "data/blog/2024-draft/copy-and-paste-development.mdx",
             "linksCollapsed": false,
             "unlinkedCollapsed": true
           }
@@ -114,7 +114,7 @@
         "state": {
           "type": "outline",
           "state": {
-            "file": "data/blog/draft/algorithm-cpp-basics-01.mdx"
+            "file": "data/blog/2024-draft/copy-and-paste-development.mdx"
           }
         }
       }
