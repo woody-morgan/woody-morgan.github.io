@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/2024-draft/fundamental-of-programming.mdx",
+                "file": "data/todo/Translation - data first data last.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/2024-draft/fundamental-of-programming.mdx",
+                "file": "data/todo/Translation - data first data last.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/2024-draft/fundamental-of-programming.mdx",
+                "file": "data/todo/Translation - data first data last.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/2024-draft/fundamental-of-programming.mdx"
+                "file": "data/todo/Translation - data first data last.md"
               }
             }
           }
@@ -152,8 +152,10 @@
   },
   "active": "fa42f62b3ffefbbf",
   "lastOpenFiles": [
-    "data/blog/2024-draft/copy-and-paste-development.mdx",
     "data/blog/2024-draft/fundamental-of-programming.mdx",
+    "data/todo/Translation - data first data last.md",
+    "data/todo",
+    "data/blog/2024-draft/copy-and-paste-development.mdx",
     "data/blog/2024-draft",
     "data/blog/2023-draft/automation-for-svg.mdx",
     "data/authors/sparrowhawk.md",
@@ -163,8 +165,6 @@
     "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
     "data/blog/engineer-as-frontend-ops/engineer-as-frontend-ops-00.mdx",
     "data/blog/frontend/optimizing-nextjs-application.mdx",
-    "data/legacy/algorithm/algorithm-tips-bitmasking.mdx",
-    "data/blog/project/implement-reflow-prevented-lazy-loading-image-component.mdx",
     "2023-05-31.md",
     "draft/Program Tip 2024-08-16.md",
     "draft/Today I Learn/2024-08-16.md",
