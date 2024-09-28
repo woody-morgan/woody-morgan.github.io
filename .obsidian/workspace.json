@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/2024-draft/retrospect-rescript.mdx",
+                "file": "data/blog/2024-draft/Parse, don't validate.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/2024-draft/retrospect-rescript.mdx",
+                "file": "data/blog/2024-draft/Parse, don't validate.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/2024-draft/retrospect-rescript.mdx",
+                "file": "data/blog/2024-draft/Parse, don't validate.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/2024-draft/retrospect-rescript.mdx"
+                "file": "data/blog/2024-draft/Parse, don't validate.mdx"
               }
             }
           }
@@ -152,8 +152,9 @@
   },
   "active": "fa42f62b3ffefbbf",
   "lastOpenFiles": [
-    "data/blog/2024-draft/everything-that-improve-type-safety.mdx",
     "data/blog/2024-draft/retrospect-rescript.mdx",
+    "data/blog/2024-draft/Parse, don't validate.mdx",
+    "data/blog/2024-draft/everything-that-improve-type-safety.mdx",
     "data/blog/2024-draft/copy-and-paste-development.mdx",
     "data/todo/Translation - data first data last.md",
     "data/blog/2024-draft/fundamental-of-programming.mdx",
@@ -165,7 +166,6 @@
     "data/legacy/github-markdown-guide.mdx",
     "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
     "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
-    "data/blog/engineer-as-frontend-ops/engineer-as-frontend-ops-00.mdx",
     "2023-05-31.md",
     "draft/Program Tip 2024-08-16.md",
     "draft/Today I Learn/2024-08-16.md",
