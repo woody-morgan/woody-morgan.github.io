@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/2024-draft/Thinking about fundamental.mdx",
+                "file": "data/blog/2024-draft/**Thinking about fundamental.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/2024-draft/Thinking about fundamental.mdx",
+                "file": "data/blog/2024-draft/**Thinking about fundamental.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/2024-draft/Thinking about fundamental.mdx",
+                "file": "data/blog/2024-draft/**Thinking about fundamental.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/2024-draft/Thinking about fundamental.mdx"
+                "file": "data/blog/2024-draft/**Thinking about fundamental.mdx"
               }
             }
           }
@@ -153,7 +153,7 @@
   "active": "fa42f62b3ffefbbf",
   "lastOpenFiles": [
     "data/blog/2024-draft/Parse, don't validate.mdx",
-    "data/blog/2024-draft/Thinking about fundamental.mdx",
+    "data/blog/2024-draft/**Thinking about fundamental.mdx",
     "data/blog/2024-draft/retrospect-rescript.mdx",
     "data/blog/2024-draft/everything-that-improve-type-safety.mdx",
     "data/blog/2024-draft/copy-and-paste-development.mdx",
