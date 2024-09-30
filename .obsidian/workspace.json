@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/2024-draft/patterns for solving problem.mdx",
+                "file": "data/blog/2024-draft/dive into zod.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -65,7 +65,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -85,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/2024-draft/patterns for solving problem.mdx",
+                "file": "data/blog/2024-draft/dive into zod.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/2024-draft/patterns for solving problem.mdx",
+                "file": "data/blog/2024-draft/dive into zod.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/2024-draft/patterns for solving problem.mdx"
+                "file": "data/blog/2024-draft/dive into zod.mdx"
               }
             }
           }
@@ -150,20 +151,20 @@
       "publish:Publish changes...": false
     }
   },
-  "active": "fa42f62b3ffefbbf",
+  "active": "9513fb1e4d8ee750",
   "lastOpenFiles": [
+    "data/blog/2024-draft/everything-that-improve-type-safety.mdx",
+    "data/blog/2024-draft/dive into zod.mdx",
+    "data/blog/2024-draft/fundamental-of-programming.mdx",
+    "data/blog/2024-draft/retrospect-rescript.mdx",
     "data/blog/2024-draft/rethinking about of course things.mdx",
     "data/blog/2024-draft/patterns for solving problem.mdx",
     "data/blog/2024-draft/**thinking about fundamental.mdx",
     "data/blog/2024-draft/Parse, don't validate.mdx",
-    "data/blog/2024-draft/retrospect-rescript.mdx",
-    "data/blog/2024-draft/everything-that-improve-type-safety.mdx",
     "data/blog/2024-draft/copy-and-paste-development.mdx",
     "data/todo/Translation - data first data last.md",
-    "data/blog/2024-draft/fundamental-of-programming.mdx",
     "data/todo",
     "data/blog/2024-draft",
-    "data/blog/2023-draft/automation-for-svg.mdx",
     "data/authors/sparrowhawk.md",
     "data/blog/draft/2024-09-11.md",
     "2023-05-31.md",
