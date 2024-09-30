@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "791168811117c317",
+        "id": "6a71634604aba7ef",
         "type": "tabs",
         "children": [
           {
-            "id": "fa42f62b3ffefbbf",
+            "id": "2c158b82e8f8e84e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "data/blog/2024-draft/rethinking about of course things.mdx",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
