@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/2024-draft/dive into zod.mdx",
+                "file": "data/blog/2024-draft/rethinking about of course things.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/2024-draft/dive into zod.mdx",
+                "file": "data/blog/2024-draft/rethinking about of course things.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/2024-draft/dive into zod.mdx",
+                "file": "data/blog/2024-draft/rethinking about of course things.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/2024-draft/dive into zod.mdx"
+                "file": "data/blog/2024-draft/rethinking about of course things.mdx"
               }
             }
           }
@@ -153,14 +153,14 @@
   },
   "active": "9513fb1e4d8ee750",
   "lastOpenFiles": [
-    "data/blog/2024-draft/everything-that-improve-type-safety.mdx",
-    "data/blog/2024-draft/dive into zod.mdx",
-    "data/blog/2024-draft/fundamental-of-programming.mdx",
     "data/blog/2024-draft/retrospect-rescript.mdx",
-    "data/blog/2024-draft/rethinking about of course things.mdx",
     "data/blog/2024-draft/patterns for solving problem.mdx",
-    "data/blog/2024-draft/**thinking about fundamental.mdx",
     "data/blog/2024-draft/Parse, don't validate.mdx",
+    "data/blog/2024-draft/**thinking about fundamental.mdx",
+    "data/blog/2024-draft/dive into zod.mdx",
+    "data/blog/2024-draft/everything-that-improve-type-safety.mdx",
+    "data/blog/2024-draft/fundamental-of-programming.mdx",
+    "data/blog/2024-draft/rethinking about of course things.mdx",
     "data/blog/2024-draft/copy-and-paste-development.mdx",
     "data/todo/Translation - data first data last.md",
     "data/todo",
