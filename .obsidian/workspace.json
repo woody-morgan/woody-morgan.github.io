@@ -11,8 +11,12 @@
             "id": "2c158b82e8f8e84e",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "data/blog/2024-draft/**thinking about fundamental.mdx",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -61,8 +65,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
@@ -82,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/2024-draft/rethinking about of course things.mdx",
+                "file": "data/blog/2024-draft/**thinking about fundamental.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/2024-draft/rethinking about of course things.mdx",
+                "file": "data/blog/2024-draft/**thinking about fundamental.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -122,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/2024-draft/rethinking about of course things.mdx"
+                "file": "data/blog/2024-draft/**thinking about fundamental.mdx"
               }
             }
           }
@@ -147,8 +150,10 @@
       "publish:Publish changes...": false
     }
   },
-  "active": "9513fb1e4d8ee750",
+  "active": "2c158b82e8f8e84e",
   "lastOpenFiles": [
+    "2024-10-07.md",
+    "Untitled.canvas",
     "data/blog/2024-draft/retrospect-rescript.mdx",
     "data/blog/2024-draft/patterns for solving problem.mdx",
     "data/blog/2024-draft/Parse, don't validate.mdx",
@@ -160,7 +165,6 @@
     "data/blog/2024-draft/copy-and-paste-development.mdx",
     "data/todo/Translation - data first data last.md",
     "data/todo",
-    "data/blog/2024-draft",
     "data/authors/sparrowhawk.md",
     "data/blog/draft/2024-09-11.md",
     "2023-05-31.md",
