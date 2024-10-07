@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "8aac8b6a0abd6a6f",
+        "id": "686edf16aa748145",
         "type": "tabs",
         "children": [
           {
-            "id": "06094ea476b83663",
+            "id": "1e359d6798f1ec0f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "data/blog/2024-draft/thinking about fundamental.mdx",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/2024-draft/thinking about fundamental.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/2024-draft/thinking about fundamental.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "data/blog/2024-draft/thinking about fundamental.mdx"
-              }
+              "state": {}
             }
           }
         ]
@@ -150,14 +142,17 @@
       "publish:Publish changes...": false
     }
   },
-  "active": "67cfe87703c02881",
+  "active": "1e359d6798f1ec0f",
   "lastOpenFiles": [
+    "data/logo.svg",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
+    "2024-09-02.md",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
+    "data/blog/retrospect/thinking about fundamental.mdx",
+    "data/blog/retrospect/retrospect-2024-start.mdx",
     "data/blog/2024",
     "2024-03-10.md",
-    "data/blog/2024-draft/thinking about fundamental.mdx",
     "data/blog/engineer-as-frontend-ops/engineer-as-frontend-ops-00.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
     "data/blog/frontend/optimizing-nextjs-application.mdx",
     "README.md",
     "2024-10-07.md",
@@ -165,8 +160,6 @@
     "data/blog/2024-draft/retrospect-rescript.mdx",
     "data/blog/2024-draft/patterns for solving problem.mdx",
     "data/blog/2024-draft/Parse, don't validate.mdx",
-    "data/blog/2024-draft/dive into zod.mdx",
-    "data/blog/2024-draft/everything-that-improve-type-safety.mdx",
     "data/todo/Translation - data first data last.md",
     "data/authors/sparrowhawk.md",
     "data/blog/draft/2024-09-11.md",
