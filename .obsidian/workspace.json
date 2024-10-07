@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/2024-draft/**thinking about fundamental.mdx",
+                "file": "data/blog/2024-draft/thinking about fundamental.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/2024-draft/**thinking about fundamental.mdx",
+                "file": "data/blog/2024-draft/thinking about fundamental.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/2024-draft/**thinking about fundamental.mdx",
+                "file": "data/blog/2024-draft/thinking about fundamental.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/2024-draft/**thinking about fundamental.mdx"
+                "file": "data/blog/2024-draft/thinking about fundamental.mdx"
               }
             }
           }
@@ -150,10 +150,11 @@
       "publish:Publish changes...": false
     }
   },
-  "active": "06094ea476b83663",
+  "active": "67cfe87703c02881",
   "lastOpenFiles": [
+    "data/blog/2024",
     "2024-03-10.md",
-    "data/blog/2024-draft/**thinking about fundamental.mdx",
+    "data/blog/2024-draft/thinking about fundamental.mdx",
     "data/blog/engineer-as-frontend-ops/engineer-as-frontend-ops-00.mdx",
     "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
     "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
