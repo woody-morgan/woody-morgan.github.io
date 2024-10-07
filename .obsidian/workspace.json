@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/2024-draft/**thinking about fundamental.mdx",
+                "file": "2024-10-07.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/2024-draft/**thinking about fundamental.mdx",
+                "file": "2024-10-07.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/2024-draft/**thinking about fundamental.mdx",
+                "file": "2024-10-07.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/2024-draft/**thinking about fundamental.mdx"
+                "file": "2024-10-07.md"
               }
             }
           }
@@ -152,12 +152,12 @@
   },
   "active": "2c158b82e8f8e84e",
   "lastOpenFiles": [
+    "data/blog/2024-draft/**thinking about fundamental.mdx",
     "2024-10-07.md",
     "Untitled.canvas",
     "data/blog/2024-draft/retrospect-rescript.mdx",
     "data/blog/2024-draft/patterns for solving problem.mdx",
     "data/blog/2024-draft/Parse, don't validate.mdx",
-    "data/blog/2024-draft/**thinking about fundamental.mdx",
     "data/blog/2024-draft/dive into zod.mdx",
     "data/blog/2024-draft/everything-that-improve-type-safety.mdx",
     "data/blog/2024-draft/fundamental-of-programming.mdx",
