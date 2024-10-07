@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2024-10-07.md",
+                "file": "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 305.5
+    "width": 200
   },
   "right": {
     "id": "16f4a25d01ad401f",
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2024-10-07.md",
+                "file": "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2024-10-07.md",
+                "file": "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2024-10-07.md"
+                "file": "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx"
               }
             }
           }
@@ -152,7 +152,11 @@
   },
   "active": "2c158b82e8f8e84e",
   "lastOpenFiles": [
+    "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
+    "data/blog/frontend/optimizing-nextjs-application.mdx",
+    "data/blog/engineer-as-frontend-ops/engineer-as-frontend-ops-00.mdx",
     "data/blog/2024-draft/**thinking about fundamental.mdx",
+    "README.md",
     "2024-10-07.md",
     "Untitled.canvas",
     "data/blog/2024-draft/retrospect-rescript.mdx",
@@ -162,9 +166,7 @@
     "data/blog/2024-draft/everything-that-improve-type-safety.mdx",
     "data/blog/2024-draft/fundamental-of-programming.mdx",
     "data/blog/2024-draft/rethinking about of course things.mdx",
-    "data/blog/2024-draft/copy-and-paste-development.mdx",
     "data/todo/Translation - data first data last.md",
-    "data/todo",
     "data/authors/sparrowhawk.md",
     "data/blog/draft/2024-09-11.md",
     "2023-05-31.md",
@@ -184,7 +186,6 @@
     "public/static/images/proj/with-you.png",
     "public/static/images/proj/surrounds.png",
     "public/static/images/proj/study-cafe.png",
-    "README.md",
     "README 2.md",
     "무제 파일.md",
     "무제 파일.canvas"
