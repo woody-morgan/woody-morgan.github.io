@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "6a71634604aba7ef",
+        "id": "8aac8b6a0abd6a6f",
         "type": "tabs",
         "children": [
           {
-            "id": "2c158b82e8f8e84e",
+            "id": "06094ea476b83663",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
+                "file": "data/blog/2024-draft/**thinking about fundamental.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 316.5
   },
   "right": {
     "id": "16f4a25d01ad401f",
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
+                "file": "data/blog/2024-draft/**thinking about fundamental.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
+                "file": "data/blog/2024-draft/**thinking about fundamental.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx"
+                "file": "data/blog/2024-draft/**thinking about fundamental.mdx"
               }
             }
           }
@@ -150,12 +150,14 @@
       "publish:Publish changes...": false
     }
   },
-  "active": "2c158b82e8f8e84e",
+  "active": "06094ea476b83663",
   "lastOpenFiles": [
+    "2024-03-10.md",
+    "data/blog/2024-draft/**thinking about fundamental.mdx",
+    "data/blog/engineer-as-frontend-ops/engineer-as-frontend-ops-00.mdx",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
     "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
     "data/blog/frontend/optimizing-nextjs-application.mdx",
-    "data/blog/engineer-as-frontend-ops/engineer-as-frontend-ops-00.mdx",
-    "data/blog/2024-draft/**thinking about fundamental.mdx",
     "README.md",
     "2024-10-07.md",
     "Untitled.canvas",
@@ -164,8 +166,6 @@
     "data/blog/2024-draft/Parse, don't validate.mdx",
     "data/blog/2024-draft/dive into zod.mdx",
     "data/blog/2024-draft/everything-that-improve-type-safety.mdx",
-    "data/blog/2024-draft/fundamental-of-programming.mdx",
-    "data/blog/2024-draft/rethinking about of course things.mdx",
     "data/todo/Translation - data first data last.md",
     "data/authors/sparrowhawk.md",
     "data/blog/draft/2024-09-11.md",
