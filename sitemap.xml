@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://woody-morgan.github.io//about</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io/</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//projects</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/core/flat-color-token-object-for-vanilla-extract</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/core/what-is-throttle-debounce</loc>
+  </url>
+
+  <url>
+    <loc
+      >https://woody-morgan.github.io//blog/backend/deploy-nestjs-application-on-heroku-system</loc
+    >
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/backend/graphql-arrays-n-lists</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/backend/graphql-connections-n-pagination</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/backend/graphql-mutations</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/backend/graphql-queries-for-interactions</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/backend/graphql-queries</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/frontend/optimizing-nextjs-application</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/good-fe-engineer/become-good-fe-engineer-00</loc>
+  </url>
+
+  <url>
+    <loc
+      >https://woody-morgan.github.io//blog/project/create-native-like-image-slider-component</loc
+    >
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/project/declarative-programming-part1</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/project/declarative-programming-part2</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/project/how-to-make-advent-calendar</loc>
+  </url>
+
+  <url>
+    <loc
+      >https://woody-morgan.github.io//blog/project/implement-reflow-prevented-lazy-loading-image-component</loc
+    >
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/project/making-full-page-scroll-effect</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/project/optimize-script-loading-on-react</loc>
+  </url>
+
+  <url>
+    <loc
+      >https://woody-morgan.github.io//blog/project/pagetransition-animation-using-framer-motion</loc
+    >
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/project/ways-to-optimize-your-nextjs-application</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/retrospect/retrospect-2024-start</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//blog/retrospect/thinking about fundamental</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/algebraic-effect</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/backend</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/components</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/compound-pattern</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/declarative</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/essay</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/animation</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/graphql</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/javascript</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/make-skeleton</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/nestjs</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/nextjs</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/reactjs</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/relay</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/optimization</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/retrospect</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/suspense</loc>
+  </url>
+
+  <url>
+    <loc>https://woody-morgan.github.io//tags/vanilla-extract</loc>
+  </url>
+</urlset>

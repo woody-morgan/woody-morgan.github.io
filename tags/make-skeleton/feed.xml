@@ -11,10 +11,10 @@
       <atom:link href="https://woody-morgan.github.io//tags/make-skeleton/feed.xml" rel="self" type="application/rss+xml"/>
       
   <item>
-    <guid>https://woody-morgan.github.io//blog/good-fe-engineer/become-good-fe-engineer-00</guid>
-    <title>[시리즈][좋프엔지] 서론</title>
-    <link>https://woody-morgan.github.io//blog/good-fe-engineer/become-good-fe-engineer-00</link>
-    <description>좋은 프론트엔드 개발자가 되기 위해 필요한 지식</description>
+    <guid>https://woody-morgan.github.io//blog/good-fe-engineer/become-good-fe-engineer-01</guid>
+    <title>[시리즈][좋프엔지] 사이드 이펙트를 위임하는 방법 - 01</title>
+    <link>https://woody-morgan.github.io//blog/good-fe-engineer/become-good-fe-engineer-01</link>
+    <description>Browser 주소창을 이용한 영속성 위임하기</description>
     <pubDate>Mon, 02 Sep 2024 00:00:00 GMT</pubDate>
     <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>reactjs</category><category>make-skeleton</category>
