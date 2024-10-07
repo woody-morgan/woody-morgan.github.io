@@ -11,7 +11,7 @@ const ContentSecurityPolicy = `
   media-src 'self' cdn.channel.io;
   connect-src *;
   font-src 'self' fonts.gstatic.com cdn.jsdelivr.net;
-  frame-src
+  frame-src 'self' *.youtube.com;
 `
 
 const securityHeaders = [
