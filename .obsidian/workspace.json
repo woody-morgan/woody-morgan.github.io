@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/core/implement-promise.mdx",
+                "file": "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/core/implement-promise.mdx",
+                "file": "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/core/implement-promise.mdx",
+                "file": "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/core/implement-promise.mdx"
+                "file": "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx"
               }
             }
           }
@@ -152,12 +152,13 @@
   },
   "active": "1e359d6798f1ec0f",
   "lastOpenFiles": [
-    "data/blog/core/what-is-throttle-debounce.mdx",
-    "data/blog/core/implement-promise.mdx",
-    "data/logo.svg",
     "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
-    "2024-09-02.md",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx",
     "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
+    "data/blog/core/implement-promise.mdx",
+    "data/blog/core/what-is-throttle-debounce.mdx",
+    "data/logo.svg",
+    "2024-09-02.md",
     "data/blog/retrospect/thinking about fundamental.mdx",
     "data/blog/retrospect/retrospect-2024-start.mdx",
     "data/blog/2024",
@@ -168,7 +169,6 @@
     "2024-10-07.md",
     "Untitled.canvas",
     "data/blog/2024-draft/retrospect-rescript.mdx",
-    "data/blog/2024-draft/patterns for solving problem.mdx",
     "data/todo/Translation - data first data last.md",
     "data/authors/sparrowhawk.md",
     "data/blog/draft/2024-09-11.md",
