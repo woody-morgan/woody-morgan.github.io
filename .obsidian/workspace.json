@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/frontend/fundamental-javascript.mdx",
+                "file": "data/blog/retrospect/thinking about fundamental.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/frontend/fundamental-javascript.mdx",
+                "file": "data/blog/retrospect/thinking about fundamental.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/frontend/fundamental-javascript.mdx",
+                "file": "data/blog/retrospect/thinking about fundamental.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/frontend/fundamental-javascript.mdx"
+                "file": "data/blog/retrospect/thinking about fundamental.mdx"
               }
             }
           }
@@ -152,20 +152,20 @@
   },
   "active": "0ded335ddd81417e",
   "lastOpenFiles": [
-    "data/blog/retrospect/thinking about fundamental.mdx",
-    "data/blog/frontend/fundamental-javascript.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx",
+    "data/blog/retrospect/regret-form-implementation.mdx",
     "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
     "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx",
+    "data/blog/retrospect/retrospect-2024-half.mdx",
+    "data/blog/linguistics/fundamental-javascript.mdx",
+    "data/blog/linguistics",
+    "data/blog/retrospect/thinking about fundamental.mdx",
     "data/blog/core/implement-promise.mdx",
     "data/blog/core/what-is-throttle-debounce.mdx",
     "data/logo.svg",
     "2024-09-02.md",
     "data/blog/retrospect/retrospect-2024-start.mdx",
-    "data/blog/2024",
     "2024-03-10.md",
-    "data/blog/engineer-as-frontend-ops/engineer-as-frontend-ops-00.mdx",
-    "data/blog/frontend/optimizing-nextjs-application.mdx",
     "README.md",
     "2024-10-07.md",
     "Untitled.canvas",
