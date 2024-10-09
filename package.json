@@ -6,12 +6,13 @@
     "start": "cross-env SOCKET=true node ./scripts/next-remote-watch.js ./data",
     "dev": "next dev",
     "build": "next build && node ./scripts/generate-sitemap",
+    "build:with-export": "next build && next export -o docs && touch docs/CNAME && touch docs/.nojekyll",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts",
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
-    "deploy": "next build && next export -o docs && touch docs/CNAME && touch docs/.nojekyll && gh-pages -t true -d docs",
+    "deploy": "pnpm build:with-export && gh-pages -t true -d docs",
     "compose": "node ./scripts/compose.js"
   },
   "dependencies": {
