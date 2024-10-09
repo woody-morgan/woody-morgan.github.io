@@ -1,0 +1,37 @@
+---
+title: zod를 더 잘 쓰는 방법
+date: 2024-03-10
+tags:
+  - automation
+draft: true
+summary: 복사 붙여넣기 개발 환경을 만들기 위해 했던 고민들
+images:
+  - https://repository-images.githubusercontent.com/585146387/f307ab02-0c46-439b-84e0-319721662dce
+layout: PostLayout
+---
+
+```example.ts
+
+const PostSchema = z.object({
+
+id: z.string(),
+
+title: z.string(),
+
+// ^ ℹ️ Try refactor this name with VSCode dev tools, it'll do it cross-stack
+
+body: z.string(),
+
+});
+
+  
+
+const CreatePostSchema = PostSchema.omit({ id: true });
+
+  
+
+type CreateSchema = z.infer<typeof CreatePostSchema>;
+
+```
+
+

@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "791168811117c317",
+        "id": "686edf16aa748145",
         "type": "tabs",
         "children": [
           {
-            "id": "fa42f62b3ffefbbf",
+            "id": "0ded335ddd81417e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/2024-draft/fundamental-of-programming.mdx",
+                "file": "data/blog/retrospect/thinking about fundamental.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 316.5
   },
   "right": {
     "id": "16f4a25d01ad401f",
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/2024-draft/fundamental-of-programming.mdx",
+                "file": "data/blog/retrospect/thinking about fundamental.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/2024-draft/fundamental-of-programming.mdx",
+                "file": "data/blog/retrospect/thinking about fundamental.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/2024-draft/fundamental-of-programming.mdx"
+                "file": "data/blog/retrospect/thinking about fundamental.mdx"
               }
             }
           }
@@ -150,21 +150,28 @@
       "publish:Publish changes...": false
     }
   },
-  "active": "fa42f62b3ffefbbf",
+  "active": "0ded335ddd81417e",
   "lastOpenFiles": [
-    "data/blog/2024-draft/copy-and-paste-development.mdx",
-    "data/blog/2024-draft/fundamental-of-programming.mdx",
-    "data/blog/2024-draft",
-    "data/blog/2023-draft/automation-for-svg.mdx",
+    "data/blog/retrospect/regret-form-implementation.mdx",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx",
+    "data/blog/retrospect/retrospect-2024-half.mdx",
+    "data/blog/linguistics/fundamental-javascript.mdx",
+    "data/blog/linguistics",
+    "data/blog/retrospect/thinking about fundamental.mdx",
+    "data/blog/core/implement-promise.mdx",
+    "data/blog/core/what-is-throttle-debounce.mdx",
+    "data/logo.svg",
+    "2024-09-02.md",
+    "data/blog/retrospect/retrospect-2024-start.mdx",
+    "2024-03-10.md",
+    "README.md",
+    "2024-10-07.md",
+    "Untitled.canvas",
+    "data/todo/Translation - data first data last.md",
     "data/authors/sparrowhawk.md",
     "data/blog/draft/2024-09-11.md",
-    "data/legacy/github-markdown-guide.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
-    "data/blog/engineer-as-frontend-ops/engineer-as-frontend-ops-00.mdx",
-    "data/blog/frontend/optimizing-nextjs-application.mdx",
-    "data/legacy/algorithm/algorithm-tips-bitmasking.mdx",
-    "data/blog/project/implement-reflow-prevented-lazy-loading-image-component.mdx",
     "2023-05-31.md",
     "draft/Program Tip 2024-08-16.md",
     "draft/Today I Learn/2024-08-16.md",
@@ -181,8 +188,6 @@
     "public/static/images/proj/wordle.png",
     "public/static/images/proj/with-you.png",
     "public/static/images/proj/surrounds.png",
-    "public/static/images/proj/study-cafe.png",
-    "README.md",
     "README 2.md",
     "무제 파일.md",
     "무제 파일.canvas"
