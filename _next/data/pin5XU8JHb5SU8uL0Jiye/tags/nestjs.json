@@ -1,1 +1,0 @@
-{"pageProps":{"posts":[{"title":"Deploy Nestjs Application on Heroku","date":"2022-08-07T00:00:00.000Z","tags":["backend","nestjs"],"draft":false,"summary":"Nestjs 어플리케이션을 배포하면서 생긴 문제점을 정리하였습니다","images":["/static/images/heroku-nestjs.webp"],"layout":"PostLayout","slug":"backend/deploy-nestjs-application-on-heroku-system"}],"tag":"nestjs"},"__N_SSG":true}
