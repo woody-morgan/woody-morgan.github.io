@@ -33,7 +33,7 @@ jobs:
 
       - name: Build 🔧
         run: |
-          pnpm run build
+          pnpm run build:with-export
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
