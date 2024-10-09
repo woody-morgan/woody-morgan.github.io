@@ -1,0 +1,34 @@
+
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+      <title>woody-morgan.github.io</title>
+      <link>https://woody-morgan.github.io//blog</link>
+      <description>Beyond contentment, greatness</description>
+      <language>ko-KR</language>
+      <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
+      <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
+      <lastBuildDate>Sun, 01 Sep 2024 00:00:00 GMT</lastBuildDate>
+      <atom:link href="https://woody-morgan.github.io//tags/retrospect/feed.xml" rel="self" type="application/rss+xml"/>
+      
+  <item>
+    <guid>https://woody-morgan.github.io//blog/retrospect/thinking about fundamental</guid>
+    <title>[에세이] 본질을 추구하는 것의 의미</title>
+    <link>https://woody-morgan.github.io//blog/retrospect/thinking about fundamental</link>
+    <description>본질을 추구하다가 알게된 본질을 추구하는 본질적인 의미</description>
+    <pubDate>Sun, 01 Sep 2024 00:00:00 GMT</pubDate>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
+    <category>essay</category><category>retrospect</category>
+  </item>
+
+  <item>
+    <guid>https://woody-morgan.github.io//blog/retrospect/retrospect-2024-start</guid>
+    <title>[회고] 이직을 하며</title>
+    <link>https://woody-morgan.github.io//blog/retrospect/retrospect-2024-start</link>
+    <description>retrospect</description>
+    <pubDate>Mon, 11 Mar 2024 00:00:00 GMT</pubDate>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
+    <category>retrospect</category>
+  </item>
+
+    </channel>
+  </rss>

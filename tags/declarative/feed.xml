@@ -1,0 +1,34 @@
+
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+      <title>woody-morgan.github.io</title>
+      <link>https://woody-morgan.github.io//blog</link>
+      <description>Beyond contentment, greatness</description>
+      <language>ko-KR</language>
+      <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
+      <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
+      <lastBuildDate>Sun, 04 Jun 2023 00:00:00 GMT</lastBuildDate>
+      <atom:link href="https://woody-morgan.github.io//tags/declarative/feed.xml" rel="self" type="application/rss+xml"/>
+      
+  <item>
+    <guid>https://woody-morgan.github.io//blog/project/declarative-programming-part2</guid>
+    <title>Declarative Programming With React. Part 2</title>
+    <link>https://woody-morgan.github.io//blog/project/declarative-programming-part2</link>
+    <description>React Suspense와 Compound Component Pattern으로 알아보는 선언적 프로그래밍(feat. 대수적 효과)</description>
+    <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
+    <category>declarative</category><category>reactjs</category><category>compound-pattern</category>
+  </item>
+
+  <item>
+    <guid>https://woody-morgan.github.io//blog/project/declarative-programming-part1</guid>
+    <title>Declarative Programming With React. Part 1</title>
+    <link>https://woody-morgan.github.io//blog/project/declarative-programming-part1</link>
+    <description>React Suspense와 Compound Component Pattern으로 알아보는 선언적 프로그래밍(feat. 대수적 효과)</description>
+    <pubDate>Wed, 31 May 2023 00:00:00 GMT</pubDate>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
+    <category>declarative</category><category>algebraic effect</category><category>reactjs</category><category>suspense</category>
+  </item>
+
+    </channel>
+  </rss>
