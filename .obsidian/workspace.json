@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/retrospect/thinking about fundamental.mdx",
+                "file": "data/blog/core/fundamental-javascript.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/retrospect/thinking about fundamental.mdx",
+                "file": "data/blog/core/fundamental-javascript.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/retrospect/thinking about fundamental.mdx",
+                "file": "data/blog/core/fundamental-javascript.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/retrospect/thinking about fundamental.mdx"
+                "file": "data/blog/core/fundamental-javascript.mdx"
               }
             }
           }
@@ -152,19 +152,19 @@
   },
   "active": "0ded335ddd81417e",
   "lastOpenFiles": [
-    "data/blog/retrospect/regret-form-implementation.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx",
-    "data/blog/retrospect/retrospect-2024-half.mdx",
-    "data/blog/linguistics/fundamental-javascript.mdx",
-    "data/blog/linguistics",
     "data/blog/retrospect/thinking about fundamental.mdx",
     "data/blog/core/implement-promise.mdx",
-    "data/blog/core/what-is-throttle-debounce.mdx",
+    "data/blog/core/fundamental-javascript.mdx",
+    "data/blog/project/declarative-programming-part1.mdx",
+    "data/blog/project/create-native-like-image-slider-component.mdx",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
+    "data/blog/engineer-as-frontend-ops/engineer-as-frontend-ops-00.mdx",
+    "data/blog/retrospect/regret-form-implementation.mdx",
+    "data/blog/retrospect/retrospect-2024-half.mdx",
     "data/logo.svg",
     "2024-09-02.md",
-    "data/blog/retrospect/retrospect-2024-start.mdx",
     "2024-03-10.md",
     "README.md",
     "2024-10-07.md",

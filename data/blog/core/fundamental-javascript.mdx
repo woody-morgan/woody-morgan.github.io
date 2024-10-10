@@ -1,0 +1,115 @@
+---
+title: "[언어학] Prototype"
+date: 2024-09-01
+tags:
+  - linguistics
+draft: false
+summary: Prototype에 대해 알아보면서 JS에 대해 다시 알아보자
+images:
+  - https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png
+layout: PostLayout
+---
+
+## 개론
+
+현업에 있다보면 항상 신기하게도, 내가 사용하는 도구의 본질에서 멀어집니다.
+
+본질보다는 누군가가 쌓아놓은 Framework나 Layer 위에서 움직입니다. 이걸 추상화라고도 합니다.
+
+매일 같이 Javascript(이하 JS)를 사용하고 있지만, 일을 하다보면 추상화해놓은 것들을 조합만 해도 대부분의 요구사항을 만들 수 있습니다
+
+따라서 이게 `어떻게 돌아가는지에 대한 것`은 자연스럽게 관심에서 멀어집니`
+
+오늘은 그런 `어떻게 돌아가는지에 대한 것` 중에 하나인 JS Prototype에 대해 알아보고, 독자분들께 영감이 되었으면 하는 바램으로 글을 작성했습니다.
+
+글이 조금 깁니다.
+## Prototype
+
+### 왜 Prototype인가
+
+컴퓨터 공학과 학생들이 프로그래밍을 배우면 대부분 C, C++, Python, Java 같은 언어로 입문을 합니다. 저 또한 마찬가지였습니다.
+
+그러다 Javascript 언어를 처음 접하면 가장 생소한게 바로 Prototype입니다.
+
+대부분 `왜 Prototype이라는게 있어요?`라고 하면 `상속을 지원하기 위해서요`라는 답변이 돌아오고, 저 같이 Class 문법에 익숙했던 사람은 그냥 Class 쓰면 되는거 아닌가? 라는 생각이 머리속에 듭니다.
+
+그러나 그때 뿐, Javascript가 Class문법을 지원한다는 사실을 알고 나면 Prototype에 대한 의문은 저 멀리 사라져있습니다.
+
+그런데 Prototype을 차용했기 때문에 Javascript만이 가졌던 특성, 그리고 그런 특성들로 인해 있었던 함수등이 있습니다.
+
+바로 bind, call, apply, hoisting, 그리고 악명높은 this이죠.
+
+왜 JS는 위에 나열한 이상한 특성들을 가지면서도, 다른 언어들과 다른 Prototype 기반을 선택한걸까요?
+
+### 바라보는 관점 바꾸기
+
+기존 프로그래밍 패러다임이 객체를 바라보는 관점을 생각해봅시다
+
+
+### 프로그래밍의 본질
+
+결국 프로그래밍이란 글쓰기 입니다.
+
+우리가 회사에서 일을 하는 이유는 사회에 안에서 가치를 만들어내기 위함입니다.
+
+그리고 프로그래머인 저는, 가치를 만들어내기 위해 프로그래밍을 통해 컴퓨터가 해석할 수 있는 코드를 적습니다.
+
+그 코드는 특정 집단이 만들어낸 프로토콜, 소위 `프로그래밍 언어`라는 프로토콜에 맞게 글을 쓰는 것 입니다.
+
+우리가 아는 가장 대중적인 소설책들을 예를 들어보면 다음과 같습니다.
+
+해리포터 시리즈, 반지의 제왕 시리즈.
+
+두 책 모두 훌륭하지만,  그 안에서 쳅터 구성, 문맥 배치, 어체 등은 아예 다릅니다. 하지만 둘 다 훌륭한 책이라고 느낍니다
+
+`뜯어보면 정말 다른 책인데, 왜 둘 다 좋은 책이라고 느낄까?`  라고 질문한다면 저는 이렇게 답변할 것 같습니다
+
+글의 ~~~
+
+
+
+
+## Extra mile - Rescript
+
+오늘 이 글을 쓰게 된 이유는 Flow와 Typescript(이하 TS)를 비교하다가 문득 Javascript 자체에 의문이 들어서 쓰게되었습니다.
+
+제 첫 회사는 Ocaml 기반의 BuckleScript(지금은 Recript로 리브렌딩)를 Frontend 언어로 사용하던 회사였습니다. 구조조정으로 인해 3개월만에 나오긴 했지만 제 프로그래밍 실력에 가장 큰 영향을 줬던 회사였습니다.
+
+그 때 사용했던 BuckleScript라는 언어가 가진 철학, 패러다임, 함수 등이 제게 큰 영감을 주었고, 그런 영감이 저를 어떤 방향으로 이끌었거든요.
+
+하지만 항상 이런 의문이 있었습니다. `왜 BuckleScript 같은 마이너 언어를 선택하게 되었을까?`. 회사라는게 우선 돈을 벌어야하기 때문에 메인스트림에서 아예 벗어나는게 불가능하거든요.
+
+그 이유를 Flow와 TS의 역사를 알아보면서 깨닫게 되었습니다.
+
+알아보기에 앞서 우선, Flow는 Facebook이 TS는 Microsoft에서 만든 JS타입 추론기(혹은 시뮬레이터) 입니다. 비슷해보이지만 두 추론기는 지향하는바가 다릅니다.
+
+TS는 AST를, Flow는 Graph를 사용합니다. 좀 더 간단히 이야기하자면, Typescript는 타입을 즉시 결정하고, Flow는 타입 결정을 추론하여 결정합니다.(그래서 Flow는 타입 정보를 TS에 비해 덜 적어도 됩니다)
+
+[Flow](https://github.com/facebook/flow)의 경우 Ocaml 언어를 통해 Javascript Code Parsing and Analyze 로직이 짜여져있습니다. Ocaml의 힌들리 밀러 타입 시스템이 Flow의 타입 결정 로직과 일치하기 때문에 매우 똑똑한 결정이었을 것 입니다. 
+
+하지만 JS는 Ocaml과 달리 함수형 패러다임에 입각한 언어가 아니기 때문에 타입 추론 버그에 시달릴 수 밖에 없었습니다. 객체에 대한 mutable한 접근을 시뮬레이팅 하거나, JS의 특정한 문법을 Flow의 Graph 전파 로직 내에서 예외처리하기 어려웠겠죠. 
+
+또한 점진적 Migration 측면에서 Typescript가 더 훌륭했기 때문에 점차 시장에서 밀렸을 것 입니다.
+
+그렇지만 Flow가 가진 매력적인 요소들이 많았기에, 이런 요소들을 실제 개발에 도입할 수 있는 환경(Buckle Script or Rescript)을 구축하려고 노력했고, 그 노력이 그린랩스라는 회사의 탄생으로 이어진게 아닌가 싶었습니다.
+
+더 자세한건 `[Flow와 Typescript의 채택](https://blog.rhostem.com/posts/2017-06-11-adopting-flow-and-typescript)` 글을 참고해주세요
+
+그래서 정리하면 이렇습니다
+1. Flow는 페이스북이 만들었고 Ocaml 언어로 만들어졌다
+	1. React 또한 Ocaml로 프로토타이핑 되었던 시절이 있다
+2. BuckleScript는 사실상 Ocaml을 기반으로한 Readable Javascript Converter이다
+3. Flow는 Javascript 언어의 한계로 버그 및 이슈가 많다
+
+`따라서 BuckleScript를 기반으로 Flow의 장점을 차용해서 Javascript 개발을 하자`와 같이 된게 아닌가 싶었습니다.
+
+정확하진 않겠지만 Flow를 분석하다 보니 예전부터 의문으로 생각하던게 하나 해결된 것 같아 후련합니다.
+
+## Inspired By
+
+- [adopting-flow-and-typescript](https://jamie.build/adopting-flow-and-typescript.html)
+- [자바스크립트는 왜 프로토타입을 선택했을까](https://medium.com/@limsungmook/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%99%9C-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85%EC%9D%84-%EC%84%A0%ED%83%9D%ED%96%88%EC%9D%84%EA%B9%8C-997f985adb42)
+* [The Better Parts](https://www.youtube.com/watch?v=PSGEjv3Tqo0&t=300s)
+
+
+긴 글 읽어주셔서 감사합니다.
