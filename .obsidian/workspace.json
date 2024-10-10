@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 316.5
+    "width": 200
   },
   "right": {
     "id": "16f4a25d01ad401f",
@@ -153,16 +153,16 @@
   "active": "0ded335ddd81417e",
   "lastOpenFiles": [
     "data/blog/retrospect/thinking about fundamental.mdx",
-    "data/blog/core/implement-promise.mdx",
+    "data/blog/retrospect/retrospect-2024-half.mdx",
+    "data/blog/retrospect/regret-form-implementation.mdx",
     "data/blog/core/fundamental-javascript.mdx",
+    "data/blog/core/implement-promise.mdx",
     "data/blog/project/declarative-programming-part1.mdx",
     "data/blog/project/create-native-like-image-slider-component.mdx",
     "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
     "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx",
     "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
     "data/blog/engineer-as-frontend-ops/engineer-as-frontend-ops-00.mdx",
-    "data/blog/retrospect/regret-form-implementation.mdx",
-    "data/blog/retrospect/retrospect-2024-half.mdx",
     "data/logo.svg",
     "2024-09-02.md",
     "2024-03-10.md",

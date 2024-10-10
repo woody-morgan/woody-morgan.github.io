@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/2024-draft/copy-and-paste-development.mdx",
+                "file": "data/blog/core/fundamental-javascript.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "data/blog/2024-draft/copy-and-paste-development.mdx",
+            "file": "data/blog/core/fundamental-javascript.mdx",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
         "state": {
           "type": "outgoing-link",
           "state": {
-            "file": "data/blog/2024-draft/copy-and-paste-development.mdx",
+            "file": "data/blog/core/fundamental-javascript.mdx",
             "linksCollapsed": false,
             "unlinkedCollapsed": true
           }
@@ -114,7 +114,7 @@
         "state": {
           "type": "outline",
           "state": {
-            "file": "data/blog/2024-draft/copy-and-paste-development.mdx"
+            "file": "data/blog/core/fundamental-javascript.mdx"
           }
         }
       }
@@ -136,5 +136,10 @@
     }
   },
   "active": "22c025e0fca8f8bd",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "data/blog/retrospect/thinking about fundamental.mdx",
+    "data/blog/2024-draft/copy-and-paste-development.mdx",
+    "/package.json",
+    "/pnpm-lock.yaml"
+  ]
 }
