@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "1bc8d2ccfbb5f355",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "data/blog/core/fundamental-javascript.mdx",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -147,15 +160,16 @@
       "markdown-importer:Open format converter": false,
       "random-note:Open random note": false,
       "audio-recorder:Start/stop recording": false,
-      "publish:Publish changes...": false
+      "publish:Publish changes...": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0ded335ddd81417e",
+  "active": "1bc8d2ccfbb5f355",
   "lastOpenFiles": [
     "data/blog/retrospect/thinking about fundamental.mdx",
+    "data/blog/core/fundamental-javascript.mdx",
     "data/blog/retrospect/retrospect-2024-half.mdx",
     "data/blog/retrospect/regret-form-implementation.mdx",
-    "data/blog/core/fundamental-javascript.mdx",
     "data/blog/core/implement-promise.mdx",
     "data/blog/project/declarative-programming-part1.mdx",
     "data/blog/project/create-native-like-image-slider-component.mdx",

@@ -141,7 +141,7 @@ Prototype은 이런 Classification에 대해 정면으로 반박하여 나온 �
 - 현실에 존재하는 것 중 가장 좋은 본보기를 원형(prototype)으로 선택한다.
 - 문맥(컨텍스트)에 따라 ‘범주’, 즉 ‘의미’가 달라진다.
 
-## So.. Prototype is
+## Prototype is
 
 이런 이론에 입각하여 태어난 Self언어와 가족유사성을 언어 차원에서 구현한 언어들에 영감을 받은 언어가 Javascript입니다.
 
@@ -221,9 +221,171 @@ console.log("다시 물어본다. 펭귄1은 날 수 있나? :", 펭귄1.날수�
 
 >==변수의 의미는 그== ==**어휘적인(Lexical)**====, ==**실행 문맥(Execution Context)**====에서의 의미가 된다
 
-그렇기에 Javascript가 동읠 범위(Lexical)의 모든 `선언`을 참고(Hoisting)해 의미를 정의합니다.
+그렇기에 Javascript가 동일 범위(Lexical)의 모든 `선언`을 참고(Hoisting)해 의미를 정의합니다.
+
+프로토타입 기반 언어인 Javascript에서는 `단어의 의미가 사용되는 근처 환경`에서의 `근처`를 어휘적인 범위(Lexical Scope)로 정의했습니다. Javascript Engine은 코드가 로드될 때 실행 컨텍스트를 생성하고 그 안에 선언된 변수, 함수를 실행 컨텐스트 최상단으로 Hoisting합니다. 이러한 범위를 렉시컬 스코프라 합니다.
+
+예제 코드는 다음과 같습니다
 
 
+```js
+
+// 전역 실행문맥 생성. 전체 정의(name, init) 호이스팅
+var name = 'Kai';
+init(); // init 실행문맥 생성. 내부 정의(name, displayName) 호이스팅
+function init() {
+    var name = "Steve";
+    function displayName() {  
+      console.log(name); // 현재 실행문맥 내에 정의된게 없으니 outer 로 chain
+      // var name = 'troll?'; // 주석 해제되면 호이스팅
+    }
+    displayName(); // displayName 실행문맥 생성. 내부 정의 호이스팅.
+}
+
+```
+
+
+코드를 로드하면 다음과 같은 Context가 생깁니다
+
+```
+
+- Global Execution // 1  
+	- Lexical : name, init  
+- Execution : init // 2  
+	- Lexical : name, displayName  
+	- Outer : global  
+- Execution : displayName // 3  
+	- Lexical : null  
+	- Outer : init
+
+```
+
+사진으로 정리하면 다음과 같습니다
+
+![context](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*0qa5p_SprK0BE20fhHWpAQ.png)
+
+그래서 정리하면 왜 **`실행 문맥`, `렉시컬 스코프`, `호이스팅`이 존재할까요?**
+
+> 프로토타입 철학의 근원인 비트겐슈타인류에서 가장 중요하게 생각하는 것이 `어휘`이고 이것은 `문맥`내에서만 의미를 가집니다
+
+이런 핵심을 구현하기 위해서 자연스럽게 발생한 특징입니다.
+
+
+### Javascript - this
+
+그 악명높은 this 입니다. Class 기반 객체지향언어에서의 this와 동작이 매우 다르기 때문에 대부분 대충 넘어가는 this입니다.
+
+[자바스크립트는 왜 프로토타입을 선택했을까](https://medium.com/@limsungmook/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%99%9C-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85%EC%9D%84-%EC%84%A0%ED%83%9D%ED%96%88%EC%9D%84%EA%B9%8C-997f985adb42) 를 읽으면서 왜 this가 이렇게 동작해야하는지 알게되어서 매우 행복합니다.
+
+다음은 this에 대한 오해입니다
+
+- this 는 기본적으로 window 다 ( X )
+- 이벤트 리스너에서 등록한 콜백의 this 는 내부에서 bind 등을 통해 바뀌기때문에 무엇인지 알 수 없다. ( X )
+- this 는 외워야한다 ( X )
+
+이러한 오해를 바로잡기 위해선 먼저 프로토타입 철학에서 이런 상황을 어떻게 해석하는지 알 필요가 있습니다.
+
+이전에 [문맥 따르기](#### 문맥 따르기) 기억나시나요? `응`이라는 말이 상황에 따라 긍정 또는 부정의 의미를 가졌습니다.
+
+비트겐슈타인은 그의 대표적인 저서 `철학적 탐구`에서 단어의 쓰임새가 곧 의미라는 점을 강조했습니다(`의미사용이론`). 그는 이를 `발화`라고 얘기했는데요, 위에서 예시 들었던 `응`이라는 대답은, 어디서 `발화`되느냐에 따라서 단어의 의미가 달라집니다. 즉 받아들이는 `대상`에 따라서 같은 단어도 의미가 달라진다는 얘기입니다.
+
+이 점이 Prototype과 Class의 대표적인 차이입니다. 미리 분류된 Class를 중요하게 여기는 전통적인 방식과 달리, Prototype에서는 받아들이는 주체와 문맥이 가장 중요한 것 입니다. 프로그래밍으로 보자면 실행(invoke)하는 `객체`가 중요하다는 의미입니다.
+
+이 점이 Prototype 기반 언어인 Javascript에서의 this가 다른 Class 기반 언어에서의 this와 다르게 동작하는 이유입니다.
+
+Prototype 기반 언어에서는 this가 정의된 함수가 어떻게 발화(invoke) 되었는지에 따라 가리키는 값이 달라집니다. 정확히는 받아들이는 대상의 컨텍스트를 가리킵니다.
+
+이를 이해하려면 먼저 메소드와 메시지를 명확하게 알아야 합니다
+
+- 메소드 : 객체의 함수
+- 메시지 : 메소드를 실행하라는 메시지 전달
+
+Java에서는 클래스의 메소드를 호출하는 행위를 메시지라 합니다. Javascript를 예로 들면 foo 라는 객체가 있고 그 내부에 bar()라는 함수가 있을 때, 다음처럼 발화(invoke)할 객체를 지정할 수 있습니다.
+
+- foo.bar()
+- bar.call(foo)
+- var boundBar = bar.bind(foo)
+
+위처럼 foo 객체를 통해 발화한 함수는 내부 this가 무조건 foo를 가리킵니다. 만약 아무것도 지정되어있지 않으면 Global(브라우저라면 window)을 가리킵니다.
+
+예제를 봅시다
+
+```js
+
+var someValue = 'hello';
+function outerFunc() {
+    console.log(this.someValue); // 첫번째 : ?, 두번째 : ?
+    this.innerFunc();
+}
+const obj = {
+    someValue : 'world',
+    outerFunc,
+    innerFunc : function() {
+        console.log("innerFunc's this : ", this); // 첫번째 : ?, 두번째 : ?
+    }
+}
+obj.outerFunc(); // 'world'
+outerFunc(); // 'hello'
+
+```
+
+* obj.outerFunc()를 실행하면 world가, outerFunc()를 실행하면 hello가 나옵니다
+* outerFunc를 invoke한 주체가 누군지 알면 this를 결정할 수 있습니다
+
+obj.outerFunc()의 호출 상황을 그림으로 그려보면 다음과 같습니다
+
+![obj.outerFunc()](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*sU6vTevHUcZAsXF1zz31Ag.png)
+
+
+1. Javascript Engine이 코드를 실행합니다.(브라우저에서 use strict 모드가 아닌 경우 this는 window를 가리킵니다)
+2. obj.outerFunc() 코드를 보면, Engine은 obj에 outerFunc를 실행하라는 메시지를 보냅니다
+3. obj에서 outerFunc를 invoke 합니다. 코드 로드 시 만들어져있는 실행문맥을 참고해 실행합니다. 이때 실행 문맥상의 this는 발화한 obj를 가리킵니다.
+4. 실행 중에 this.intterFunc를 만납니다. 엔진은 this가 가리키는 obj에 innterFunc를 실행하라는 메시지를 보냅니다
+5. obj에 innterFunc이 선언되어있으니 잘 실행합니다
+
+outerFunc 호출 상황을 그립으로 그려보면 다음과 같습니다
+
+![outerFunc](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*RcrKnh6VwTclbsLiYypQeA.png)
+
+1. JS Engine은 자신(global)의 실행문맥상에 존재하는 outerFunc을 호출합니다
+2. 발화한 지점이 Engine(global)이니 this는 엔진을 가리킵니다. 엔진에 innerFunc을 실행하라는 메시지를 보냅니다
+3. 글로벌 실행문맥에는 innerFunc이 없기 때문에 에러가 납니다
+
+
+즉 발화가 어느 지점에서 일어났는가, 일어난 시점에서 Context는 어떻게 되었는가가 핵심입니다.
+
+
+add event listener 예제를 봅시다
+
+
+```js
+
+function handle() {     
+    console.log(this);  // 첫번째 ?, 두번째 ?   
+}  document  
+    .getElementsByTagName('body')[0]  
+    .addEventListener('click', handle);  // 첫번째. 호출되었다고 가정.handle();  // 두번째. 첫번째 이후에 호출되었다고 가정.
+    
+```
+
+
+![eventlistener](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*NCnqM2YQgJ7oSxdSYawyrg.png)
+
+addEventListener 함수는 해당 element에 callback을 등록하는 함수입니다. "div"객체에 'handle'메소드를 등록했다고 볼 수 있습니다.
+
+1. 브라우저에서 div를 클릭하면 Engine이 반응합니다
+2. 해당 div에 등록된 event listener들을 실행하라는 메세지를 보냅니다
+3. div element에서 handle을 발화합니다
+4. 이때 handle의 실행문맥의 this는 발화한 주체(div element)가 됩니다
+
+
+## So.. Prototype is
+
+Prototype은 `문맥을 존중하는 기술`입니다.
+
+Prototype은 Class의 다른 구현이 아닌, 완전히 새로운 인식 하에 만들어진 이론입니다.
+
+JS에서는 Class라는 Syntax Sugar가 있을 뿐이지, 내부적으로는 아예 다른 관점으로 객체를 바라보고 있습니다. 따라서 JS의 Prototype, Hoisting, this가 `왜` 존재하고 
 
 
 ### 프로그래밍의 본질
