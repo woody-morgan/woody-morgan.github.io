@@ -18,33 +18,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "1bc8d2ccfbb5f355",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "data/blog/core/fundamental-javascript.mdx",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "35f8975db3ed1edf",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "data/blog/core/what-is-throttle-debounce.mdx",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -110,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/core/what-is-throttle-debounce.mdx",
+                "file": "data/blog/core/fundamental-javascript.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/core/what-is-throttle-debounce.mdx",
+                "file": "data/blog/core/fundamental-javascript.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/core/what-is-throttle-debounce.mdx"
+                "file": "data/blog/core/fundamental-javascript.mdx"
               }
             }
           }
@@ -176,21 +151,22 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "35f8975db3ed1edf",
+  "active": "0ded335ddd81417e",
   "lastOpenFiles": [
-    "data/blog/core/implement-promise.mdx",
+    "data/blog/2024-draft/copy-and-paste-development.mdx",
+    "data/blog/essay/similarity-between-fp-compound-pattern.mdx",
     "data/blog/core/fundamental-javascript.mdx",
-    "data/blog/core/flat-color-token-object-for-vanilla-extract.mdx",
+    "2024-03-10.md",
+    "data/blog/2024-draft/retrospect-rescript.mdx",
+    "data/blog/2024-draft/rethinking about of course things.mdx",
+    "data/blog/2024-draft/patterns for solving problem.mdx",
+    "data/blog/2024-draft/Parse, don't validate.mdx",
+    "data/blog/essay/thinking about fundamental.mdx",
+    "data/blog/2024-draft/fundamental-of-programming.mdx",
+    "data/blog/essay",
+    "data/blog/retrospect/retrospect-2024-half.mdx",
     "!문맥.md",
     "2024-09-02.md",
-    "2024-03-10.md",
-    "data/blog/core/what-is-throttle-debounce.mdx",
-    "data/blog/retrospect/retrospect-2024-half.mdx",
-    "data/blog/retrospect/regret-form-implementation.mdx",
-    "data/blog/retrospect/thinking about fundamental.mdx",
-    "data/blog/project/declarative-programming-part1.mdx",
-    "data/blog/project/create-native-like-image-slider-component.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
     "data/logo.svg",
     "README.md",
     "2024-10-07.md",
