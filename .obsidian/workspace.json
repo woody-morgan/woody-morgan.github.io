@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "686edf16aa748145",
+        "id": "81518e50625b1aeb",
         "type": "tabs",
         "children": [
           {
-            "id": "0ded335ddd81417e",
+            "id": "a0f4db5d4d877e00",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/core/fundamental-javascript.mdx",
+                "file": "data/blog/core/implement-promise.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/core/fundamental-javascript.mdx",
+                "file": "data/blog/core/implement-promise.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/core/fundamental-javascript.mdx",
+                "file": "data/blog/core/implement-promise.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/core/fundamental-javascript.mdx"
+                "file": "data/blog/core/implement-promise.mdx"
               }
             }
           }
@@ -151,26 +151,28 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0ded335ddd81417e",
+  "active": "a0f4db5d4d877e00",
   "lastOpenFiles": [
-    "data/blog/2024-draft/copy-and-paste-development.mdx",
-    "data/blog/essay/similarity-between-fp-compound-pattern.mdx",
+    "data/blog/frontend/flat-color-token-object-for-vanilla-extract.mdx",
     "data/blog/core/fundamental-javascript.mdx",
-    "2024-03-10.md",
-    "data/blog/2024-draft/retrospect-rescript.mdx",
-    "data/blog/2024-draft/rethinking about of course things.mdx",
-    "data/blog/2024-draft/patterns for solving problem.mdx",
-    "data/blog/2024-draft/Parse, don't validate.mdx",
-    "data/blog/essay/thinking about fundamental.mdx",
-    "data/blog/2024-draft/fundamental-of-programming.mdx",
-    "data/blog/essay",
+    "data/blog/frontend/optimizing-nextjs-application.mdx",
+    "data/blog/review/making-internal-platform-lumberjack.mdx",
+    "data/blog/retrospect/regret-form-implementation.mdx",
     "data/blog/retrospect/retrospect-2024-half.mdx",
-    "!문맥.md",
+    "data/blog/retrospect/retrospect-2024-start.mdx",
+    "data/blog/project/ways-to-optimize-your-nextjs-application.mdx",
+    "data/blog/project/pagetransition-animation-using-framer-motion.mdx",
+    "data/blog/project/optimize-script-loading-on-react.mdx",
+    "data/blog/project/making-full-page-scroll-effect.mdx",
+    "Untitled 1.canvas",
+    "2024-10-12.md",
+    "Untitled.canvas",
     "2024-09-02.md",
+    "2024-03-10.md",
+    "!문맥.md",
     "data/logo.svg",
     "README.md",
     "2024-10-07.md",
-    "Untitled.canvas",
     "data/todo/Translation - data first data last.md",
     "data/authors/sparrowhawk.md",
     "data/blog/draft/2024-09-11.md",
