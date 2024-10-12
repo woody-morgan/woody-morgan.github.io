@@ -7,9 +7,19 @@
       <language>ko-KR</language>
       <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
       <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
-      <lastBuildDate>Mon, 02 Sep 2024 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Sun, 13 Oct 2024 00:00:00 GMT</lastBuildDate>
       <atom:link href="https://woody-morgan.github.io//feed.xml" rel="self" type="application/rss+xml"/>
       
+  <item>
+    <guid>https://woody-morgan.github.io//blog/2024-draft/graceful-error-handling</guid>
+    <title>[WIP]우아하게 에러 핸들링하기</title>
+    <link>https://woody-morgan.github.io//blog/2024-draft/graceful-error-handling</link>
+    <description>ts-rest, react-query, nest.js exception filter를 이용해 우아하게 에러 핸들링하기</description>
+    <pubDate>Sun, 13 Oct 2024 00:00:00 GMT</pubDate>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
+    <category>backend</category>
+  </item>
+
   <item>
     <guid>https://woody-morgan.github.io//blog/good-fe-engineer/become-good-fe-engineer-00</guid>
     <title>[시리즈][좋프엔지] 서론</title>
@@ -18,6 +28,16 @@
     <pubDate>Mon, 02 Sep 2024 00:00:00 GMT</pubDate>
     <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>frontend</category>
+  </item>
+
+  <item>
+    <guid>https://woody-morgan.github.io//blog/review/making-internal-platform-lumberjack</guid>
+    <title>[WIP][후기][FEops] 내부 로컬 배포 플랫폼 럼버잭 제작기</title>
+    <link>https://woody-morgan.github.io//blog/review/making-internal-platform-lumberjack</link>
+    <description>내부 로컬 배포 플랫폼 럼버잭을 제작하면 했던 고민들을 공유합니다</description>
+    <pubDate>Sun, 01 Sep 2024 00:00:00 GMT</pubDate>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
+    <category>review</category>
   </item>
 
   <item>
@@ -52,7 +72,7 @@
 
   <item>
     <guid>https://woody-morgan.github.io//blog/frontend/flat-color-token-object-for-vanilla-extract</guid>
-    <title>ColorToken Flattening For Vanilla Extract CSS (feat. Typescript)</title>
+    <title>Vanilla Extract CSS를 위한 ColorToken Flattening(feat. Typescript)</title>
     <link>https://woody-morgan.github.io//blog/frontend/flat-color-token-object-for-vanilla-extract</link>
     <description>colorToken을 Vanilla Extract Sprinkles에 할당하기 위한 Object Flattening 하기</description>
     <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>

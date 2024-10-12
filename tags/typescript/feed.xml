@@ -12,7 +12,7 @@
       
   <item>
     <guid>https://woody-morgan.github.io//blog/frontend/flat-color-token-object-for-vanilla-extract</guid>
-    <title>ColorToken Flattening For Vanilla Extract CSS (feat. Typescript)</title>
+    <title>Vanilla Extract CSS를 위한 ColorToken Flattening(feat. Typescript)</title>
     <link>https://woody-morgan.github.io//blog/frontend/flat-color-token-object-for-vanilla-extract</link>
     <description>colorToken을 Vanilla Extract Sprinkles에 할당하기 위한 Object Flattening 하기</description>
     <pubDate>Sun, 04 Jun 2023 00:00:00 GMT</pubDate>
