@@ -171,21 +171,134 @@ layout: PostLayout
 
 복사 붙여넣기 개발 환경이 되기 위해 다음과 같은 의사결정을 했습니다.
 
+#### Shadcn UI 및 v0 도입
+
+내부 배포툴 특성상 UI의 중요성 보다는 기능의 완성도가 중요합니다.
+
+또한 Backend 개발자가 내부 배포툴의 기능을 제작할 가능성도 있었습니다.
+
+따라서 UI 자동 생성 도구를 도입하고, UI는 AI에, 로직은 개발자에게 도입하는게 최선이라 생각했습니다.
+
 #### Contract와 API Controller & API Fetching Hook 구조 통일화
 
 해당 프로젝트는 다음과 같은 폴더구조를 가지고 있습니다.
 
+```
+src/
+├── main        # Electron App Entry Point(Handling renderer app, server app init and close lifecycle)
+├── preload     # Electron App Context Bridge` `for` `IPC(Internal Procedure call)
+├── renderer    # Electron App Renderer(For now. written in React. It could be replaced to Vue, Svelte, Solid, etc..)
+├── server      # Electron App Backend Server(For now. written in Nestjs, Bind to src/main)
+└── shared      # Contract(Api Spec Manager) and common utility defined
+
+```
 
 
+그리고 shared 폴더 안에는 contract(api schema 명세)가 정의되어있습니다
 
+contract
+```contract folder structure
 
-### Make & Skeleton & Render Pattern
+shared/
+├── contract
+        ├── environment     # contract for controlling lumberjack app(app log, app metadata(redis, dynamodb, etc...))
+        ├── farms           # contract for deploy farm
+        ├── local-builds    # contract for searching downloaded builds(searching downloaded build list)
+        ├── remote-builds   # contract for searching remote builds(searching remote branch list, searching remote builds, etc...)
+        └── ...define your own contract
+└── ...etc
+
+```
+
+그리고 위의 폴더 구조 그대로 Backend API Controller와 Frontend Api Fetching Hook을 그대로 만듭니다
+
+frontend api fetching
+```frontend folder structure
+
+renderer/
+├── api
+        ├── environment
+            ├── query-key.ts    # define react-query key for managing caching, invalidation policy
+            └── ...define your own React Query Hook base on api call
+        ├── farms
+            ├── query-key.ts    # define react-query key for managing caching, invalidation policy
+            └── ...define your own React Query Hook base on api call
+        └── ...define your own React Query Hook
+
+└── pages, hooks, components, lib, config, locales, styles, types, etc...
+
+```
+
+backend controller
+```backend folder structure
+
+server/
+├── modules
+        ├── environment                 # modules.. defined by contract
+        ├── farms                       # modules..
+        ├── local-builds                # modules..
+        ├── remote-builds               # modules..
+        └── ...define your own modules`
+
+└── ...some nestjs app entry and configuration files
+
+```
+
+위의 구조를 가지기 전, 다른 프로젝트들이 가졌던 문제는 다음과 같습니다
+
+1. API 정의(Contract)에 대한 명세와 실제 구현이 다른 경우가 지속적으로 발생했다
+	1. + API 명세에는 있지만 Backend Controller에는 구현되어 있지 않아도 타입 에러가 발생하지 않았다
+2. API로 불러온 데이터가 페이지별로 처리하는 로직이 다른 경우가 있었다.
+	1. 같은 API임에도 Caching Hook을 통해 공통화되지 못해 여러번 호출이 되었다.
+
+위의 구조를 통해서 가지는 이점은 다음과 같습니다
+
+1. API Spec을 폴더 구조를 통해 한 눈에 파악이 가능합니다
+	1. 또한 해당 구조를 Backend, Frontend 동일하게 가져가기 때문에 사용자의 의도를 파악하기 쉽습니다
+2. API 사용 및 Cache & Invalidation에 대한 로직을 설계하기 쉽습니다
+	1. 한 API에 대한 정의는 오직 renderer/api에 정의된 API Fetching Hook을 사용하기 떄문입니다.
+		1. 다만 예외적인 케이스를 처리하기 위해서, 타입 확장성을 열어놔야합니다.
+	2. 추가적으로 Contract에 정의된 내용 + File 구조를 기반으로 `Backend Controller와 Frontend API Fetching Hook을 자동으로 생성가능하도록 자동화`가 가능합니다
+
+따라서 자동화 가능성, 일관성을 통한 의도 파악 시간 단축 등을 이유로 잘했던 결정이라 생각합니다.
 
 
 ### 아쉬운 결정
 
+#### Monorepo 채택 및 제거
+
 초기에 Monorepo 형상을 채택했던 점이 가장 큰 아쉬움이었습니다.
 
-또한 Docker Free라는게 너무 무리였지 않나 싶습니다.
+#### Docker Free
 
-Backend Core 로직에 점차 Message Queue Service, 
+또한 Docker Free라는게 너무 무리였지 않나 싶습니다. 이 부분은 프로젝트 초기부터 결정된 사항이었고, 또 필수적인 부분이라 바꿀 수 없었습니다.
+
+럼버잭을 사용하는 사용자의 컴퓨터 대부분에서 가상머신을 사용중입니다.(BlueStack, Android VM)
+
+또 Windows 환경에서는 위의 가상머신과 WSL2 Docker와 함께 사용하면 충돌이 나기 때문에 Docker Free는 필수였습니다.
+
+하지만 Backend Core 로직에 점차 Message Queue Service, RDB 등이 도입되면서 Binary 빌드를 하는데 큰 시간이 소요되었습니다.
+
+특히 Mac이면 모르겠지만, Windows는 바이너리를 만드는게 불가능하거나 Reference가 없는 경우가 종종 있었습니다.
+
+또한 바이너리를 빌드하면, 해당 Binary의 Lifecycle을 분석해서 Nestjs Dynamic Module을 만들어야하는데 이 과정이 고통스러웠습니다.
+
+이 부분을 어떻게 해결해야할지가 다음 과제입니다.
+
+
+
+### 후기
+
+솔직히 좀 많이 힘들었습니다.
+
+사실 Fullstack을 할 수는 있었지만, 개인적으로 Frontend가 재밌고 흥미로운 것들이 많아서 Frontend 개발을 하고 있었습니다.
+
+하지만 조직에 처음 들어왔을 때 아젠다가 `조직에 도움이 되면 무엇이든 하겠다. 문제 해결할 수만 있다면 된다`였습니다.
+
+그래서 `개발 시간을 최적화하기 위해 Platform을 제작한다`는 기회가 왔을때, 프로젝트 리드로써 임할 수 있는 기회도 받았습니다.
+
+그렇지만 해당 프로젝트는 Fullstack을 넘어서 Desktop Native Build, Binary(Redis, PostgreSQL, DynamoDB) Build, Codesign 등을 모두 해야했습니다.
+
+그렇다고 개발 리소스를 많이 할당받지도 못했구요.
+
+DRI를 가지고 있어서 실험적인 것들(Ex. ts-rest, shadcn ui + v0 등)을 도입했지만 다음에 비슷한 기회가 있다면 정말 많이 고민할 것 같습니다.

@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "9691b2f79fa645ec",
+        "id": "1f4af5dbbf48e854",
         "type": "tabs",
         "children": [
           {
-            "id": "d04a73bda4e7a2b4",
+            "id": "5dda5efe6afd100f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/review/making-internal-platform-lumberjack.mdx",
+                "file": "data/blog/2024-draft/graceful-error-handling.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 223.5
+    "width": 298.5
   },
   "right": {
     "id": "16f4a25d01ad401f",
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/review/making-internal-platform-lumberjack.mdx",
+                "file": "data/blog/2024-draft/graceful-error-handling.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/review/making-internal-platform-lumberjack.mdx",
+                "file": "data/blog/2024-draft/graceful-error-handling.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/review/making-internal-platform-lumberjack.mdx"
+                "file": "data/blog/2024-draft/graceful-error-handling.mdx"
               }
             }
           }
@@ -151,20 +151,20 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d04a73bda4e7a2b4",
+  "active": "5dda5efe6afd100f",
   "lastOpenFiles": [
+    "data/blog/2024-draft/graceful-error-handling.mdx",
+    "data/blog/frontend/flat-color-token-object-for-vanilla-extract.mdx",
+    "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/essay/thinking about fundamental.mdx",
     "data/blog/retrospect/retrospect-2024-start.mdx",
-    "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/frontend/create-native-like-image-slider-component.mdx",
-    "data/blog/frontend/flat-color-token-object-for-vanilla-extract.mdx",
     "data/blog/funtional/declarative-programming-part2.mdx",
     "public/static/images/avatar.jpeg",
     "data/blog/funtional/declarative-programming-part1.mdx",
     "data/blog/essay/wip-similarity-between-fp-compound-pattern.mdx",
     "data/blog/language/fundamental-javascript.mdx",
     "data/blog/2024-draft/retrospect-2024-half.mdx",
-    "data/blog/2024-draft/improve-form-implementation.mdx",
     "Untitled 1.canvas",
     "2024-10-12.md",
     "Untitled.canvas",
