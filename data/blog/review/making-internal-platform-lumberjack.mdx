@@ -128,22 +128,54 @@ layout: PostLayout
 * IPC Event 중복 등록
 * Build and Release
 
+위의 문제 해결 과정은 아래 의사결정 항목에서 자세히 설명하겠습니다.
 
 ## 의사결정
 
 ### 잘했던 결정
 
-### Contract와 API Controller & API Fetching Hook 구조 통일화
+### Contract 기반 개발 프로세스 도입
 
+기존 개발 프로세스는 다음과 같았습니다
 
+1. Backend 개발자가 API를 제작한다
+2. 업데이트된 API Request, Response를 OpenAPI 기반 문서에 업데이트한다
+3. 해당 OpenAPI 문서를 이용해서 Client에서 Typegen을 한다
+4. Typegen된 API를 기반으로 API Fetching을 한다
 
-### REST API
+해당 방식의 문제점은 다음과 같습니다
+
+1. Backend 개발자가 수기로 OpenAPI에 명시된 API Request, Response를 업데이트 해야한다. 
+	1. 휴먼 에러가 발생할 수 있다
+2. API Schema가 정의될 때 까지 Frontend 개발자가 상상해서 코딩하고 있어야한다.
+
+위의 병목과 휴먼 에러를 방지하면, 기능 개발을 신속하게 할 수 있을 것이라 생각했습니다
+
+추가적으로 Contract 기반 개발 프로세스를 도입하면서 합의한 내용은 다음과 같습니다
+
+1. REST API 기반으로 통신할 것
+2. 개발 이전에 필요한 REST API의 Request, Response를 미리 정의할 것
+	1. 단 세부적인 Parameter naming 변경은 Backend 개발자에게 위임한다
+	2. Typescript 레벨에서 검사가 되기 때문에, 변경 비용은 감당할 수 있다
+3. REST API 설계시 [Resource 단위](https://restfulapi.net/resource-naming/)로 분리하여 제작할 것
+4. Schema에 대한 API가 정의되기 전에는, Mock Autogen을 통해 개발 프로세스를 진행할 것
+
+위의 합의를 통해, Frontend와 Backend 개발을 동시에 개발할 수 있는 환경이 조성되었습니다.
+
+또한 Contract를 우선적으로 정의했기 때문에, 더 좋은 API Interface설계에 대해 함께 고민할 수 있게 되어 좋았습니다.
 
 ### Copy and Paste Development
+
 
 현재 속해있는 팀은 Frontend 리소스가 부족합니다.
 
 복사 붙여넣기 개발 환경이 되기 위해 다음과 같은 의사결정을 했습니다.
+
+#### Contract와 API Controller & API Fetching Hook 구조 통일화
+
+해당 프로젝트는 다음과 같은 폴더구조를 가지고 있습니다.
+
+
 
 
 
