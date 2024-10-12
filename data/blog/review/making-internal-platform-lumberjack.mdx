@@ -1,10 +1,10 @@
 ---
-title: "[후기][FEops] 내부 배포 플랫폼 럼버잭 제작기"
+title: "[후기][FEops] 내부 로컬 배포 플랫폼 럼버잭 제작기"
 date: 2024-09-01
 tags:
   - review
-draft: true
-summary: 내부 배포 플랫폼 럼버잭을 제작하면 했던 고민들을 공유합니다
+draft: false
+summary: 내부 로컬 배포 플랫폼 럼버잭을 제작하면 했던 고민들을 공유합니다
 images: 
 layout: PostLayout
 ---
@@ -13,11 +13,55 @@ layout: PostLayout
 
 ## 개론
 
-코어 로직 
+내부 코어로직을 로컬 머신에서 배포 및 테스트 할 수 있는 데스크탑 앱 기반 플랫폼을 만들었습니다.
+
+프레임워크의 동작원리 보다는 프로젝트를 진행하면서 겪었던 문제점들에 대해 소개합니다.
 
 ## 프로젝트의 목적
 
-* 
+해당 프로젝트의 목적은 `의사소통 비용을 줄인다`입니다.
+
+내부 코어 로직 서비스를 비 Backend 개발자가 실행시키는 것은 대체로 고통스럽습니다.
+
+대략 다음과 같은 과정을 거쳐야하기 때문입니다.
+
+1. Project를 Clone한다
+2. Dependency를 설치한다
+3. Docker가 필요시 Docker를 설치한다
+4. Env를 세팅한다
+5. Project를 실행한다
+
+또한 프로젝트 특성상 Windows 환경에서도 실행이 가능해야합니다.
+
+위의 과정이 적어놓은 것에 비해 훨씬 복잡했기 때문에 이를 해결할 내부 SaaS가 필요합니다.
+
+### 기존 개발 프로세스
+
+따라서 내부적으로 Vercel과 같은 Cloud Platform(이하 CP라고 하겠습니다)을 제작하여 사용하고 있었고
+
+다음과 같은 프로세스로 개발이 이루어졌습니다
+
+1. CP에서 배포할 서비스를 선택한다
+2. 배포할 서비스가 K8S Pod에 배포될 때 까지 기다린다
+3. 배포 후, 각자의 서비스(iOS, Android, Client)에 reverse proxy port에 연결하여 개발한다
+
+하지만 다음과 같은 불편함이 있었습니다.
+
+1. 배포하는데 반영까지 최소 20분 이상 소요는 점
+	1. Binary Build와 상관없는 간단한 Config Map 수정임에도 Minimum Time이 소요된다
+		1. Core 서비스의 사용자인 Client 개발자에게는 Config Map수정이 주된 변경이다
+	2. 변경이 이루어진건지 확인하기 어렵다
+2. 필요없는 Core Service도 함께 배포되기 때문에 Pod의 용량이 크다
+
+###  해결책
+
+따라서 위의 문제를 해결하기 위해, 팀 내부적으로 논의된 해결책은 다음과 같았습니다
+
+* Core Service들을 로컬 머신에 띄울 수 있는 Local Deploy Platform을 만든다
+- Cross-platform(Windows, Mac)을 지원한다
+	- QA Engineer, Mobile Native Engineer를 위해
+- Docker Free를 지향하고, Core Service가 사용하는 third-party service는 직접 build 후 Local Deploy Platform이 내장한다.
+
 
 ## 고민사항
 
@@ -66,3 +110,4 @@ layout: PostLayout
 
 복사 붙여넣기 개발 환경이 되기 위해 다음과 같은 의사결정을 했습니다.
 
+### Make & Skeleton & Render Pattern
