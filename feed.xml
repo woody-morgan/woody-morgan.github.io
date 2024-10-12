@@ -7,19 +7,9 @@
       <language>ko-KR</language>
       <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
       <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
-      <lastBuildDate>Sun, 13 Oct 2024 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Mon, 02 Sep 2024 00:00:00 GMT</lastBuildDate>
       <atom:link href="https://woody-morgan.github.io//feed.xml" rel="self" type="application/rss+xml"/>
       
-  <item>
-    <guid>https://woody-morgan.github.io//blog/2024-draft/graceful-error-handling</guid>
-    <title>[WIP]우아하게 에러 핸들링하기</title>
-    <link>https://woody-morgan.github.io//blog/2024-draft/graceful-error-handling</link>
-    <description>ts-rest, react-query, nest.js exception filter를 이용해 우아하게 에러 핸들링하기</description>
-    <pubDate>Sun, 13 Oct 2024 00:00:00 GMT</pubDate>
-    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
-    <category>backend</category>
-  </item>
-
   <item>
     <guid>https://woody-morgan.github.io//blog/good-fe-engineer/become-good-fe-engineer-00</guid>
     <title>[시리즈][좋프엔지] 서론</title>
