@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/core/fundamental-javascript.mdx",
+                "file": "data/blog/core/what-is-throttle-debounce.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/core/fundamental-javascript.mdx",
+                "file": "data/blog/core/what-is-throttle-debounce.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/core/fundamental-javascript.mdx",
+                "file": "data/blog/core/what-is-throttle-debounce.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/core/fundamental-javascript.mdx"
+                "file": "data/blog/core/what-is-throttle-debounce.mdx"
               }
             }
           }
@@ -178,15 +178,15 @@
   },
   "active": "35f8975db3ed1edf",
   "lastOpenFiles": [
-    "!문맥.md",
+    "data/blog/core/implement-promise.mdx",
     "data/blog/core/fundamental-javascript.mdx",
+    "data/blog/core/flat-color-token-object-for-vanilla-extract.mdx",
+    "!문맥.md",
     "2024-09-02.md",
     "2024-03-10.md",
     "data/blog/core/what-is-throttle-debounce.mdx",
-    "data/blog/core/implement-promise.mdx",
     "data/blog/retrospect/retrospect-2024-half.mdx",
     "data/blog/retrospect/regret-form-implementation.mdx",
-    "data/blog/core/flat-color-token-object-for-vanilla-extract.mdx",
     "data/blog/retrospect/thinking about fundamental.mdx",
     "data/blog/project/declarative-programming-part1.mdx",
     "data/blog/project/create-native-like-image-slider-component.mdx",
