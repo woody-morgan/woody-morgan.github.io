@@ -3,7 +3,7 @@
     <channel>
       <title>woody-morgan.github.io</title>
       <link>https://woody-morgan.github.io//blog</link>
-      <description>Beyond contentment, greatness</description>
+      <description>Inspirational thoughts and ideas</description>
       <language>ko-KR</language>
       <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
       <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
@@ -17,7 +17,7 @@
     <description>Nestjs 어플리케이션을 배포하면서 생긴 문제점을 정리하였습니다</description>
     <pubDate>Sun, 07 Aug 2022 00:00:00 GMT</pubDate>
     <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
-    <category>backend</category><category>nestjs</category>
+    <category>backend</category>
   </item>
 
     </channel>
