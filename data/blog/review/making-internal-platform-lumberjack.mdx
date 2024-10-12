@@ -15,33 +15,35 @@ layout: PostLayout
 
 내부 
 
+## 프로젝트의 목적
 
+* 
 
+## 고민사항
 
+- 비 Frontend 개발자도 쉽게 유지보수 할 수 있는가?
+	- Copy and Paste 개발이 되면 해결가능
+		- Type Extraction Utility 구조화
+		- API Fetching Hook 공통화
+		- Husky Build Hook 도입
+		- Contract, Backend Controller, Frontend API Fetching Hook 폴더구조 통일
+- Frontend와 Backend 개발자간의 의사소통 비용이 줄었으면 좋겠다
+	- Contract 도입으로 RPC like Restful API설계
+	- Resource 별 Rest API 설계
+	- 
 
+## 발생했던 문제
 
-## 후기
+* Monorepo 사용 불가
+* 배포 환경별 Folder Permission 
+* Binary Build and Crush
+* Nestjs Shutdown Hook
+* Redis Instance Flush
+* Code Sign
+* IPC Event 중복 등록
+* Build and Release
 
-해당 플랫폼을 만들면서 많이 힘들었습니다.
-
-왜 힘들었을까? 라고 스스로에게 질문했을 때, 다음과 같은 답을 냈습니다.
-
-`기여에 대한 보람을 느끼기 어렵다고 기대되기 때문입니다.`
-
-지금 회사로 이직을 결정했을 때, 가장 큰 아젠다는 `팀을 위해서 어떤 것이든 하겠다`였습니다.
-
-그래서 Frontend라는 역할에 국한하지 않고, 자동화 도구 제작, CI/CD 개선, 개발 문화 수립 등등에 기여했습니다.
-
-또한 그런 기여에는 구성원들의 Pain Point를 기반으로 진행했죠.
-
-럼버잭 또한 Frontend 뿐만이 아닌 대부분의 영역에 기여했습니다. 예를 들면, Frontend 전체, Backend Interface 및 Business Logic 구현, Contract 기반 개발 프로세스 수립, CI/CD 구축, CodeSign 등등. 
-
-그런데 실망했던 점은 그런 일들을 함께 하는 것 보다는, `나의 일`처럼 되어가는게 느껴져서 아쉬웠던 것 같습니다.
-
-제게 일을 열심히 하게 하는 가장 큰 동기는 `함께` 위대한 것을 이루는 과정이거든요.
-
-이런 실망이 어떻게 이어질지 모르겠습니다.
-
+## 의사결정
 
 
 
