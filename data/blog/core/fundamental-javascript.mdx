@@ -23,7 +23,7 @@ layout: PostLayout
 오늘은 그런 `어떻게 돌아가는지에 대한 것` 중에 하나인 JS Prototype에 대해 알아보고, 독자분들께 영감이 되었으면 하는 바램으로 글을 작성했습니다.
 
 글이 조금 깁니다.
-또한 `[자바스크립트는 왜 프로토타입을 선택했을까](https://medium.com/@limsungmook/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%99%9C-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85%EC%9D%84-%EC%84%A0%ED%83%9D%ED%96%88%EC%9D%84%EA%B9%8C-997f985adb42)` 해당 글을 참조했습니다. 
+또한 [자바스크립트는 왜 프로토타입을 선택했을까](https://medium.com/@limsungmook/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%99%9C-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85%EC%9D%84-%EC%84%A0%ED%83%9D%ED%96%88%EC%9D%84%EA%B9%8C-997f985adb42) 해당 글을 참조했습니다. 
 ## Prototype
 
 결론은 Prototype은 ’문맥을 존중하는 기술의 구현체‘입니다.
@@ -154,6 +154,75 @@ Prototype 기반의 OOP 언어의 특징은 다음과 같습니다
 - 개별 객체 수준에서 객체를 수정하고 발전시키는 능력은 **선험적 분류의 필요성을 줄이고 반복적인 프로그래밍 및 디자인 스타일**을 장려
 - Classification 하지 않고 Similarity를 활용하도록 함
 - 설계는 맥락에 의해 평가
+
+다시 한 번 정리하면 다음과 같습니다
+
+* Classification를 우선하지 않는다. `생성된` 객체 위주로 유사성을 정의한다
+* 어휘, 쓰임새는 Context에 의해 평가된다
+	* 실행 컨텍스트, 스코프 체인이 여기에서 파생되었습니다
+	* Closure, this, hoisting 등등이 모두 프로토타입의 Context를 표현하기 위한 것 입니다.
+
+
+코드를 통해 다시 한 번 살펴봅시다
+
+### Javascript - Prototype
+
+```js
+
+function 참새(){
+    this.날개갯수 = 2;
+    this.날수있나 = true;
+}
+const 참새1 = new 참새();
+
+console.log("참새의 날개 갯수 : ", 참새1.날개갯수); // 2
+
+// 닭
+function 닭(){
+  this.벼슬 = true;
+}
+닭.prototype = 참새1; // reference(오른쪽이 인스턴스인 점 주목)
+const 닭1 = new 닭();
+console.log("닭1 날개 : ", 닭1.날개갯수, ", 날수있나? ", 닭1.날수있나); // 2, true
+닭1.날수있나 = false;
+console.log("다시 물어본다. 닭1은 날 수 있나? :", 닭1.날수있나); // false
+
+
+// 펭귄
+// 아래는 고전적인 방식의 프로토타입 연결
+function 펭귄(){
+    참새.call(this);    // copy properties
+}
+펭귄.prototype = Object.create(참새.prototype); // 프로토타입 연결
+const 펭귄1 = new 펭귄();
+console.log("펭귄1 날개 : ", 펭귄1.날개갯수, ", 날수있나? ", 펭귄1.날수있나); // 2, true
+펭귄1.날수있나 = false;
+console.log("다시 물어본다. 펭귄1은 날 수 있나? :", 펭귄1.날수있나); // false
+
+```
+
+주목해야할 부분은 다음과 같습니다
+* 닭의 prototype을 주입할 때, 참새(함수)가 아닌 참새1(인스턴스)를 주입합니다. 프로토타입 이론은 이미 존재하는 사물을 통해 범주화한다는 점에서 일치합니다
+* 닭1은 날 수 없습니다. 닭1은 날 수 없어도 프로토타입에 해당하는 참새1은 날 수 있습니다. 같은 속성을 변경해도 프로토타입 객체의 속성은 변경되지 않습니다.
+* 프로토타입에선 객체 생성(Object.create 함수)를 통해 확장된다는 부분이 좀 더 직관적으로 다가옵니다
+
+
+![reference](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*EPvcWtTdkrM_vZHDwNNMJg.png)
+
+* 닭1의 Prototype은 참새1이다
+* 닭1에 없는 속성(날개개수)은 프로토타입 체인을 통해 참조된다
+* 닭1에 동일한 속성명(날수있나)을 추가해도 원형은 변하지 않는다(위임)
+	* 원리적으로는 닭1을 통해 원형을 변경하는건 불가능해야 합니다. 다만 JS에선 문법적으로 가능합니다.(권장하지 않음)
+
+
+### Javascript - Lexical Scope
+
+의미사용이론에 따르면 단어의 의미는 어휘적인, 근처 환경에서의 의미가 됩니다. 이는 Javascript에서 다음처럼 적용됩니다
+
+>==변수의 의미는 그== ==**어휘적인(Lexical)**====, ==**실행 문맥(Execution Context)**====에서의 의미가 된다
+
+그렇기에 Javascript가 동읠 범위(Lexical)의 모든 `선언`을 참고(Hoisting)해 의미를 정의합니다.
+
 
 
 
