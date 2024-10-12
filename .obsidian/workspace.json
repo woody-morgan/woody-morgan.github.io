@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/funtional/declarative-programming-part2.mdx",
+                "file": "data/blog/review/making-internal-platform-lumberjack.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/funtional/declarative-programming-part2.mdx",
+                "file": "data/blog/review/making-internal-platform-lumberjack.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/funtional/declarative-programming-part2.mdx",
+                "file": "data/blog/review/making-internal-platform-lumberjack.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/funtional/declarative-programming-part2.mdx"
+                "file": "data/blog/review/making-internal-platform-lumberjack.mdx"
               }
             }
           }
@@ -153,6 +153,7 @@
   },
   "active": "9c5ca6e714267d61",
   "lastOpenFiles": [
+    "data/blog/funtional/declarative-programming-part2.mdx",
     "public/static/images/avatar.jpeg",
     "data/blog/funtional/declarative-programming-part1.mdx",
     "data/blog/retrospect/retrospect-2024-start.mdx",
@@ -191,7 +192,6 @@
     "public/static/images/proj/advent/advent-modifiers.gif",
     "public/static/images/proj/wordle.png",
     "public/static/images/proj/with-you.png",
-    "public/static/images/proj/surrounds.png",
     "README 2.md",
     "무제 파일.md",
     "무제 파일.canvas"
