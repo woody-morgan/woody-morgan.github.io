@@ -291,7 +291,7 @@ function init() {
 
 이러한 오해를 바로잡기 위해선 먼저 프로토타입 철학에서 이런 상황을 어떻게 해석하는지 알 필요가 있습니다.
 
-이전에 [문맥 따르기](#### 문맥 따르기) 기억나시나요? `응`이라는 말이 상황에 따라 긍정 또는 부정의 의미를 가졌습니다.
+이전에 [문맥 따르기](!문맥 따르기) 기억나시나요? `응`이라는 말이 상황에 따라 긍정 또는 부정의 의미를 가졌습니다.
 
 비트겐슈타인은 그의 대표적인 저서 `철학적 탐구`에서 단어의 쓰임새가 곧 의미라는 점을 강조했습니다(`의미사용이론`). 그는 이를 `발화`라고 얘기했는데요, 위에서 예시 들었던 `응`이라는 대답은, 어디서 `발화`되느냐에 따라서 단어의 의미가 달라집니다. 즉 받아들이는 `대상`에 따라서 같은 단어도 의미가 달라진다는 얘기입니다.
 
@@ -394,7 +394,7 @@ Prototype은 Class의 다른 구현이 아닌, 완전히 새로운 인식 하에
 JS에서는 Class라는 Syntax Sugar가 있을 뿐이지, 내부적으로는 아예 다른 관점으로 객체를 바라보고 있습니다. 따라서 다른 Class기반 언어와 달리 JS의 Prototype, Hoisting, this가 `왜` 존재하고 이해할 수 있습니다.
 
 
-## 글을 쓴 이유(fea. Rescript)
+## 글을 쓴 이유(feat. Rescript)
 
 오늘 이 글을 쓰게 된 이유는 Flow와 Typescript(이하 TS)를 비교하다가 문득 Javascript 자체에 의문이 들어서 쓰게되었습니다.
 
@@ -408,23 +408,23 @@ JS에서는 Class라는 Syntax Sugar가 있을 뿐이지, 내부적으로는 아
 
 알아보기에 앞서 우선, Flow는 Facebook이 TS는 Microsoft에서 만든 JS타입 추론기(혹은 시뮬레이터) 입니다. 비슷해보이지만 두 추론기는 지향하는바가 다릅니다.
 
-TS는 AST를, Flow는 Graph를 사용합니다. 좀 더 간단히 이야기하자면, Typescript는 타입을 즉시 결정하고, Flow는 타입 결정을 추론하여 결정합니다.(그래서 Flow는 타입 정보를 TS에 비해 덜 적어도 됩니다)
+TS는 AST를, Flow는 Graph를 사용합니다. 좀 더 간단히 이야기하자면, Typescript는 타입을 즉시 결정하고, Flow는 타입 결정을 추론하여 결정합니다.(그래서 Flow는 타입 정보를 TS에 비해 덜 적어도 됩니다. 물론 이것도 최근에는 TS 옵션이 많이 좋아져서 꼭 그렇지도 않습니다.)
 
 [Flow](https://github.com/facebook/flow)의 경우 Ocaml 언어를 통해 Javascript Code Parsing and Analyze 로직이 짜여져있습니다. Ocaml의 힌들리 밀러 타입 시스템이 Flow의 타입 결정 로직과 일치하기 때문에 매우 똑똑한 결정이었을 것 입니다. 
 
-하지만 JS는 Ocaml과 달리 함수형 패러다임에 입각한 언어가 아니기 때문에 타입 추론 버그에 시달릴 수 밖에 없었습니다. 객체에 대한 mutable한 접근을 시뮬레이팅 하거나, JS의 특정한 문법을 Flow의 Graph 전파 로직 내에서 예외처리하기 어려웠겠죠. 
+하지만 JS는 Ocaml과 달리 함수형 패러다임에 입각한 언어가 아니기 때문에 타입 추론 버그에 시달릴 수 밖에 없었습니다. 객체에 대한 mutable한 접근을 시뮬레이팅 하거나, JS의 특정한 문법을 Flow의 Graph 전파 로직 내에서 예외처리하기 어려웠겠죠(ES5의 문법적 한계 때문이 큽니다.)
 
 또한 점진적 Migration 측면에서 Typescript가 더 훌륭했기 때문에 점차 시장에서 밀렸을 것 입니다.
 
 그렇지만 Flow가 가진 매력적인 요소들이 많았기에, 이런 요소들을 실제 개발에 도입할 수 있는 환경(Buckle Script or Rescript)을 구축하려고 노력했고, 그 노력이 그린랩스라는 회사의 탄생으로 이어진게 아닌가 싶었습니다.
 
-더 자세한건 `[Flow와 Typescript의 채택](https://blog.rhostem.com/posts/2017-06-11-adopting-flow-and-typescript)` 글을 참고해주세요
+더 자세한건 [Flow와 Typescript의 채택](https://blog.rhostem.com/posts/2017-06-11-adopting-flow-and-typescript) 글을 참고해주세요
 
 그래서 정리하면 이렇습니다
 1. Flow는 페이스북이 만들었고 Ocaml 언어로 만들어졌다
 	1. React 또한 Ocaml로 프로토타이핑 되었던 시절이 있다
 2. BuckleScript는 사실상 Ocaml을 기반으로한 Readable Javascript Converter이다
-3. Flow는 Javascript 언어의 한계로 버그 및 이슈가 많다
+3. Flow는 Javascript 언어의 한계로 버그 및 이슈가 많다(단, ES6가 되면서 많이 개선되었다)
 
 `따라서 BuckleScript를 기반으로 Flow의 장점을 차용해서 Javascript 개발을 하자`와 같이 된게 아닌가 싶었습니다.
 
