@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/essay/thinking about fundamental.mdx",
+                "file": "data/blog/funtional/automation-for-work.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/essay/thinking about fundamental.mdx",
+                "file": "data/blog/funtional/automation-for-work.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/essay/thinking about fundamental.mdx",
+                "file": "data/blog/funtional/automation-for-work.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/essay/thinking about fundamental.mdx"
+                "file": "data/blog/funtional/automation-for-work.mdx"
               }
             }
           }
@@ -153,20 +153,20 @@
   },
   "active": "5dda5efe6afd100f",
   "lastOpenFiles": [
-    "data/blog/essay/wip-similarity-between-fp-compound-pattern.mdx",
-    "data/blog/language/fundamental-javascript.mdx",
-    "data/blog/essay/thinking about fundamental.mdx",
-    "data/blog/2024-draft/graceful-error-handling.mdx",
-    "data/blog/frontend/flat-color-token-object-for-vanilla-extract.mdx",
-    "data/blog/review/making-internal-platform-lumberjack.mdx",
-    "data/blog/retrospect/retrospect-2024-start.mdx",
-    "data/blog/frontend/create-native-like-image-slider-component.mdx",
-    "data/blog/funtional/declarative-programming-part2.mdx",
-    "public/static/images/avatar.jpeg",
-    "data/blog/funtional/declarative-programming-part1.mdx",
-    "data/blog/2024-draft/retrospect-2024-half.mdx",
-    "Untitled 1.canvas",
     "2024-10-12.md",
+    "2023-05-31.md",
+    "data/blog/funtional/automation-for-work.mdx",
+    "data/blog/funtional/declarative-programming-part1.mdx",
+    "data/blog/retrospect/retrospect-2024-start.mdx",
+    "data/blog/funtional/what-is-throttle-debounce.mdx",
+    "data/blog/funtional/declarative-programming-part2.mdx",
+    "data/blog/language/fundamental-javascript.mdx",
+    "data/blog/review/making-internal-platform-lumberjack.mdx",
+    "data/blog/essay/thinking about fundamental.mdx",
+    "data/blog/essay/wip-similarity-between-fp-compound-pattern.mdx",
+    "data/blog/2024-draft/graceful-error-handling.mdx",
+    "public/static/images/avatar.jpeg",
+    "Untitled 1.canvas",
     "Untitled.canvas",
     "2024-09-02.md",
     "2024-03-10.md",
@@ -177,7 +177,6 @@
     "data/todo/Translation - data first data last.md",
     "data/authors/sparrowhawk.md",
     "data/blog/draft/2024-09-11.md",
-    "2023-05-31.md",
     "draft/Program Tip 2024-08-16.md",
     "draft/Today I Learn/2024-08-16.md",
     "draft/Today I Learn/TIL 2024-08-16.md",
