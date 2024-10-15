@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/funtional/automation-for-work.mdx",
+                "file": "data/blog/review/making-internal-platform-lumberjack.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "data/blog/funtional/automation-for-work.mdx",
+                "file": "data/blog/review/making-internal-platform-lumberjack.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "data/blog/funtional/automation-for-work.mdx",
+                "file": "data/blog/review/making-internal-platform-lumberjack.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/funtional/automation-for-work.mdx"
+                "file": "data/blog/review/making-internal-platform-lumberjack.mdx"
               }
             }
           }
@@ -153,14 +153,14 @@
   },
   "active": "5dda5efe6afd100f",
   "lastOpenFiles": [
+    "data/blog/retrospect/retrospect-2024-start.mdx",
+    "data/blog/language/fundamental-javascript.mdx",
+    "data/blog/funtional/automation-for-work.mdx",
     "data/blog/funtional/declarative-programming-part2.mdx",
     "data/blog/funtional/declarative-programming-part1.mdx",
     "data/blog/funtional/what-is-throttle-debounce.mdx",
-    "data/blog/funtional/automation-for-work.mdx",
     "2024-10-12.md",
     "2023-05-31.md",
-    "data/blog/retrospect/retrospect-2024-start.mdx",
-    "data/blog/language/fundamental-javascript.mdx",
     "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/essay/thinking about fundamental.mdx",
     "data/blog/essay/wip-similarity-between-fp-compound-pattern.mdx",
