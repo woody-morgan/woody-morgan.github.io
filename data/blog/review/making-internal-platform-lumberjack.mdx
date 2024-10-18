@@ -26,11 +26,16 @@ layout: PostLayout
 
 대략 다음과 같은 과정을 거쳐야하기 때문입니다.
 
+```bash
+
 1. Project를 Clone한다
 2. Dependency를 설치한다
 3. Docker가 필요시 Docker를 설치한다
 4. Env를 세팅한다
 5. Project를 실행한다
+
+```
+
 
 또한 프로젝트 특성상 Windows 환경에서도 실행이 가능해야합니다.
 
@@ -97,7 +102,7 @@ layout: PostLayout
 위의 고민을 통해 결정한 기술 스택은 다음과 같습니다
 
 * FE
-	* React 18.2.0, React Query v5, React Hook Form, Shadn UI, Zod, [TS-Rest](https://ts-rest.com)
+	* Electron, React 18.2.0, React Query v5, React Hook Form, Shadn UI, Zod, [TS-Rest](https://ts-rest.com)
 	* UI Gen with [v0](https://v0.dev)
 * BE
 	* Nest.js, Zod, [TS-Rest](https://ts-rest.com)
@@ -108,24 +113,11 @@ layout: PostLayout
 * Automation
 	* Husky
 	* Github Action
-	* 
 
-## 발생했던 문제
+변경 가능성과 확장 가능성에 초점을 두고 기술 스택을 선택했습니다.
 
-프로젝트를 진행하면서 발생한 문제는 다음과 같습니다.
 
-* Monorepo 사용 불가
-* 배포 환경별 Folder Permission 
-* Binary Build and Crush
-* Nestjs Shutdown Hook
-* Redis Instance Flush
-* Code Sign
-* IPC Event 중복 등록
-* Build and Release
-
-위의 문제 해결 과정은 아래 의사결정 항목에서 자세히 설명하겠습니다.
-
-## 의사결정
+## 의사결정과 회고
 
 ### 잘했던 결정
 
@@ -140,22 +132,22 @@ layout: PostLayout
 
 해당 방식의 문제점은 다음과 같습니다
 
-1. Backend 개발자가 수기로 OpenAPI에 명시된 API Request, Response를 업데이트 해야한다. 
-	1. 휴먼 에러가 발생할 수 있다
-2. API Schema가 정의될 때 까지 Frontend 개발자가 상상해서 코딩하고 있어야한다.
+1. Backend 개발자가 `수기로 OpenAPI에 명시된 API Request, Response를 업데이트 해야한다.` 
+	1. `휴먼 에러`가 발생할 수 있다
+2. API Schema가 정의될 때 까지 Frontend 개발자가 `상상해서 코딩`하고 있어야한다.
 
 위의 병목과 휴먼 에러를 방지하면, 기능 개발을 신속하게 할 수 있을 것이라 생각했습니다
 
 추가적으로 Contract 기반 개발 프로세스를 도입하면서 합의한 내용은 다음과 같습니다
 
 1. REST API 기반으로 통신할 것
-2. 개발 이전에 필요한 REST API의 Request, Response를 미리 정의할 것
+2. `개발 시작 전 필요한 REST API의 Request, Response를 미리` 정의할 것
 	1. 단 세부적인 Parameter naming 변경은 Backend 개발자에게 위임한다
 	2. Typescript 레벨에서 검사가 되기 때문에, 변경 비용은 감당할 수 있다
-3. REST API 설계시 [Resource 단위](https://restfulapi.net/resource-naming/)로 분리하여 제작할 것
-4. Schema에 대한 API가 정의되기 전에는, Mock Autogen을 통해 개발 프로세스를 진행할 것
+3. `REST API 설계시 [Resource 단위](https://restfulapi.net/resource-naming/)로 분리하여 제작할 것`
+4. Schema에 대한 실제 API가 정의되기 전에는, Mock Autogen을 통해 개발 프로세스를 진행할 것
 
-위의 합의를 통해, Frontend와 Backend 개발을 동시에 개발할 수 있는 환경이 조성되었습니다.
+위의 합의를 통해, Frontend와 Backend 개발을 `동시에 개발`할 수 있는 환경이 조성되었습니다.
 
 또한 Contract를 우선적으로 정의했기 때문에, 더 좋은 API Interface설계에 대해 함께 고민할 수 있게 되어 좋았습니다.
 
@@ -239,20 +231,20 @@ server/
 
 ```
 
-위의 구조를 가지기 전, 다른 프로젝트들이 가졌던 문제는 다음과 같습니다
+위의 구조를 가지기 전, `과거 프로젝트들이 가졌던 공통적인 문제`는 다음과 같습니다
 
-1. API 정의(Contract)에 대한 명세와 실제 구현이 다른 경우가 지속적으로 발생했다
+1. API 에 대한 `명세와 실제 구현이 다른 경우가 지속적으로 발생`했다
 	1. + API 명세에는 있지만 Backend Controller에는 구현되어 있지 않아도 타입 에러가 발생하지 않았다
 2. API로 불러온 데이터가 페이지별로 처리하는 로직이 다른 경우가 있었다.
 	1. 같은 API임에도 Caching Hook을 통해 공통화되지 못해 여러번 호출이 되었다.
 
-위의 구조를 통해서 가지는 이점은 다음과 같습니다
+`위의 구조를 통해서 가지는 이점`은 다음과 같습니다
 
-1. API Spec을 폴더 구조를 통해 한 눈에 파악이 가능합니다
-	1. 또한 해당 구조를 Backend, Frontend 동일하게 가져가기 때문에 사용자의 의도를 파악하기 쉽습니다
+1. API Spec을 `폴더 구조를 통해 한 눈에 파악`이 가능합니다
+	1. 또한 API 호출 및 정의에 대해 Frontend,  Backend 동일하게 가져가기 때문에 의도를 파악하기 쉽습니다
 2. API 사용 및 Cache & Invalidation에 대한 로직을 설계하기 쉽습니다
-	1. 한 API에 대한 정의는 오직 renderer/api에 정의된 API Fetching Hook을 사용하기 떄문입니다.
-		1. 다만 예외적인 케이스를 처리하기 위해서, 타입 확장성을 열어놔야합니다.
+	1. 한 API에 대한 정의는 오직 정의된 API Fetching Hook을 사용하기 떄문입니다.
+		1. 다만 예외적인 케이스(Invalidation)를 처리하기 위해서, 타입 확장성을 열어놔야합니다.
 	2. 추가적으로 Contract에 정의된 내용 + File 구조를 기반으로 `Backend Controller와 Frontend API Fetching Hook을 자동으로 생성가능하도록 자동화`가 가능합니다
 
 따라서 자동화 가능성, 일관성을 통한 의도 파악 시간 단축 등을 이유로 잘했던 결정이라 생각합니다.
@@ -264,7 +256,9 @@ server/
 
 초기에 Monorepo 형상을 채택했던 점이 가장 큰 아쉬움이었습니다.
 
-처음에는 
+처음에는 Frontend Repo와 Backend Repo를 분리하고 Pnpm workspace + Turborepo를 이용하여 Monorepo 형상으로 프로젝트를 설계했습니다.
+
+하지만 
 
 #### Docker Free
 
@@ -283,19 +277,33 @@ server/
 이 부분을 어떻게 해결해야할지가 다음 과제입니다.
 
 
+### 사소한 문제들
+
+  프로젝트를 진행하면서 발생한 문제는 다음과 같습니다.
+
+* Monorepo 사용 불가
+* 배포 환경별 Folder Permission
+* Binary Build and Crush
+* Nestjs Shutdown Hook
+* Redis Instance Flush
+* Code Sign
+* IPC Event 중복 등록
+* Build and Release
+
 
 ### 후기
 
 솔직히 좀 많이 힘들었습니다.
 
-사실 Fullstack을 할 수는 있었지만, 개인적으로 Frontend가 재밌고 흥미로운 것들이 많아서 Frontend 개발을 하고 있었습니다.
+사실 Fullstack을 할 수는 있었지만, 개인적으로 Frontend가 재밌고 흥미로운 것들이 많아서 Frontend 개발을 하고 있었습니다...만
 
-하지만 조직에 처음 들어왔을 때 아젠다가 `조직에 도움이 되면 무엇이든 하겠다. 문제 해결할 수만 있다면 된다`였습니다.
+제 개인적인 아젠다가 `조직에 도움이 되면 무엇이든 하겠다. 문제 해결할 수만 있다면 된다`입니다.
 
-그래서 `개발 시간을 최적화하기 위해 Platform을 제작한다`는 기회가 왔을때, 프로젝트 리드로써 임할 수 있는 기회도 받았습니다.
+그래서 지금 회사에서 `개발 시간을 최적화하기 위해 Platform을 제작한다`는 기회가 왔을때, 프로젝트 리드로써 임할 수 있었습니다.
 
-그렇지만 해당 프로젝트는 Fullstack을 넘어서 Desktop Native Build, Binary(Redis, PostgreSQL, DynamoDB) Build, Codesign 등을 모두 해야했습니다.
+하지만 개발 난이도에 대해서 오만하게 생각했던 것 같습니다.
 
-그렇다고 개발 리소스를 많이 할당받지도 못했구요.
+왜냐하면 `개발 프로세스를 빠르게 만들어 성공하는 제품을 만든다는 목표`와 함께 `기존 서비스에 있던 문제점들(자동화의 부제, Runtime에서 테스트가 필요한 부분)을 반복하지 않는다`도 있었기 때문입니다.
 
-하지만 
+추가로 Frontend, Backend 로직을 넘어서 Desktop Native Build, Binary(Redis, PostgreSQL, DynamoDB) Build, Codesign 등을 해야했거든요.
+
