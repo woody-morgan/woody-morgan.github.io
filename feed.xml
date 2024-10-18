@@ -7,7 +7,7 @@
       <language>ko-KR</language>
       <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
       <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
-      <lastBuildDate>Mon, 02 Sep 2024 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Sun, 20 Oct 2024 00:00:00 GMT</lastBuildDate>
       <atom:link href="https://woody-morgan.github.io//feed.xml" rel="self" type="application/rss+xml"/>
       
   <item>
@@ -15,14 +15,14 @@
     <title>[시리즈][좋프엔지] 서론</title>
     <link>https://woody-morgan.github.io//blog/good-fe-engineer/become-good-fe-engineer-00</link>
     <description>좋은 프론트엔드 개발자가 되기 위해 필요한 지식</description>
-    <pubDate>Mon, 02 Sep 2024 00:00:00 GMT</pubDate>
+    <pubDate>Sun, 20 Oct 2024 00:00:00 GMT</pubDate>
     <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>frontend</category>
   </item>
 
   <item>
     <guid>https://woody-morgan.github.io//blog/review/making-internal-platform-lumberjack</guid>
-    <title>[WIP][후기][FEops] 내부 로컬 배포 플랫폼 럼버잭 제작기</title>
+    <title>[후기][FEops] 내부 로컬 배포 플랫폼 럼버잭 제작기</title>
     <link>https://woody-morgan.github.io//blog/review/making-internal-platform-lumberjack</link>
     <description>내부 로컬 배포 플랫폼 럼버잭을 제작하면 했던 고민들을 공유합니다</description>
     <pubDate>Sun, 01 Sep 2024 00:00:00 GMT</pubDate>
