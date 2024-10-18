@@ -34,7 +34,7 @@ layout: PostLayout
 
 또한 프로젝트 특성상 Windows 환경에서도 실행이 가능해야합니다.
 
-위의 과정이 적어놓은 것에 비해 훨씬 복잡했기 때문에 이를 해결할 내부 SaaS가 필요합니다.
+위의 과정이 적어놓은 것에 비해 훨씬 복잡했기 때문에 이를 해결할 내부 PaaS가 필요합니다.
 
 ### 기존 개발 프로세스
 
@@ -59,9 +59,9 @@ layout: PostLayout
 따라서 위의 문제를 해결하기 위해, 팀 내부적으로 논의된 해결책은 다음과 같았습니다
 
 * Core Service들을 로컬 머신에 띄울 수 있는 Local Deploy Platform을 만든다
-- Cross-platform(Windows, Mac)을 지원한다
-	- QA Engineer, Mobile Native Engineer를 위해
-- Docker Free를 지향하고, Core Service가 사용하는 third-party service는 직접 build 후 Local Deploy Platform이 내장한다.
+	- QA 및 Native Client(Unreal, Android, iOS)를 위해 Cross-platform(Windows, Mac)을 지원한다
+- VM 충돌 문제를 방지하기 위해 Docker Free를 지향한다
+	- 따라서 Core Service가 사용하는 third-party service는 직접 build 후 Local Deploy Platform이 내장한다.(Ex. PostgreSQL, DynamoDB 등)
 
 위의 논의를 바탕으로 DRI를 가지고 Local Deploy Platform인 Lumberjack을 제작했습니다.
 
@@ -86,7 +86,7 @@ layout: PostLayout
 	- Frontend와 Backend 빌드 프로세스를 분리할 것
 	- Format & Build 자동화
 		- 핵심적인 내용만 코드리뷰가 가능하도록 할 것
-		- Main branch의 모든 commit은 Build되는 버전이다
+		- Main branch의 모든 commit은 Build되는 버전 일 것
 - 사람이 놓치기 쉬운 부분은 자동화 한다
 	- 앱 Relase는 Github Action & Github Release를 통해 자동화한다
 	- 앱이 요구하는 Redis, DynamoDB 등의 바이너리 빌드를 자동화한다
@@ -97,23 +97,18 @@ layout: PostLayout
 위의 고민을 통해 결정한 기술 스택은 다음과 같습니다
 
 * FE
-	* React 18.2.0
-	* React Query v5
-	* React Hook Form
-	* Shadn UI
-		* [Radix UI](https://www.radix-ui.com)
-		* [v0](https://v0.dev)
+	* React 18.2.0, React Query v5, React Hook Form, Shadn UI, Zod, [TS-Rest](https://ts-rest.com)
+	* UI Gen with [v0](https://v0.dev)
 * BE
-	* Nest.js
-* API Schema
-	* [ts-rest](https://ts-rest.com)
-* Common
-	* zod
-	* husky
+	* Nest.js, Zod, [TS-Rest](https://ts-rest.com)
 * Bundling
 	* PNPM
 	* Electron-vite
 	* Github Release
+* Automation
+	* Husky
+	* Github Action
+	* 
 
 ## 발생했던 문제
 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/essay/rethinking-programming-design-principle.mdx",
+                "file": "data/blog/review/making-internal-platform-lumberjack.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "rethinking-programming-design-principle"
+              "title": "making-internal-platform-lumberjack"
             }
           }
         ]
@@ -169,8 +169,8 @@
   },
   "active": "5dda5efe6afd100f",
   "lastOpenFiles": [
-    "data/blog/essay/thinking about fundamental.mdx",
     "data/blog/essay/rethinking-programming-design-principle.mdx",
+    "data/blog/essay/thinking about fundamental.mdx",
     "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
     "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/language/fundamental-javascript.mdx",
