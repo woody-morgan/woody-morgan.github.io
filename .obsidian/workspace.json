@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/essay/wip-similarity-between-fp-compound-pattern.mdx",
+                "file": "data/blog/essay/rethinking-programming-design-principle.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "wip-similarity-between-fp-compound-pattern"
+              "title": "rethinking-programming-design-principle"
             }
           }
         ]
@@ -170,16 +170,17 @@
   "active": "5dda5efe6afd100f",
   "lastOpenFiles": [
     "data/blog/essay/thinking about fundamental.mdx",
+    "data/blog/essay/rethinking-programming-design-principle.mdx",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
     "data/blog/review/making-internal-platform-lumberjack.mdx",
-    "data/blog/retrospect/retrospect-2024-start.mdx",
     "data/blog/language/fundamental-javascript.mdx",
+    "data/blog/retrospect/retrospect-2024-start.mdx",
     "data/blog/funtional/automation-for-work.mdx",
     "data/blog/funtional/declarative-programming-part2.mdx",
     "data/blog/funtional/declarative-programming-part1.mdx",
     "data/blog/funtional/what-is-throttle-debounce.mdx",
     "2024-10-12.md",
     "2023-05-31.md",
-    "data/blog/essay/wip-similarity-between-fp-compound-pattern.mdx",
     "data/blog/2024-draft/graceful-error-handling.mdx",
     "public/static/images/avatar.jpeg",
     "Untitled 1.canvas",
