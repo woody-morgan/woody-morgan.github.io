@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/automation/automation-for-work.mdx",
+                "file": "data/blog/review/automation-for-work.mdx",
                 "mode": "source",
                 "source": false
               },
@@ -167,19 +167,19 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "67cfe87703c02881",
+  "active": "5dda5efe6afd100f",
   "lastOpenFiles": [
+    "data/blog/review/making-internal-platform-lumberjack.mdx",
+    "data/blog/review/automation-for-work.mdx",
     "data/blog/automation",
     "data/blog/funtional/what-is-throttle-debounce.mdx",
     "data/blog/frontend/how-to-make-advent-calendar.mdx",
     "data/blog/frontend/create-native-like-image-slider-component.mdx",
     "data/blog/essay/rethinking-programming-design-principle.mdx",
     "data/blog/essay/thinking about fundamental.mdx",
-    "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/retrospect/retrospect-2024-start.mdx",
     "data/blog/language/fundamental-javascript.mdx",
     "data/blog/frontend/optimize-script-loading-on-react.mdx",
-    "data/blog/frontend/making-full-page-scroll-effect.mdx",
     "Untitled.canvas",
     "2024-10-12.md",
     "2023-05-31.md",
