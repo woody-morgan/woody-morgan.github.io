@@ -1,0 +1,24 @@
+
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+      <title>woody-morgan.github.io</title>
+      <link>https://woody-morgan.github.io//blog</link>
+      <description>Inspirational thoughts and ideas</description>
+      <language>ko-KR</language>
+      <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
+      <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
+      <lastBuildDate>Mon, 14 Oct 2024 00:00:00 GMT</lastBuildDate>
+      <atom:link href="https://woody-morgan.github.io//tags/automation/feed.xml" rel="self" type="application/rss+xml"/>
+      
+  <item>
+    <guid>https://woody-morgan.github.io//blog/review/automation-for-work</guid>
+    <title>[후기] 현업에서 써먹는 자동화</title>
+    <link>https://woody-morgan.github.io//blog/review/automation-for-work</link>
+    <description>생산성 향상을 위해 했던 고민들</description>
+    <pubDate>Mon, 14 Oct 2024 00:00:00 GMT</pubDate>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
+    <category>review</category><category>automation</category>
+  </item>
+
+    </channel>
+  </rss>
