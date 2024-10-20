@@ -169,6 +169,7 @@
   },
   "active": "5dda5efe6afd100f",
   "lastOpenFiles": [
+    "data/Logo.tsx",
     "public/static/images/proj/chak-chak.png",
     "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/review/automation-for-work.mdx",
@@ -207,7 +208,6 @@
     "public/static/images/proj/advent/advent.png",
     "public/static/images/proj/advent/advent-modifiers.gif",
     "public/static/images/proj/wordle.png",
-    "public/static/images/proj/with-you.png",
     "README 2.md",
     "무제 파일.md",
     "무제 파일.canvas"
