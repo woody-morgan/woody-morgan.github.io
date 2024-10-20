@@ -73,7 +73,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -167,7 +168,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5dda5efe6afd100f",
+  "active": "a4b3adde127cb6cd",
   "lastOpenFiles": [
     "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/review/automation-for-work.mdx",
