@@ -249,6 +249,8 @@ Sample 프로젝트를 진행하여 기존 방식 대비 장점을 함께 이해
 
 #### Contract와 API Controller & API Fetching Hook 구조 통일화
 
+##### Folder 구조
+
 해당 프로젝트는 다음과 같은 폴더구조를 가지고 있습니다.
 
 ```
@@ -264,7 +266,7 @@ src/
 
 그리고 shared 폴더 안에는 contract(api schema 명세)가 정의되어있습니다
 
-contract
+`contract`
 ```contract folder structure
 
 shared/
@@ -280,7 +282,7 @@ shared/
 
 그리고 위의 폴더 구조 그대로 Backend API Controller와 Frontend Api Fetching Hook을 그대로 만듭니다
 
-frontend api fetching
+`Frontend API Fetching`
 ```frontend folder structure
 
 renderer/
@@ -297,7 +299,7 @@ renderer/
 
 ```
 
-backend controller
+`Backend controller`
 ```backend folder structure
 
 server/
@@ -369,50 +371,109 @@ Monorepo 형상을 제거하고 monolith로 전환할 수 밖에 없었습니다
 
 #### 의사 결정 과정
 
-Docker Free는 이 프로젝트의 핵심 과제였습니다.
+Docker Free는 이 프로젝트의 핵심 과제였습니다. 
 
-이 부분은 프로젝트 초, 또 필수적인 부분이라 바꿀 수 없었습니다.
+이유는 럼버잭을 사용하는 사용자의 컴퓨터 대부분에서 `가상머신을 사용중`이기 때문입니다.(BlueStack, Android VM)
 
-럼버잭을 사용하는 사용자의 컴퓨터 대부분에서 가상머신을 사용중입니다.(BlueStack, Android VM)
+이는 특히 Windows 환경에서 문제가 컸는데,  VM(BlueStack, Android VM)과 WSL2 Docker와 함께 사용하면 충돌이 나기 때문입니다.
 
-또 Windows 환경에서는 위의 가상머신과 WSL2 Docker와 함께 사용하면 충돌이 나기 때문에 Docker Free는 필수였습니다.
+따라서 럼버잭의 목적(`Core 로직 서비스를 쉽게 실행`)을 달성해도, Docker 사용을 전재로 하면, 럼버잭 앱 설치가 아예 불가능한 케이스가 발생할 수 있었습니다. 
 
-하지만 Backend Core 로직에 점차 Message Queue Service, RDB 등이 도입되면서 Binary 빌드를 하는데 큰 시간이 소요되었습니다.
+따라서 Docker를 사용하지 않는 걸 전재로 앱을 개발해야했습니다.
 
-특히 Mac이면 모르겠지만, Windows는 바이너리를 만드는게 불가능하거나 Reference가 없는 경우가 종종 있었습니다.
+#### 해결 과정
 
-또한 바이너리를 빌드하면, 해당 Binary의 Lifecycle을 분석해서 Nestjs Dynamic Module을 만들어야하는데 이 과정이 고통스러웠습니다.
+바이너리를 직접 빌드했습니다.
 
-이 부분을 어떻게 해결해야할지가 다음 과제입니다.
+예를 들면 Redis와 DynamoDB에 대한 종속성이 필요한 경우, Electron 앱 안에 Redis와 DynamoDB를 내장했습니다.
 
+electron-builder.json에 아래와 같이 명시하면, 
+
+빌드시 resources/${os}에 있는 폴더를 빌드된 앱 Package안에 Resources/bin 안에 복사해줍니다. 
+
+```json
+
+## electron-builder.json
+
+ "build": {
+    "extraFiles": [
+      {
+        "from": "resources/${os}", // $os => "mac/linux/win"
+        "to": "Resources/bin",     // for Linux => "resources/bin"
+        "filter": ["**/*"]
+      }
+    ],
+  }
+
+ -> for example, when build, if $os is mac, ./resources/mac will be copied to ./Resources/bin inside the app
+
+
+```
+
+또한 복사된 폴더의 경로를 불러올 수 있기 때문에, dev/prod 모드별로 바이너리 위치를 가져올 수 있습니다
+
+```typescript
+
+import { homedir } from 'os';
+import path from 'path';
+import { app } from 'electron';
+
+export function getResourcePath() {
+	const { isPackaged } = app;
+
+	const resourcePath = isPackaged
+		? path.join(process.resourcesPath)
+		: path.join(app.getAppPath(), 'resources');
+
+	return resourcePath;
+}
+
+```
+
+
+#### 발생한 문제들
+
+발생한 문제는 다음과 같습니다.
+
+1. Core 로직 서비스에 점차 Thrid-party 서비스(Message Queue Service, RDB 등)를 추가할 경우, 공수가 크다
+	1. 추가할 경우, Mac / Windows 바이너리를 모두 빌드 후 Electron 앱에 내장 및 Spawn하는 Controller를 분석 및 제작해야한다.
+	2. 특히 Windows의 경우, 바이너리 빌드하는 방식이 어렵거나 없는 경우가 있다
+2. Binary의 Lifecycle이 각각 다를 수 있다
+	1. Nest.js Dynamic Module을 통해 Binary를 다루는 Custom Module을 제작했습니다. 하지만 각 Binary마다 Spawn & Health Check하는 로직이 달라 모듈 제작에 어려움이 있었습니다
+
+
+`이 부분을 어떻게 해결해야할지가 다음 과제입니다`
 
 ### 사소한 문제들
 
   프로젝트를 진행하면서 발생한 문제는 다음과 같습니다.
 
-* Monorepo 사용 불가
-* 배포 환경별 Folder Permission
-* Binary Build and Crush
-* Nestjs Shutdown Hook
-* Redis Instance Flush
-* Code Sign
-* IPC Event 중복 등록
-* Build and Release
-
+* 배포 환경별 Folder Permission이 다른 문제
+* Nest.js Shutdown Hook 설정이 안되어서 Module이 정상적으로 종료되지 않는 문제
+* Redis Flush를 하나의 redis-client에서 여러번 호출시 redis 바이너리 crash가 발생하는 문제
+* IPC Event가 중복 등록되는 문제
 
 ### 후기
 
 솔직히 좀 많이 힘들었습니다.
 
-사실 Fullstack을 할 수는 있었지만, 개인적으로 Frontend가 재밌고 흥미로운 것들이 많아서 Frontend 개발을 하고 있었습니다...만
+Fullstack을 할 수는 있었지만(그렇다고 Node.js에 대해서 잘 알고 있다는 말은 아닙니다) 개인적으로 Frontend를 더 좋아합니다.
 
-제 개인적인 아젠다가 `조직에 도움이 되면 무엇이든 하겠다. 문제 해결할 수만 있다면 된다`입니다.
+제 개인적인 아젠다가 `조직에 도움이 되면 무엇이든 하겠다. 문제 해결할 수만 있다면 된다`이었고
 
 그래서 지금 회사에서 `개발 시간을 최적화하기 위해 Platform을 제작한다`는 기회가 왔을때, 프로젝트 리드로써 임할 수 있었습니다.
 
 하지만 개발 난이도에 대해서 오만하게 생각했던 것 같습니다.
 
-왜냐하면 `개발 프로세스를 빠르게 만들어 성공하는 제품을 만든다는 목표`와 함께 `기존 서비스에 있던 문제점들(자동화의 부제, Runtime에서 테스트가 필요한 부분)을 반복하지 않는다`도 있었기 때문입니다.
+왜냐하면 Frontend, Backend 로직을 넘어서 Desktop Native Build, Binary Build, Codesign 프로세스 등을 모두 해야했습니다.
 
-추가로 Frontend, Backend 로직을 넘어서 Desktop Native Build, Binary(Redis, PostgreSQL, DynamoDB) Build, Codesign 등을 해야했거든요.
+게다가 개인적인 목표인 `개발 프로세스를 빠르게 만들어 성공하는 제품을 만든다는 목표`와 함께 `기존 서비스에 있던 문제점들(자동화의 부제, Runtime에서 테스트가 필요한 부분)을 반복하지 않는다`도 있었기 때문입니다.
+
+위의 과정이 필요한지 몰랐기 때문에 `무식하면 용감하다`와 같이 적극적으로 임했던게 아닌가 싶습니다. 알았으면 시도조차 안했을 것 같습니다 🥲
+
+다만 위의 과정을 통해 `엔지니어링 역량` 뿐만 아니라 `결정 사항이 프로젝트에 어떤 영향을 끼치는지 파악`할 수 있었기 때문에 큰 도움이 되었습니다.
+
+감사합니다.
+
+
 

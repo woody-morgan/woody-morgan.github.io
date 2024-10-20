@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/review/making-internal-platform-lumberjack.mdx",
+                "file": "data/blog/essay/thinking about fundamental.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "making-internal-platform-lumberjack"
+              "title": "thinking about fundamental"
             }
           }
         ]
@@ -169,18 +169,18 @@
   },
   "active": "5dda5efe6afd100f",
   "lastOpenFiles": [
+    "data/blog/essay/rethinking-programming-design-principle.mdx",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
+    "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx",
+    "data/blog/language/fundamental-javascript.mdx",
+    "data/blog/retrospect/retrospect-2024-start.mdx",
+    "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/essay/thinking about fundamental.mdx",
     "data/blog/frontend/flat-color-token-object-for-vanilla-extract.mdx",
     "Untitled.canvas",
-    "data/blog/review/making-internal-platform-lumberjack.mdx",
-    "data/blog/essay/rethinking-programming-design-principle.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
-    "data/blog/language/fundamental-javascript.mdx",
-    "data/blog/retrospect/retrospect-2024-start.mdx",
     "data/blog/funtional/automation-for-work.mdx",
     "data/blog/funtional/declarative-programming-part2.mdx",
-    "data/blog/funtional/declarative-programming-part1.mdx",
-    "data/blog/funtional/what-is-throttle-debounce.mdx",
     "2024-10-12.md",
     "2023-05-31.md",
     "public/static/images/avatar.jpeg",
