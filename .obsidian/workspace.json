@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/essay/thinking about fundamental.mdx",
+                "file": "data/blog/automation/automation-for-work.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "thinking about fundamental"
+              "title": "automation-for-work"
             }
           }
         ]
@@ -167,20 +167,20 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5dda5efe6afd100f",
+  "active": "67cfe87703c02881",
   "lastOpenFiles": [
+    "data/blog/automation",
+    "data/blog/funtional/what-is-throttle-debounce.mdx",
+    "data/blog/frontend/how-to-make-advent-calendar.mdx",
+    "data/blog/frontend/create-native-like-image-slider-component.mdx",
     "data/blog/essay/rethinking-programming-design-principle.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-00.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-01.mdx",
-    "data/blog/good-fe-engineer/become-good-fe-engineer-05.mdx",
-    "data/blog/language/fundamental-javascript.mdx",
-    "data/blog/retrospect/retrospect-2024-start.mdx",
-    "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/essay/thinking about fundamental.mdx",
-    "data/blog/frontend/flat-color-token-object-for-vanilla-extract.mdx",
+    "data/blog/review/making-internal-platform-lumberjack.mdx",
+    "data/blog/retrospect/retrospect-2024-start.mdx",
+    "data/blog/language/fundamental-javascript.mdx",
+    "data/blog/frontend/optimize-script-loading-on-react.mdx",
+    "data/blog/frontend/making-full-page-scroll-effect.mdx",
     "Untitled.canvas",
-    "data/blog/funtional/automation-for-work.mdx",
-    "data/blog/funtional/declarative-programming-part2.mdx",
     "2024-10-12.md",
     "2023-05-31.md",
     "public/static/images/avatar.jpeg",
