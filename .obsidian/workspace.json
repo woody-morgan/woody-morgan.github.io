@@ -167,8 +167,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "67cfe87703c02881",
+  "active": "5dda5efe6afd100f",
   "lastOpenFiles": [
+    "public/static/images/proj/chak-chak.png",
     "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/review/automation-for-work.mdx",
     "data/blog/automation",
@@ -179,7 +180,6 @@
     "data/blog/essay/thinking about fundamental.mdx",
     "data/blog/retrospect/retrospect-2024-start.mdx",
     "data/blog/language/fundamental-javascript.mdx",
-    "data/blog/frontend/optimize-script-loading-on-react.mdx",
     "Untitled.canvas",
     "2024-10-12.md",
     "2023-05-31.md",
