@@ -1,5 +1,5 @@
 ---
-title: "[후기][FEops] 내부 로컬 배포 플랫폼 럼버잭 제작기"
+title: '[후기][FEops] 내부 로컬 배포 플랫폼 럼버잭 제작기'
 date: 2024-09-01
 tags:
   - review
@@ -10,7 +10,7 @@ images:
 layout: PostLayout
 ---
 
-<TOCInline toc={props.toc} exclude={'Intro'} asDisclosure />
+<TOCInline toc={props.toc} exclude={'개론'} asDisclosure />
 
 ## 개론
 
@@ -20,7 +20,7 @@ layout: PostLayout
 
 `발생했던 문제를 반복하지 않기 위한 회고 목적의 글` 입니다
 
-따라서 다른 글에 비해 읽기 힘들 수 있습니다. 
+따라서 다른 글에 비해 읽기 힘들 수 있습니다.
 
 ## 프로젝트의 목적
 
@@ -40,7 +40,6 @@ layout: PostLayout
 
 ```
 
-
 또한 프로젝트 특성상 Windows 환경에서도 실행이 가능해야합니다.
 
 위의 과정이 적어놓은 것에 비해 훨씬 복잡했기 때문에 이를 해결할 내부 PaaS가 필요합니다.
@@ -58,19 +57,20 @@ layout: PostLayout
 하지만 다음과 같은 불편함이 있었습니다.
 
 1. 배포하는데 반영까지 최소 20분 이상 소요는 점
-	1. Binary Build와 상관없는 간단한 Config Map 수정임에도 Minimum Time이 소요된다
-		1. Core 서비스의 사용자인 Client 개발자에게는 Config Map수정이 주된 변경이다
-	2. 변경이 이루어진건지 확인하기 어렵다
+   1. Binary Build와 상관없는 간단한 Config Map 수정임에도 Minimum Time이 소요된다
+      1. Core 서비스의 사용자인 Client 개발자에게는 Config Map수정이 주된 변경이다
+   2. 변경이 이루어진건지 확인하기 어렵다
 2. 필요없는 Core Service도 함께 배포되기 때문에 Pod의 용량이 크다
 
-###  해결책
+### 해결책
 
 따라서 위의 문제를 해결하기 위해, 팀 내부적으로 논의된 해결책은 다음과 같았습니다
 
-* Core Service들을 로컬 머신에 띄울 수 있는 Local Deploy Platform을 만든다
-	- QA 및 Native Client(Unreal, Android, iOS)를 위해 Cross-platform(Windows, Mac)을 지원한다
-- VM 충돌 문제를 방지하기 위해 Docker Free를 지향한다
-	- 따라서 Core Service가 사용하는 third-party service는 직접 build 후 Local Deploy Platform이 내장한다.(Ex. PostgreSQL, DynamoDB 등)
+- Core Service들을 로컬 머신에 띄울 수 있는 Local Deploy Platform을 만든다
+  - QA 및 Native Client(Unreal, Android, iOS)를 위해 Cross-platform(Windows, Mac)을 지원한다
+
+* VM 충돌 문제를 방지하기 위해 Docker Free를 지향한다
+  - 따라서 Core Service가 사용하는 third-party service는 직접 build 후 Local Deploy Platform이 내장한다.(Ex. PostgreSQL, DynamoDB 등)
 
 위의 논의를 바탕으로 DRI를 가지고 Local Deploy Platform인 Lumberjack을 제작했습니다.
 
@@ -83,43 +83,41 @@ layout: PostLayout
 위의 고민을 토대로 세운 `원칙과 의사결정 사항`은 다음과 같습니다.
 
 - 비 Frontend 개발자도 쉽게 유지보수가 가능할 것
-	- Copy & Paste로 개발이 되도록 설계한다
-		- Type Extraction Utility 제작
-		- API 정의, 구현, 사용처의 폴더구조를 통일화
-		- AI 기반 UI를 만들어주는 UI System을 사용
-	- 패턴, 구조 등의 문서화를 자동화 한다
-		- Docusaurus와 같은 문서 자동화 도구를 도입
+  - Copy & Paste로 개발이 되도록 설계한다
+    - Type Extraction Utility 제작
+    - API 정의, 구현, 사용처의 폴더구조를 통일화
+    - AI 기반 UI를 만들어주는 UI System을 사용
+  - 패턴, 구조 등의 문서화를 자동화 한다
+    - Docusaurus와 같은 문서 자동화 도구를 도입
 - Frontend와 Backend 개발자간의 의사소통 비용을 최적화한다
-	- GraphQL codegen과 같은 API Schema 기반으로 시스템적으로 의사소통
-		- 단, 유지보수 문제로 GraphQL은 사용하지 말 것
-	- Frontend와 Backend 빌드 프로세스를 분리할 것
-	- Format & Build 자동화
-		- 핵심적인 내용만 코드리뷰가 가능하도록 할 것
-		- Main branch의 모든 commit은 Build되는 버전 일 것
+  - GraphQL codegen과 같은 API Schema 기반으로 시스템적으로 의사소통
+    - 단, 유지보수 문제로 GraphQL은 사용하지 말 것
+  - Frontend와 Backend 빌드 프로세스를 분리할 것
+  - Format & Build 자동화
+    - 핵심적인 내용만 코드리뷰가 가능하도록 할 것
+    - Main branch의 모든 commit은 Build되는 버전 일 것
 - 사람이 놓치기 쉬운 부분은 자동화 한다
-	- 앱 Relase는 Github Action & Github Release를 통해 자동화한다
-	- 앱이 요구하는 Redis, DynamoDB 등의 바이너리 빌드를 자동화한다
-
+  - 앱 Relase는 Github Action & Github Release를 통해 자동화한다
+  - 앱이 요구하는 Redis, DynamoDB 등의 바이너리 빌드를 자동화한다
 
 ## 기술 스택
 
 위의 고민을 통해 결정한 기술 스택은 다음과 같습니다
 
-* FE
-	* Electron, React 18.2.0, React Query v5, React Hook Form, Shadn UI, Zod, [TS-Rest](https://ts-rest.com)
-	* UI Gen with [v0](https://v0.dev)
-* BE
-	* Nest.js, Zod, [TS-Rest](https://ts-rest.com)
-* Bundling
-	* PNPM
-	* Electron-vite
-	* Github Release
-* Automation
-	* Husky
-	* Github Action
+- FE
+  - Electron, React 18.2.0, React Query v5, React Hook Form, Shadn UI, Zod, [TS-Rest](https://ts-rest.com)
+  - UI Gen with [v0](https://v0.dev)
+- BE
+  - Nest.js, Zod, [TS-Rest](https://ts-rest.com)
+- Bundling
+  - PNPM
+  - Electron-vite
+  - Github Release
+- Automation
+  - Husky
+  - Github Action
 
 `변경 가능성`과 `확장 가능성`에 초점을 두고 기술 스택을 선택했습니다.
-
 
 ## 의사결정과 회고 - 잘했던 결정
 
@@ -143,11 +141,11 @@ Rest API를 채택하여 Frontend와 Backend 개발 프로세스를 명시적으
 
 가장 우선적으로 검증해야할 것은 다음과 같았습니다
 
-* 하나의 Desktop App이 여러개의 Port를 점유할 수 있는가?
-	* 이유:
-		* Rest API 서비스를 서빙할 별도의 Backend Application을 특정 포트에 띄어야하기 떄문입니다.
-	- 가능하다면 Electron Entry File(main.js)에서 Frontend App과 Backend App의 라이프 사이클 제어는 어떻게 해야하는가?
-	- Backend App이 가지는 Shutdown Hook(Module Lifecycle 및 SubProcess)이 의도한 대로 작동할 것인가?
+- 하나의 Desktop App이 여러개의 Port를 점유할 수 있는가?
+  - 이유:
+    - Rest API 서비스를 서빙할 별도의 Backend Application을 특정 포트에 띄어야하기 떄문입니다.
+  * 가능하다면 Electron Entry File(main.js)에서 Frontend App과 Backend App의 라이프 사이클 제어는 어떻게 해야하는가?
+  * Backend App이 가지는 Shutdown Hook(Module Lifecycle 및 SubProcess)이 의도한 대로 작동할 것인가?
 
 #### 문제와 해결 과정
 
@@ -163,12 +161,11 @@ Rest API를 채택하여 Frontend와 Backend 개발 프로세스를 명시적으
 
 #### 장점
 
-* Frontend와 Backend 개발 프로세스를 분리
-	* 기존 Rest API 기반 레퍼런스 참고 가능
-	* 코드 리뷰 명확성 제공
-* 럼버잭 외의 서비스에 Rest API 제공 가능
-	* 로컬에 띄어진 다른 서비스(Unreal, Android, iOS App)에서도 럼버잭의 API(Spawn Binary, Get File Log)등을 그대로 사용 가능
-
+- Frontend와 Backend 개발 프로세스를 분리
+  - 기존 Rest API 기반 레퍼런스 참고 가능
+  - 코드 리뷰 명확성 제공
+- 럼버잭 외의 서비스에 Rest API 제공 가능
+  - 로컬에 띄어진 다른 서비스(Unreal, Android, iOS App)에서도 럼버잭의 API(Spawn Binary, Get File Log)등을 그대로 사용 가능
 
 ### Contract 기반 개발 프로세스 도입
 
@@ -183,9 +180,9 @@ Rest API를 채택하여 Frontend와 Backend 개발 프로세스를 명시적으
 
 해당 방식의 문제점은 다음과 같습니다
 
-* Backend 개발자가 `수기로 OpenAPI에 명시된 API Request, Response를 업데이트 해야한다.` 
-	* `휴먼 에러`가 발생할 가능성이 높다
-* API Schema가 정의될 때 까지 Frontend 개발자가 `상상해서 코딩`하고 있어야한다.
+- Backend 개발자가 `수기로 OpenAPI에 명시된 API Request, Response를 업데이트 해야한다.`
+  - `휴먼 에러`가 발생할 가능성이 높다
+- API Schema가 정의될 때 까지 Frontend 개발자가 `상상해서 코딩`하고 있어야한다.
 
 위의 병목과 휴먼 에러를 방지하면, 기능 개발을 신속하게 할 수 있을 것이라 생각했습니다
 
@@ -196,13 +193,13 @@ Contract 기반으로 간단한 Blog 게시물을 내려주는 서비스를 만�
 다음과 같이 진행하여 한 서비스를 완성하고, 문제점을 보완한 후, 본 프로젝트에 적용했습니다.
 
 1. Contract를 함께 정의한다
-	1. Blog Post에 대한 리소스(/blog/post, /blog/post/:id, /blog/post/:id/content, ...etc) 정의
-	2. 정의된 리소스 기반으로, 리소스 당 CRUD Operation 추가
-	3. 각 Endpoint에 Option 및 Request / Response Schema 추가
+   1. Blog Post에 대한 리소스(/blog/post, /blog/post/:id, /blog/post/:id/content, ...etc) 정의
+   2. 정의된 리소스 기반으로, 리소스 당 CRUD Operation 추가
+   3. 각 Endpoint에 Option 및 Request / Response Schema 추가
 2. 함께 동시에 개발한다
-	1. Frontend Engineer는 Contract기반 생성된 OpenAPI 3.0 스펙 기반 문서로 Mock Autogen을 한다
-		1. 이후 실제 서비스가 완성되면, 실제 서비스 기반으로 API Testing을 진행한다
-	2. Backend Engineer는 Contract기반으로 Controller를 Typesafe라게 생성하고, 비지니스 로직을 추가한다
+   1. Frontend Engineer는 Contract기반 생성된 OpenAPI 3.0 스펙 기반 문서로 Mock Autogen을 한다
+      1. 이후 실제 서비스가 완성되면, 실제 서비스 기반으로 API Testing을 진행한다
+   2. Backend Engineer는 Contract기반으로 Controller를 Typesafe라게 생성하고, 비지니스 로직을 추가한다
 3. 함께 테스팅 후, 배포한다
 
 Sample 프로젝트를 진행하여 기존 방식 대비 장점을 함께 이해하려 했습니다.
@@ -213,8 +210,8 @@ Sample 프로젝트를 진행하여 기존 방식 대비 장점을 함께 이해
 
 1. REST API 기반으로 통신할 것
 2. `개발 시작 전 필요한 REST API의 Request, Response를 미리` 정의할 것
-	1. 단 세부적인 Parameter naming 변경은 Backend 개발자에게 위임한다
-	2. Typescript 레벨에서 검사가 되기 때문에, 변경 비용은 감당할 수 있다
+   1. 단 세부적인 Parameter naming 변경은 Backend 개발자에게 위임한다
+   2. Typescript 레벨에서 검사가 되기 때문에, 변경 비용은 감당할 수 있다
 3. REST API 설계시 [Resource 단위](https://restfulapi.net/resource-naming/)로 분리하여제작할 것`
 4. Schema에 대한 실제 API가 정의되기 전에는, Mock Autogen을 통해 개발 프로세스를 진행할 것
 
@@ -222,9 +219,7 @@ Sample 프로젝트를 진행하여 기존 방식 대비 장점을 함께 이해
 
 또한 Contract를 우선적으로 정의했기 때문에, 더 좋은 API Interface설계에 대해 함께 고민할 수 있게 되어 좋았습니다.
 
-
 ### Copy and Paste Development 개발 환경 구축
-
 
 현재 속해있는 팀은 Frontend 리소스가 부족합니다.
 
@@ -246,7 +241,6 @@ Sample 프로젝트를 진행하여 기존 방식 대비 장점을 함께 이해
 
 `어떻게 해야 온보딩을 쉽게 할지 고민 포인트입니다.`
 
-
 #### Contract와 API Controller & API Fetching Hook 구조 통일화
 
 ##### Folder 구조
@@ -263,10 +257,10 @@ src/
 
 ```
 
-
 그리고 shared 폴더 안에는 contract(api schema 명세)가 정의되어있습니다
 
 `contract`
+
 ```contract folder structure
 
 shared/
@@ -283,6 +277,7 @@ shared/
 그리고 위의 폴더 구조 그대로 Backend API Controller와 Frontend Api Fetching Hook을 그대로 만듭니다
 
 `Frontend API Fetching`
+
 ```frontend folder structure
 
 renderer/
@@ -300,6 +295,7 @@ renderer/
 ```
 
 `Backend controller`
+
 ```backend folder structure
 
 server/
@@ -317,20 +313,20 @@ server/
 위의 구조를 가지기 전, `과거 프로젝트들이 가졌던 공통적인 문제`는 다음과 같습니다
 
 1. API 에 대한 `명세와 실제 구현이 다른 경우가 지속적으로 발생`했다
-	1. + API 명세에는 있지만 Backend Controller에는 구현되어 있지 않아도 타입 에러가 발생하지 않았다
+   1. - API 명세에는 있지만 Backend Controller에는 구현되어 있지 않아도 타입 에러가 발생하지 않았다
 2. API로 불러온 데이터가 페이지별로 처리하는 로직이 다른 경우가 있었다.
-	1. 같은 API임에도 Caching Hook을 통해 공통화되지 못해 여러번 호출이 되었다.
+   1. 같은 API임에도 Caching Hook을 통해 공통화되지 못해 여러번 호출이 되었다.
 
 ##### 장점
 
 `위의 구조를 통해서 가지는 이점`은 다음과 같습니다
 
 1. API Spec을 `폴더 구조를 통해 한 눈에 파악`이 가능합니다
-	1. 또한 API 호출 및 정의에 대해 Frontend,  Backend 동일하게 가져가기 때문에 의도를 파악하기 쉽습니다
+   1. 또한 API 호출 및 정의에 대해 Frontend, Backend 동일하게 가져가기 때문에 의도를 파악하기 쉽습니다
 2. API 사용 및 Cache & Invalidation에 대한 로직을 설계하기 쉽습니다
-	1. 한 API에 대한 정의는 오직 정의된 API Fetching Hook을 사용하기 떄문입니다.
-		1. 다만 `예외적인 케이스(Invalidation)를 처리하기 위해서, 타입 확장성`을 열어놔야합니다.
-	2. 추가적으로 Contract에 정의된 내용 + File 구조를 기반으로 `Backend Controller와 Frontend API Fetching Hook을 자동으로 생성가능하도록 자동화`가 가능합니다
+   1. 한 API에 대한 정의는 오직 정의된 API Fetching Hook을 사용하기 떄문입니다.
+      1. 다만 `예외적인 케이스(Invalidation)를 처리하기 위해서, 타입 확장성`을 열어놔야합니다.
+   2. 추가적으로 Contract에 정의된 내용 + File 구조를 기반으로 `Backend Controller와 Frontend API Fetching Hook을 자동으로 생성가능하도록 자동화`가 가능합니다
 
 따라서 `자동화 가능성`, `일관성을 통한 의도 파악 시간 단축 등`을 이유로 잘했던 결정이라 생각합니다.
 
@@ -350,7 +346,7 @@ server/
 
 1. Electron App을 번들하기 전, Backend App을 빌드한다
 2. Backend App 결과물과 node_modules 폴더를 Electron App 레포에 복사한다
-	1. Backend App이 있을 것 이란 가정하에 Electron Frontend / Backend App 라이프 사이클을 설계한다
+   1. Backend App이 있을 것 이란 가정하에 Electron Frontend / Backend App 라이프 사이클을 설계한다
 3. Electron App을 번들링한다
 
 따라서 다음과 같은 이유로 포기했습니다
@@ -371,13 +367,13 @@ Monorepo 형상을 제거하고 monolith로 전환할 수 밖에 없었습니다
 
 #### 의사 결정 과정
 
-Docker Free는 이 프로젝트의 핵심 과제였습니다. 
+Docker Free는 이 프로젝트의 핵심 과제였습니다.
 
 이유는 럼버잭을 사용하는 사용자의 컴퓨터 대부분에서 `가상머신을 사용중`이기 때문입니다.(BlueStack, Android VM)
 
-이는 특히 Windows 환경에서 문제가 컸는데,  VM(BlueStack, Android VM)과 WSL2 Docker와 함께 사용하면 충돌이 나기 때문입니다.
+이는 특히 Windows 환경에서 문제가 컸는데, VM(BlueStack, Android VM)과 WSL2 Docker와 함께 사용하면 충돌이 나기 때문입니다.
 
-따라서 럼버잭의 목적(`Core 로직 서비스를 쉽게 실행`)을 달성해도, Docker 사용을 전재로 하면, 럼버잭 앱 설치가 아예 불가능한 케이스가 발생할 수 있었습니다. 
+따라서 럼버잭의 목적(`Core 로직 서비스를 쉽게 실행`)을 달성해도, Docker 사용을 전재로 하면, 럼버잭 앱 설치가 아예 불가능한 케이스가 발생할 수 있었습니다.
 
 따라서 Docker를 사용하지 않는 걸 전재로 앱을 개발해야했습니다.
 
@@ -387,9 +383,9 @@ Docker Free는 이 프로젝트의 핵심 과제였습니다.
 
 예를 들면 Redis와 DynamoDB에 대한 종속성이 필요한 경우, Electron 앱 안에 Redis와 DynamoDB를 내장했습니다.
 
-electron-builder.json에 아래와 같이 명시하면, 
+electron-builder.json에 아래와 같이 명시하면,
 
-빌드시 resources/${os}에 있는 폴더를 빌드된 앱 Package안에 Resources/bin 안에 복사해줍니다. 
+빌드시 `resources/${os}`에 있는 폴더를 빌드된 앱 Package안에 Resources/bin 안에 복사해줍니다.
 
 ```json
 
@@ -412,46 +408,42 @@ electron-builder.json에 아래와 같이 명시하면,
 
 또한 복사된 폴더의 경로를 불러올 수 있기 때문에, dev/prod 모드별로 바이너리 위치를 가져올 수 있습니다
 
-```typescript
-
-import { homedir } from 'os';
-import path from 'path';
-import { app } from 'electron';
+```tsx
+import { homedir } from 'os'
+import path from 'path'
+import { app } from 'electron'
 
 export function getResourcePath() {
-	const { isPackaged } = app;
+  const { isPackaged } = app
 
-	const resourcePath = isPackaged
-		? path.join(process.resourcesPath)
-		: path.join(app.getAppPath(), 'resources');
+  const resourcePath = isPackaged
+    ? path.join(process.resourcesPath)
+    : path.join(app.getAppPath(), 'resources')
 
-	return resourcePath;
+  return resourcePath
 }
-
 ```
-
 
 #### 발생한 문제들
 
 발생한 문제는 다음과 같습니다.
 
 1. Core 로직 서비스에 점차 Thrid-party 서비스(Message Queue Service, RDB 등)를 추가할 경우, 공수가 크다
-	1. 추가할 경우, Mac / Windows 바이너리를 모두 빌드 후 Electron 앱에 내장 및 Spawn하는 Controller를 분석 및 제작해야한다.
-	2. 특히 Windows의 경우, 바이너리 빌드하는 방식이 어렵거나 없는 경우가 있다
+   1. 추가할 경우, Mac / Windows 바이너리를 모두 빌드 후 Electron 앱에 내장 및 Spawn하는 Controller를 분석 및 제작해야한다.
+   2. 특히 Windows의 경우, 바이너리 빌드하는 방식이 어렵거나 없는 경우가 있다
 2. Binary의 Lifecycle이 각각 다를 수 있다
-	1. Nest.js Dynamic Module을 통해 Binary를 다루는 Custom Module을 제작했습니다. 하지만 각 Binary마다 Spawn & Health Check하는 로직이 달라 모듈 제작에 어려움이 있었습니다
-
+   1. Nest.js Dynamic Module을 통해 Binary를 다루는 Custom Module을 제작했습니다. 하지만 각 Binary마다 Spawn & Health Check하는 로직이 달라 모듈 제작에 어려움이 있었습니다
 
 `이 부분을 어떻게 해결해야할지가 다음 과제입니다`
 
 ### 사소한 문제들
 
-  프로젝트를 진행하면서 발생한 문제는 다음과 같습니다.
+프로젝트를 진행하면서 발생한 문제는 다음과 같습니다.
 
-* 배포 환경별 Folder Permission이 다른 문제
-* Nest.js Shutdown Hook 설정이 안되어서 Module이 정상적으로 종료되지 않는 문제
-* Redis Flush를 하나의 redis-client에서 여러번 호출시 redis 바이너리 crash가 발생하는 문제
-* IPC Event가 중복 등록되는 문제
+- 배포 환경별 Folder Permission이 다른 문제
+- Nest.js Shutdown Hook 설정이 안되어서 Module이 정상적으로 종료되지 않는 문제
+- Redis Flush를 하나의 redis-client에서 여러번 호출시 redis 바이너리 crash가 발생하는 문제
+- IPC Event가 중복 등록되는 문제
 
 ### 후기
 
@@ -474,6 +466,3 @@ Fullstack을 할 수는 있었지만(그렇다고 Node.js에 대해서 잘 알�
 다만 위의 과정을 통해 `엔지니어링 역량` 뿐만 아니라 `결정 사항이 프로젝트에 어떤 영향을 끼치는지 파악`할 수 있었기 때문에 큰 도움이 되었습니다.
 
 감사합니다.
-
-
-
