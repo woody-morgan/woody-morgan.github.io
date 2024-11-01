@@ -7,9 +7,19 @@
       <language>ko-KR</language>
       <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
       <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
-      <lastBuildDate>Sun, 20 Oct 2024 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Fri, 01 Nov 2024 00:00:00 GMT</lastBuildDate>
       <atom:link href="https://woody-morgan.github.io//feed.xml" rel="self" type="application/rss+xml"/>
       
+  <item>
+    <guid>https://woody-morgan.github.io//blog/language/review-javascript</guid>
+    <title>Javascript 기능 정리</title>
+    <link>https://woody-morgan.github.io//blog/language/review-javascript</link>
+    <description>Javascript에 대해 정리해보자</description>
+    <pubDate>Fri, 01 Nov 2024 00:00:00 GMT</pubDate>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
+    <category>javascript</category>
+  </item>
+
   <item>
     <guid>https://woody-morgan.github.io//blog/good-fe-engineer/become-good-fe-engineer-00</guid>
     <title>[시리즈][좋프엔지] 서론</title>
