@@ -6,7 +6,7 @@
       {
         "id": "1f4af5dbbf48e854",
         "type": "tabs",
-        "dimension": 54.02455661664393,
+        "dimension": 54.024556616643935,
         "children": [
           {
             "id": "5dda5efe6afd100f",
@@ -35,9 +35,19 @@
               "icon": "lucide-file",
               "title": "rethinking-programming-design-principle"
             }
+          },
+          {
+            "id": "4d3463512b59d750",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       },
       {
         "id": "5fbc484dbdc2a687",
@@ -57,8 +67,19 @@
               "icon": "lucide-file",
               "title": "retrospect-2024-start"
             }
+          },
+          {
+            "id": "0527b6522d546f78",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -204,8 +225,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "524d4381e2f836e7",
+  "active": "0527b6522d546f78",
   "lastOpenFiles": [
+    "data/blog/retrospect/retrospect-2024-start.mdx",
     "data/blog/language/fundamental-javascript.mdx",
     "data/blog/essay/thinking-about-business.mdx",
     "data/blog/essay/thinking-about-fundamental.mdx",
@@ -217,7 +239,6 @@
     "data/blog/backend/graphql-queries.mdx",
     "data/blog/backend/deploy-nestjs-application-on-heroku-system.mdx",
     "data/blog/review/automation-for-work.mdx",
-    "data/blog/review/making-internal-platform-lumberjack.mdx",
     "public/static/images/proj/chak-chak.png",
     "Untitled.canvas",
     "2024-10-12.md",
