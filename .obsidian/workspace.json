@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "a3c515d37d1ed6f7",
+        "id": "74c4bdc4f541dabe",
         "type": "tabs",
         "children": [
           {
-            "id": "08f507b30715aba7",
+            "id": "c68ef85da770dfbb",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -140,6 +140,16 @@
               "icon": "lucide-list",
               "title": "Outline of making-internal-platform-lumberjack"
             }
+          },
+          {
+            "id": "375fee89d4ad7699",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
           }
         ]
       }
@@ -163,7 +173,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "67cfe87703c02881",
+  "active": "c68ef85da770dfbb",
   "lastOpenFiles": [
     "data/blog/backend/deploy-nestjs-application-on-heroku-system.mdx",
     "data/blog/essay/rethinking-programming-design-principle.mdx",

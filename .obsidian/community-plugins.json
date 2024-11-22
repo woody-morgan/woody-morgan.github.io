@@ -1,5 +1,10 @@
 [
-  "mdx",
-  "mdx-as-md-obsidian",
-  "obsidian-git"
+  "obsidian-git",
+  "obsidian-icon-folder",
+  "calendar",
+  "obsidian-kanban",
+  "obsidian-tasks-plugin",
+  "table-editor-obsidian",
+  "dataview",
+  "mdx"
 ]
