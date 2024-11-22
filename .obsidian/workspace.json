@@ -227,6 +227,7 @@
   "lastOpenFiles": [
     "data/blog/retrospect/retrospect-2023.mdx",
     "data/blog/retrospect/retrospect-2024.mdx",
+    "무제 파일.md",
     "data/blog/review/automation-for-work.mdx",
     "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/essay/rethinking-programming-design-principle.mdx",
@@ -240,7 +241,6 @@
     "data/blog/backend/deploy-nestjs-application-on-heroku-system.mdx",
     "data/blog/language/fundamental-javascript.mdx",
     "data/blog/essay/thinking-about-business.mdx",
-    "data/blog/essay/thinking-about-fundamental.mdx",
     "data/blog/backend/kubernetes.md",
     "public/static/images/proj/chak-chak.png",
     "2024-10-12.md",
@@ -268,7 +268,6 @@
     "public/static/images/proj/advent/advent-modifiers.gif",
     "public/static/images/proj/wordle.png",
     "README 2.md",
-    "무제 파일.md",
     "무제 파일.canvas"
   ]
 }
