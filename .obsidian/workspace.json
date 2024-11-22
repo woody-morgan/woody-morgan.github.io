@@ -35,19 +35,9 @@
               "icon": "lucide-file",
               "title": "rethinking-programming-design-principle"
             }
-          },
-          {
-            "id": "4d3463512b59d750",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       },
       {
         "id": "5fbc484dbdc2a687",
@@ -225,7 +215,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0527b6522d546f78",
+  "active": "ba2ae7881f2be25f",
   "lastOpenFiles": [
     "data/blog/retrospect/retrospect-2024-start.mdx",
     "data/blog/language/fundamental-javascript.mdx",
