@@ -1,9 +1,9 @@
 name: Deploy
 
 on:
-  schedule:
-    # Runs at 1:00 AM KST, which is 4:00 PM UTC
-    - cron: '0 16 * * *'
+  # schedule:
+  # Runs at 1:00 AM KST, which is 4:00 PM UTC
+  # - cron: '0 16 * * *'
   workflow_dispatch: # Allows you to manually trigger the workflow
 
 permissions:

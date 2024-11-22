@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/retrospect/retrospect-2024-start.mdx",
+                "file": "data/blog/retrospect/retrospect-2024.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "retrospect-2024-start"
+              "title": "retrospect-2024"
             }
           }
         ]
@@ -139,10 +139,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/retrospect/retrospect-2024-start.mdx"
+                "file": "data/blog/retrospect/retrospect-2024.mdx"
               },
               "icon": "lucide-list",
-              "title": "retrospect-2024-start 개요"
+              "title": "retrospect-2024 개요"
             }
           },
           {
@@ -205,6 +205,8 @@
   },
   "active": "bbe2abe25cdeea62",
   "lastOpenFiles": [
+    "data/blog/retrospect/retrospect-2023.mdx",
+    "data/blog/retrospect/retrospect-2024.mdx",
     "data/blog/review/automation-for-work.mdx",
     "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/essay/rethinking-programming-design-principle.mdx",
@@ -216,11 +218,9 @@
     "Untitled 1.canvas",
     "2024-11-22.md",
     "data/blog/backend/deploy-nestjs-application-on-heroku-system.mdx",
-    "data/blog/retrospect/retrospect-2024-start.mdx",
     "data/blog/language/fundamental-javascript.mdx",
     "data/blog/essay/thinking-about-business.mdx",
     "data/blog/essay/thinking-about-fundamental.mdx",
-    "data/blog/essay/thinking-about-grit.mdx",
     "data/blog/backend/kubernetes.md",
     "public/static/images/proj/chak-chak.png",
     "2024-10-12.md",
