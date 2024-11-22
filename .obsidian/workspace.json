@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "74c4bdc4f541dabe",
+        "id": "de8d3be846e423d9",
         "type": "tabs",
         "children": [
           {
-            "id": "c68ef85da770dfbb",
+            "id": "bbe2abe25cdeea62",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "data/blog/retrospect/retrospect-2024-start.mdx",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "retrospect-2024-start"
             }
           }
         ]
@@ -39,7 +43,7 @@
                 "sortOrder": "alphabetical"
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "파일 탐색기"
             }
           },
           {
@@ -73,7 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 290.5
+    "width": 235.5
   },
   "right": {
     "id": "16f4a25d01ad401f",
@@ -135,10 +139,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/review/making-internal-platform-lumberjack.mdx"
+                "file": "data/blog/retrospect/retrospect-2024-start.mdx"
               },
               "icon": "lucide-list",
-              "title": "Outline of making-internal-platform-lumberjack"
+              "title": "retrospect-2024-start 개요"
             }
           },
           {
@@ -147,11 +151,32 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
+            }
+          },
+          {
+            "id": "efa08a683557d54c",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
+            }
+          },
+          {
+            "id": "727c8f5cc7e5094a",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           }
-        ]
+        ],
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
@@ -160,44 +185,51 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "markdown-importer:Open format converter": false,
-      "random-note:Open random note": false,
-      "audio-recorder:Start/stop recording": false,
-      "publish:Publish changes...": false,
-      "obsidian-git:Open Git source control": false
+      "switcher:퀵 스위처 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 데일리 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "markdown-importer:마크다운 형식 가져오기 열기": false,
+      "zk-prefixer:새로운 유니크 노트 생성": false,
+      "random-note:랜덤 노트 열기": false,
+      "audio-recorder:녹음 시작/중지": false,
+      "workspaces:작업 공간 레이아웃 관리": false,
+      "publish:변경사항 출판": false,
+      "obsidian-kanban:새 보드 만들기": false,
+      "obsidian-git:Open Git source control": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "edit-mdx:New .mdx file": false
     }
   },
-  "active": "c68ef85da770dfbb",
+  "active": "bbe2abe25cdeea62",
   "lastOpenFiles": [
-    "data/blog/backend/deploy-nestjs-application-on-heroku-system.mdx",
+    "data/blog/review/automation-for-work.mdx",
+    "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/essay/rethinking-programming-design-principle.mdx",
+    "docs/blog/engineer-as-frontend-ops/Untitled.mdx",
+    "Untitled.canvas",
+    "Untitled Kanban.md",
+    "README.md",
+    "Recording 20241122171314.webm",
+    "Untitled 1.canvas",
+    "2024-11-22.md",
+    "data/blog/backend/deploy-nestjs-application-on-heroku-system.mdx",
     "data/blog/retrospect/retrospect-2024-start.mdx",
     "data/blog/language/fundamental-javascript.mdx",
     "data/blog/essay/thinking-about-business.mdx",
     "data/blog/essay/thinking-about-fundamental.mdx",
     "data/blog/essay/thinking-about-grit.mdx",
-    "data/blog/backend/kubernetes.mdx",
-    "data/blog/backend/graphql-queries-for-interactions.mdx",
     "data/blog/backend/kubernetes.md",
-    "data/blog/backend/graphql-queries.mdx",
-    "data/blog/review/automation-for-work.mdx",
     "public/static/images/proj/chak-chak.png",
-    "Untitled.canvas",
     "2024-10-12.md",
     "2023-05-31.md",
     "public/static/images/avatar.jpeg",
-    "Untitled 1.canvas",
     "2024-09-02.md",
     "2024-03-10.md",
     "!문맥.md",
     "data/logo.svg",
-    "README.md",
     "2024-10-07.md",
     "data/todo/Translation - data first data last.md",
     "data/authors/sparrowhawk.md",
