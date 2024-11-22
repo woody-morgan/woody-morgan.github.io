@@ -159,10 +159,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/retrospect/retrospect-2023.mdx"
+                "file": "data/blog/retrospect/retrospect-2024.mdx"
               },
               "icon": "lucide-list",
-              "title": "retrospect-2023 개요"
+              "title": "retrospect-2024 개요"
             }
           },
           {
@@ -223,10 +223,10 @@
       "edit-mdx:New .mdx file": false
     }
   },
-  "active": "d5a589bfc0c5a99f",
+  "active": "bbe2abe25cdeea62",
   "lastOpenFiles": [
-    "data/blog/retrospect/retrospect-2024.mdx",
     "data/blog/retrospect/retrospect-2023.mdx",
+    "data/blog/retrospect/retrospect-2024.mdx",
     "data/blog/review/automation-for-work.mdx",
     "data/blog/review/making-internal-platform-lumberjack.mdx",
     "data/blog/essay/rethinking-programming-design-principle.mdx",
