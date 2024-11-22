@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "data/blog/language/review-javascript.mdx",
+                "file": "data/blog/retrospect/retrospect-2024.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "review-javascript"
+              "title": "retrospect-2024"
             }
           }
         ]
@@ -95,7 +95,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "data/blog/language/review-javascript.mdx",
+            "file": "data/blog/retrospect/retrospect-2024.mdx",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -128,10 +128,20 @@
         "state": {
           "type": "outline",
           "state": {
-            "file": "data/blog/language/review-javascript.mdx"
+            "file": "data/blog/retrospect/retrospect-2024.mdx"
           },
           "icon": "lucide-list",
           "title": "Outline"
+        }
+      },
+      {
+        "id": "237effdf3c9ef953",
+        "type": "leaf",
+        "state": {
+          "type": "calendar",
+          "state": {},
+          "icon": "calendar-with-checkmark",
+          "title": "Calendar"
         }
       }
     ],
@@ -139,6 +149,11 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "zk-prefixer:Create new unique note": false,
+      "workspaces:Manage workspace layouts": false,
+      "obsidian-kanban:Create new board": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "edit-mdx:New .mdx file": false,
       "obsidian-git:Open Git source control": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
@@ -154,6 +169,11 @@
   },
   "active": "22c025e0fca8f8bd",
   "lastOpenFiles": [
+    "data/blog/language/review-javascript.mdx",
+    "data/blog/retrospect/retrospect-2024.mdx",
+    "data/blog/retrospect/retrospect-2023.mdx",
+    "/data/blog/retrospect/retrospect-2024.mdx",
+    "/data/blog/retrospect/retrospect-2023.mdx",
     "data/blog/retrospect/thinking about fundamental.mdx",
     "data/blog/2024-draft/copy-and-paste-development.mdx",
     "/package.json",
