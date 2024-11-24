@@ -7,9 +7,19 @@
       <language>ko-KR</language>
       <managingEditor>woody.morgan.crafts@gmail.com (woody morgan)</managingEditor>
       <webMaster>woody.morgan.crafts@gmail.com (woody morgan)</webMaster>
-      <lastBuildDate>Sun, 20 Oct 2024 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Fri, 22 Nov 2024 00:00:00 GMT</lastBuildDate>
       <atom:link href="https://woody-morgan.github.io//feed.xml" rel="self" type="application/rss+xml"/>
       
+  <item>
+    <guid>https://woody-morgan.github.io//blog/retrospect/retrospect-2024</guid>
+    <title>[회고 2024] 3년차 개발자가 되며</title>
+    <link>https://woody-morgan.github.io//blog/retrospect/retrospect-2024</link>
+    <description>찾아다녔던 리더쉽의 본질과 새로운 레시피를 만들어내는 법</description>
+    <pubDate>Fri, 22 Nov 2024 00:00:00 GMT</pubDate>
+    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
+    <category>retrospect</category>
+  </item>
+
   <item>
     <guid>https://woody-morgan.github.io//blog/good-fe-engineer/become-good-fe-engineer-00</guid>
     <title>[시리즈][좋프엔지] 서론</title>
@@ -58,16 +68,6 @@
     <pubDate>Mon, 26 Aug 2024 00:00:00 GMT</pubDate>
     <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
     <category>essay</category>
-  </item>
-
-  <item>
-    <guid>https://woody-morgan.github.io//blog/retrospect/retrospect-2024-start</guid>
-    <title>[회고] 이직을 하며</title>
-    <link>https://woody-morgan.github.io//blog/retrospect/retrospect-2024-start</link>
-    <description>retrospect</description>
-    <pubDate>Mon, 11 Mar 2024 00:00:00 GMT</pubDate>
-    <author>woody.morgan.crafts@gmail.com (woody morgan)</author>
-    <category>retrospect</category>
   </item>
 
   <item>
