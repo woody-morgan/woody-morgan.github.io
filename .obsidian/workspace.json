@@ -34,9 +34,21 @@
               "icon": "lucide-file",
               "title": "etc"
             }
+          },
+          {
+            "id": "39cadced02040910",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.8.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.8.7"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -55,7 +67,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -154,7 +167,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "data/blog/frontend/etc.mdx"
+                "file": "data/blog/frontend/etc.mdx",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
               "title": "Outline of etc"
@@ -219,7 +235,7 @@
       "smart-composer:Open smart composer": false
     }
   },
-  "active": "51115f41c2c27c2f",
+  "active": "39cadced02040910",
   "lastOpenFiles": [
     "data/blog/frontend/create-native-like-image-slider-component.mdx",
     "data/blog/frontend/etc.mdx",
